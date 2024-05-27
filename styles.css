@@ -44,7 +44,11 @@ body {
 }
 
 .header h1 span {
-    color: blue; /* Couleur bleue pour "Services Médicaux" */
+    color: black; /* Couleur bleue pour "Services Médicaux" */
+}
+
+.main .section {
+    color: black; /* Modification de la couleur du texte en noir */
 }
 
 .header .logo {
