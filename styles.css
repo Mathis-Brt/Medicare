@@ -1,0 +1,84 @@
+/* Reset CSS */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto; /* Centrer le contenu */
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    padding: 10px 20px; /* Ajuster le padding si nécessaire */
+    border-bottom: 2px solid #ccc;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: red; /* Couleur rouge pour "Medicare" */
+}
+
+.header h1 span {
+    color: blue; /* Couleur bleue pour "Services Médicaux" */
+}
+
+.header img {
+    max-height: 50px; /* Réduire la taille du logo */
+}
+
+.navigation {
+    background-color: white;
+    padding: 10px 0;
+    border-bottom: 2px solid #ccc;
+    text-align: center; /* Centrer les boutons */
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Ajuster l'espacement entre les boutons */
+}
+
+.button {
+    background-color: #d3d3d3; /* Couleur de fond des boutons */
+    color: black; /* Couleur du texte des boutons */
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 1em;
+    border-radius: 10px; /* Coins arrondis */
+    border: 1px solid #ccc; /* Bordure des boutons */
+    text-align: center;
+}
+
+.section {
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ccc;
+    font-size: 2em; /* Taille de police ajustée pour le texte de la section */
+    color: #4169e1; /* Couleur bleue pour le texte de la section */
+}
+
+.footer {
+    margin-top: 20px; /* Ajout d'un espace en haut du footer pour ne pas qu'il soit caché sous le contenu */
+    background-color: #f8f8f8;
+    color: #666;
+    font-size: 1em;
+    padding: 20px;
+    text-align: center;
+}
