@@ -18,6 +18,9 @@ body {
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* S'assurer que le wrapper prend toute la hauteur de la fenêtre */
 }
 
 .header {
@@ -27,6 +30,12 @@ body {
     background-color: white;
     padding: 10px 20px; /* Ajuster le padding si nécessaire */
     border-bottom: 2px solid #ccc;
+    position: relative;
+}
+
+.header .title-container {
+    flex-grow: 1;
+    text-align: center;
 }
 
 .header h1 {
@@ -38,8 +47,10 @@ body {
     color: blue; /* Couleur bleue pour "Services Médicaux" */
 }
 
-.header img {
+.header .logo {
     max-height: 50px; /* Réduire la taille du logo */
+    position: absolute;
+    right: 20px; /* Ajuster la distance par rapport au bord droit */
 }
 
 .navigation {
@@ -56,8 +67,8 @@ body {
 }
 
 .button {
-    background-color: #d3d3d3; /* Couleur de fond des boutons */
-    color: black; /* Couleur du texte des boutons */
+    background-color: rgb(32, 67, 104); /* Couleur de fond des boutons */
+    color: white; /* Couleur du texte des boutons */
     padding: 10px 20px;
     text-decoration: none;
     font-size: 1em;
@@ -67,18 +78,42 @@ body {
 }
 
 .section {
+    flex-grow: 1; /* Faire grandir la section pour occuper l'espace disponible */
     padding: 20px;
     text-align: center;
     border-bottom: 2px solid #ccc;
     font-size: 2em; /* Taille de police ajustée pour le texte de la section */
     color: #4169e1; /* Couleur bleue pour le texte de la section */
+    margin-top: 20px; /* Ajouter un espace au-dessus de la section */
+    margin-bottom: 20px; /* Ajouter un espace en dessous de la section */
 }
 
 .footer {
-    margin-top: 20px; /* Ajout d'un espace en haut du footer pour ne pas qu'il soit caché sous le contenu */
     background-color: #f8f8f8;
     color: #666;
     font-size: 1em;
     padding: 20px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Ajouter de l'espace entre les éléments du footer */
+}
+
+.footer .contact-info p {
+    margin: 5px 0; /* Ajouter de la marge entre les lignes de contact */
+}
+
+.footer .contact-info a {
+    color: #333; /* Couleur des liens dans les informations de contact */
+    text-decoration: none; /* Enlever la décoration des liens */
+}
+
+.footer .contact-info a:hover {
+    text-decoration: underline; /* Ajouter une décoration au survol */
+}
+
+.footer .map-container iframe {
+    max-width: 100%; /* S'assurer que la carte ne dépasse pas la largeur du conteneur */
+    height: auto;
 }
