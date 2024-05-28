@@ -32,14 +32,14 @@
         </div>
     </nav>
     <main class="section">
-        <h3 style="color: black;font-size:25px;font-weight: bold;" class="card-text">Voici la liste de nos différents médecins généralistes : </h3>
+        <h3 style="color: black;font-size:25px;font-weight: bold;" class="card-text">Voici la liste de nos différents médecins spécialistes : </h3>
        <?php
         // Afficher les erreurs PHP
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
 
         // Inclure le fichier PHP
-        include 'medecinG.php';
+        include 'medecinSpe.php';
         ?>
     </main>
     <footer class="footer">
