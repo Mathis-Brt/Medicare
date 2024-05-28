@@ -32,7 +32,7 @@ if ($db_found) {
         while ($data = mysqli_fetch_assoc($result)) {
             // Créer des liens vers les pages des médecins
             echo "<div class='doctor'>";
-            echo "<h2><a href='medecin" . htmlspecialchars($data['id']) . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
+            echo "<h2 style='color: black; font-size: 30px;'><a href='medecin" . htmlspecialchars($data['id']) . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
             echo "</div>";
         }
         echo "</div>";

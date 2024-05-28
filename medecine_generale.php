@@ -6,6 +6,7 @@
     <title>Médecine générale - Tout parcourir - Medicare</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
         .button-container a:nth-child(2) {
             background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
@@ -25,13 +26,14 @@
         <div class="button-container">
             <a href="accueil.html" class="button">Accueil</a>
             <a href="tout_parcourir.html" class="button">Tout Parcourir</a>
-            <a href="#" class="button">Recherche</a>
-            <a href="#" class="button">Rendez-vous</a>
-            <a href="#" class="button">Votre compte</a>
+            <a href="recherche.html" class="button">Recherche</a>
+            <a href="rdv.html" class="button">Rendez-vous</a>
+            <a href="compte.html" class="button">Votre compte</a>
         </div>
     </nav>
     <main class="section">
-        <?php
+        <h3 style="color: black;font-size:25px;font-weight: bold;" class="card-text"> Voici la liste de nos différents médecins généralistes : </h3>
+       <?php
         // Afficher les erreurs PHP
         error_reporting(E_ALL);
         ini_set('display_errors', 1);
