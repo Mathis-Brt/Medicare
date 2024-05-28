@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tout parcourir - Medicare</title>
+    <title>Médecins spécialistes - Tout parcourir - Medicare</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
@@ -32,46 +32,16 @@
         </div>
     </nav>
     <main class="section">
-        <h2 style="color: black;">Retrouvez les différents services médicaux disponibles chez Medicare</h2><br>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <a href="medecine_generale.php">
-                        <div class="card">
-                            <img src="Med_g.png" alt="Medecine generale" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
-                            <div class="card-body">
-                                <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Médecine générale</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="medecins_specialistes.php">
-                        <div class="card">
-                            <img src="Med_s.png" alt="Medecins specialistes" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
-                            <div class="card-body">
-                                <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Médecins spécialistes</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-4">
-                    <a href="laboratoire_biologie.html">
-                        <div class="card">
-                            <img src="Lab_b.png" alt="Laboratoire biologie" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
-                            <div class="card-body">
-                                <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Laboratoire biologie médicale</p>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br>
-        <h4 style="color: black;">Pour vous garantir une bonne santé, n'oubliez pas qu'il est important de consulter.</h4>
-        <br>
-    </main>
+        <h3 style="color: black;font-size:25px;font-weight: bold;" class="card-text">Voici la liste de nos différents médecins spécialistes : </h3>
+       <?php
+        // Afficher les erreurs PHP
+        error_reporting(E_ALL);
+        ini_set('display_errors', 1);
 
+        // Inclure le fichier PHP
+        include 'medecinSpe.php';
+        ?>
+    </main>
     <footer class="footer">
         <div class="contact-info">
             <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
