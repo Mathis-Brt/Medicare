@@ -27,7 +27,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: white;
+    background-color: lightblue;
     padding: 10px 20px; /* Ajuster le padding si nécessaire */
     border-bottom: 2px solid #ccc;
     position: relative;
@@ -89,19 +89,19 @@ body {
 }
 
 .footer {
-    background-color: #f8f8f8;
+    background-color: lightblue;
     color: #666;
     font-size: 1em;
     padding: 20px;
-    text-align: center;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
     gap: 20px; /* Ajouter de l'espace entre les éléments du footer */
 }
 
 .footer .contact-info p {
-    margin: 5px 0; /* Ajouter de la marge entre les lignes de contact */
+    margin: 10px 0; /* Ajouter de la marge au-dessus et en dessous des lignes de contact */
 }
 
 .footer .contact-info a {
