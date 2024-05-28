@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Informations Client</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<h1>Informations des Clients</h1>
+<?php
+    //identifier le nom de base de données
+    $database = "client";
+    //connectez-vous dans votre BDD
+    //Rappel : votre serveur = localhost | votre login = root | votre mot de pass = '' (rien)
+    $db_handle = mysqli_connect('localhost', 'root', 'root');
+
+    $db_found = mysqli_select_db($db_handle, $database);
+    //si le BDD existe, faire le traitement
+    if ($db_found) {
+        $sql = "SELECT * FROM client";
+        $result = mysqli_query($db_handle, $sql);
+        if (mysqli_num_rows($result) > 0) {
+echo "<table>";
+    echo "<tr>";
+        echo "<th>Nom</th>";
+        echo "<th>Prénom</th>";
+        echo "<th>Adresse</th>";
+        echo "<th>Ville</th>";
+        echo "<th>Code postale</th>";
+        echo "<th>Pays</th>";
+        echo "<th>Telephone</th>";
+        echo "<th>Carte Vitale</th>";
+        echo "<th>Type de paiement</th>";
+        echo "<th>Numéro de carte</th>";
+        echo "<th>Nom carte</th>";
+        echo "<th>Date d'expiration</th>";
+        echo "<th>Code de sécurité</th>";
+        echo "</tr>";
+    while ($data = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+        echo "<td>" . $data['nom'] . "</td>";
+        echo "<td>" . $data['prénom'] . "</td>";
+        echo "<td>" . $data['adresse'] . "</td>";
+        echo "<td>" . $data['ville'] . "</td>";
+        echo "<td>" . $data['cp'] . "</td>";
+        echo "<td>" . $data['pays'] . "</td>";
+        echo "<td>" . $data['telephone'] . "</td>";
+        echo "<td>" . $data['cartevitale'] . "</td>";
+        echo "<td>" . $data['typepaiement'] . "</td>";
+        echo "<td>" . $data['numerocarte'] . "</td>";
+        echo "<td>" . $data['nomcarte'] . "</td>";
+        echo "<td>" . $data['dateexpiration'] . "</td>";
+        echo "<td>" . $data['codesecurité'] . "</td>";
+        echo "</tr>";
+    }
+    echo "</table>";
+} else {
+echo "Aucun client trouvé.";
+}
+} else {
+echo "Database not found";
+}
+//fermer la connection
+mysqli_close($db_handle);
+?>
+</body>
+</html>
+
