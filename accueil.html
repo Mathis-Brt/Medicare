@@ -11,6 +11,29 @@
         .button-container a:nth-child(1) {
             background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
         }
+        .medicare-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .medicare-container img {
+            margin-right: 20px; /* Espace entre l'image et le texte */
+        }
+        .text-container {
+            flex: 1; /* Permet au conteneur de texte de prendre l'espace restant */
+        }
+        .centered-title {
+            text-align: center;
+            margin-top: 40px;
+            text-decoration: underline;
+        }
+        .centered-title2 {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 2em; /* Taille de police plus grande */
+            font-family: 'Copperplate Gothic Bold' ; /* Utilisation de la nouvelle police */
+            text-decoration: underline; /* Souligner le texte */
+        }
     </style>
 </head>
 <body>
@@ -31,11 +54,17 @@
             <a href="#" class="button">Votre compte</a>
         </div>
     </nav>
+
     <main class="section">
-        <h2 style="color: black;">Bienvenue sur Medicare</h2><br><br>
-        <p style="color: black;">Medicare est un groupe de services médicaux affilié à Omnes, dédié à fournir des soins de santé de haute qualité et des informations médicales fiables. Grâce à une équipe de professionnels de santé expérimentés et à des technologies de pointe, Medicare s'engage à améliorer le bien-être de ses patients et à innover dans le domaine médical.</p>
-        <br><br>
-        <h2 style="color: black;">Bulletin santé de la semaine</h2><br>
+        <h2 style="color: black;" class="centered-title2">Bienvenue sur Medicare</h2><br><br>
+        <div class="medicare-container">
+            <img src="medicare_accueil.jpg" alt="Image Medicare Accueil" class="medicare-image">
+            <div class="text-container">
+                <p style="color: black; font-size: 18px;">Medicare est un groupe de services médicaux affilié à Omnes, dédié à fournir des soins de santé de haute qualité et des informations médicales fiables. Grâce à une équipe de professionnels de santé expérimentés et à des technologies de pointe, Medicare s'engage à améliorer le bien-être de ses patients et à innover dans le domaine médical.</p>
+            </div>
+        </div>
+        <br><br><h2 style="color: black;" class="centered-title">Bulletin santé de la semaine</h2><br>
+
 
 
         <div class="container">

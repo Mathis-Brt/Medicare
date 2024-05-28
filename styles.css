@@ -61,7 +61,7 @@ body {
 }
 
 .navigation {
-    background-color: #FFFFF0;
+    background-color: rgb(32, 67, 104);
     padding: 20px 0;
     border-bottom: 2px solid #ccc;
     text-align: center; /* Centrer les boutons */
@@ -79,8 +79,7 @@ body {
     padding: 10px 20px;
     text-decoration: none;
     font-size: 1em;
-    border-radius: 10px; /* Coins arrondis */
-    border: 1px solid #ccc; /* Bordure des boutons */
+
     text-align: center;
 }
 
@@ -92,6 +91,29 @@ body {
     color: #4169e1; /* Couleur bleue pour le texte de la section */
 
     background-color: #FFFFF0;
+}
+
+.medicare-info-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto; /* Pour centrer le contenu */
+    max-width: 1200px; /* Ajuste la largeur maximale si nécessaire */
+}
+
+.medicare-image {
+    width: 30%; /* Ajuste la taille de l'image selon tes besoins */
+}
+
+.text-container {
+    width: 50%; /* Ajuste la largeur du conteneur de texte selon tes besoins */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centrer verticalement */
+}
+
+.text-container h2 {
+    text-align: center; /* Centrer horizontalement */
 }
 
 .footer {
