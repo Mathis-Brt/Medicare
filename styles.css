@@ -33,6 +33,10 @@ body {
     position: relative;
 }
 
+.header .small-logo {
+    max-height: 100px; /* Taille du petit logo */
+    margin-right: 20px; /* Espacement à droite du petit logo */
+}
 .header .title-container {
     flex-grow: 1;
     text-align: center;
