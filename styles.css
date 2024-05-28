@@ -13,7 +13,7 @@ body {
 
 .wrapper {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1800px;
     margin: 0 auto; /* Centrer le contenu */
     background-color: white;
     border: 1px solid #ccc;
@@ -28,8 +28,8 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: lightblue;
-    padding: 10px 20px; /* Ajuster le padding si nécessaire */
-    border-bottom: 2px solid #ccc;
+    padding: 35px 50px; /* Augmenter le padding pour un header plus grand */
+
     position: relative;
 }
 
@@ -39,23 +39,24 @@ body {
 }
 
 .header h1 {
-    font-size: 2em;
-    color: red; /* Couleur rouge pour "Medicare" */
+    font-size: 2.5em; /* Augmenter la taille de la police */
+    color: blue; /* Couleur rouge pour "Medicare" */
+    margin: 0;
 }
 
 .header h1 span {
-    color: blue; /* Couleur bleue pour "Services Médicaux" */
+    color: red; /* Couleur bleue pour "Services Médicaux" */
 }
 
 .header .logo {
-    max-height: 50px; /* Réduire la taille du logo */
+    max-height: 80px; /* Augmenter la taille du logo */
     position: absolute;
-    right: 20px; /* Ajuster la distance par rapport au bord droit */
+    right: 40px; /* Garder la distance par rapport au bord droit */
 }
 
 .navigation {
-    background-color: white;
-    padding: 10px 0;
+    background-color: #FFFFF0;
+    padding: 20px 0;
     border-bottom: 2px solid #ccc;
     text-align: center; /* Centrer les boutons */
 }
@@ -81,11 +82,10 @@ body {
     flex-grow: 1; /* Faire grandir la section pour occuper l'espace disponible */
     padding: 20px;
     text-align: center;
-    border-bottom: 2px solid #ccc;
     font-size: 2em; /* Taille de police ajustée pour le texte de la section */
     color: #4169e1; /* Couleur bleue pour le texte de la section */
-    margin-top: 20px; /* Ajouter un espace au-dessus de la section */
-    margin-bottom: 20px; /* Ajouter un espace en dessous de la section */
+
+    background-color: #FFFFF0;
 }
 
 .footer {
