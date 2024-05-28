@@ -21,16 +21,10 @@ if (!$db_found) {
 // Récupérer la spécialité de l'URL
 $specialite = isset($_GET['specialite']) ? mysqli_real_escape_string($db_handle, $_GET['specialite']) : '';
 
-// Afficher la valeur de la variable $specialite pour le débogage
-echo "Valeur de la spécialité : " . htmlspecialchars($specialite) . "<br>";
-
 if ($specialite) {
     // Utilisez les noms corrects des colonnes en fonction de votre base de données
     $sql = "
-    SELECT nom, prénom, id FROM medecinspe WHERE spécialité = '$specialite' "; // Assurez-vous que la colonne existe dans medecing
-    
-    // Pour déboguer, affichez la requête SQL
-    echo "Requête SQL : " . $sql . "<br>";
+    SELECT nom, prénom, id FROM medecinspe WHERE spécialité = '$specialite'"; // Assurez-vous que la colonne existe dans medecing
     
     $result = mysqli_query($db_handle, $sql);
 
@@ -40,7 +34,7 @@ if ($specialite) {
 
     if (mysqli_num_rows($result) > 0) {
         echo "<div class='doctor-list'>";
-        echo "<h2>Médecins avec la spécialité : " . htmlspecialchars($specialite) . "</h2>";
+        echo "<h2>" . htmlspecialchars($specialite) . "</h2>";
         while ($data = mysqli_fetch_assoc($result)) {
             // Afficher les médecins
             echo "<div class='doctor'>";
