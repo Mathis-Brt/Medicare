@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Accueil - Medicare</title>
+    <title>Tout parcourir - Medicare</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .button-container a:nth-child(2) {
+            background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
+        }
+    </style>
 </head>
 <body>
 <div class="wrapper">
     <header class="header">
         <div class="title-container">
-            <h1><span>Medicare</span>: Services Médicaux</h1>
+            <h1 style="font-size: 40px;"><span>Medicare</span>: Services Médicaux</h1>
         </div>
         <img src="logo.png" alt="Medicare Logo" class="logo">
     </header>
     <nav class="navigation">
         <div class="button-container">
             <a href="accueil.html" class="button">Accueil</a>
-            <a href="#" class="button">Tout Parcourir</a>
+            <a href="tout_parcourir.html" class="button">Tout Parcourir</a>
             <a href="#" class="button">Recherche</a>
             <a href="#" class="button">Rendez-vous</a>
             <a href="#" class="button">Votre compte</a>
@@ -30,57 +34,34 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="Med_g.png" alt="Medecine generale" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Médecine générale</p>
+                    <a href="medecine_generale.html">
+                        <div class="card">
+                            <img src="Med_g.png" alt="Medecine generale" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
+                            <div class="card-body">
+                                <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Médecine générale</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="Med_s.png" alt="Medecins specialistes" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Médecins spécialistes</p>
+                    <a href="medecins_specialistes.html">
+                        <div class="card">
+                            <img src="Med_s.png" alt="Medecins specialistes" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
+                            <div class="card-body">
+                                <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Médecins spécialistes</p>
+                            </div>
                         </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-md-4">
-                    <div class="card">
-                        <img src="Lab_b.png" alt="Laboratoire biologie" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Laboratoire biologie médicale</p>
+                    <a href="laboratoire_biologie.html">
+                        <div class="card">
+                            <img src="Lab_b.png" alt="Laboratoire biologie" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
+                            <div class="card-body">
+                                <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Laboratoire biologie médicale</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Modals for Medicare images -->
-        <div class="modal fade" id="medicare1Modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="Medicare1.jpg" class="img-fluid" alt="Medicare 1">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="medicare2Modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="Medicare2.jpg" class="img-fluid" alt="Medicare 2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="medicare3Modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="Medicare3.jpg" class="img-fluid" alt="Medicare 3">
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
