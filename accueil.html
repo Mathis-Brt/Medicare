@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Medicare</title>
     <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
 <div class="wrapper">
@@ -29,7 +30,69 @@
         <br><br>
         <h2 style="color: black;">Bulletin santé de la semaine</h2>
 
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="Medicare1.png" alt="Medicare 1" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
+                        <div class="card-body">
+                            <p style="color: black;" class="card-text"> Lutte contre le cancer : récolte de cheveux. Trouvez le point de collecte le plus proche de chez vous.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
+                        <div class="card-body">
+                            <p class="card-text">Description de l'événement Medicare 2.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
+                        <div class="card-body">
+                            <p class="card-text">Description de l'événement Medicare 3.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modals for Medicare images -->
+        <div class="modal fade" id="medicare1Modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="Medicare1.jpg" class="img-fluid" alt="Medicare 1">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="medicare2Modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="Medicare2.jpg" class="img-fluid" alt="Medicare 2">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="medicare3Modal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <img src="Medicare3.jpg" class="img-fluid" alt="Medicare 3">
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
+
+
+
+
     <footer class="footer">
         <div class="contact-info">
             <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
@@ -41,5 +104,8 @@
         </div>
     </footer>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
