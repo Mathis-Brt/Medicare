@@ -103,10 +103,6 @@
                             <input type="text" class="form-control" id="lastName" name="nom" required>
                         </div>
                         <div class="form-group">
-                            <label for="date_naissance">Date de Naissance</label>
-                            <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
-                        </div>
-                        <div class="form-group">
                             <label for="address">Adresse postale</label>
                             <input type="text" class="form-control" id="address" name="adresse" required>
                         </div>
@@ -123,11 +119,11 @@
                             <input type="text" class="form-control" id="country" name="pays" required>
                         </div>
                         <div class="form-group">
-                            <label for="phoneNumber">Numéro de téléphone du client</label>
+                            <label for="phoneNumber">Numéro de téléphone</label>
                             <input type="tel" class="form-control" id="phoneNumber" name="telephone" required>
                         </div>
                         <div class="form-group">
-                            <label for="carteVitale">Carte Vitale du client</label>
+                            <label for="carteVitale">Carte Vitale</label>
                             <input type="text" class="form-control" id="carteVitale" name="carte_vitale" required>
                         </div>
                         <div class="form-group">
@@ -138,8 +134,35 @@
                             <label for="mot_de_passe">Mot de passe</label>
                             <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
                         </div>
+                        <div class="form-group">
+                            <label for="payment_type">Type de paiement</label>
+                            <select class="form-control" id="payment_type" name="payment_type" required>
+                                <option value="Paypal">Paypal</option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="Visa">Visa</option>
+                                <option value="Visa">American Express</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="card_number">Numéro de carte</label>
+                            <input type="text" class="form-control" id="card_number" name="card_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry_date">Date d'expiration (YYYY-MM-01)</label>
+                            <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="YYYY-MM-01" pattern="^\d{4}-(0[1-9]|1[0-2])-01$" title="Format attendu : YYYY-MM-01" required>
+                            <small id="expiryDateHelp" class="form-text text-muted">Format attendu : YYYY-MM-01</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="card_name">Nom sur la carte</label>
+                            <input type="text" class="form-control" id="card_name" name="card_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="security_code">Code de sécurité</label>
+                            <input type="text" class="form-control" id="security_code" name="security_code" maxlength="3" required>
+                        </div>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
+                    
                 </div>                
             </div>
         </div>
