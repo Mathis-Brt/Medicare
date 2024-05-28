@@ -3,11 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte - Medicare</title>
+    <title>Médecine générale - Tout parcourir - Medicare</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
-
         .button-container a:nth-child(5) {
             background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
         }
@@ -41,8 +40,6 @@
             font-family: 'Copperplate Gothic Bold' ; /* Utilisation de la nouvelle police */
             text-decoration: underline; /* Souligner le texte */
         }
-
-
     </style>
 </head>
 <body>
@@ -58,17 +55,17 @@
         <div class="button-container">
             <a href="accueil.html" class="button">Accueil</a>
             <a href="tout_parcourir.html" class="button">Tout Parcourir</a>
-            <a href="recherche.html" class="button">Recherche</a>
-            <a href="rdv.html" class="button">Rendez-vous</a>
-            <a href="Compte.html" class="button">Votre compte</a>
+            <a href="#" class="button">Recherche</a>
+            <a href="#" class="button">Rendez-vous</a>
+            <a href="#" class="button">Votre compte</a>
         </div>
     </nav>
 
     <main class="section">
         <h2 style="color: black;" class="title">Bienvenue sur votre espace personnel</h2>
         <div class="main-button-container">
-            <a href="creer_compte.html">Créer un compte</a>
-            <a href="connexion.html">Se connecter</a>
+            <a href="#" onclick="openCreateAccountModal()">Créer un compte</a>
+            <a href="#" onclick="openLoginModal()">Se connecter</a>
         </div>
     </main>
 
@@ -82,9 +79,102 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </footer>
+
+    <!-- Modal de création de compte -->
+    <div id="createAccountModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Créer un compte</h5>
+                    <button type="button" class="close" onclick="closeCreateAccountModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulaire de création de compte à compléter -->
+                    <form>
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" class="form-control" id="firstName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" class="form-control" id="lastName" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="dob">Date de Naissance</label>
+                            <input type="date" class="form-control" id="dob" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Adresse postale</label>
+                            <input type="text" class="form-control" id="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Adresse e-mail</label>
+                            <input type="email" class="form-control" id="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Mot de passe</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de connexion -->
+    <div id="loginModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Se connecter</h5>
+                    <button type="button" class="close" onclick="closeLoginModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulaire de connexion à compléter -->
+                    <form>
+                        <div class="form-group">
+                            <label for="loginEmail">Adresse e-mail</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Mot de passe</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCreateAccountModal() {
+            $('#createAccountModal').modal('show');
+        }
+
+        function closeCreateAccountModal() {
+            $('#createAccountModal').modal('hide');
+        }
+
+        function openLoginModal() {
+            $('#loginModal').modal('show');
+        }
+
+        function closeLoginModal() {
+            $('#loginModal').modal('hide');
+        }
+    </script>
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+
