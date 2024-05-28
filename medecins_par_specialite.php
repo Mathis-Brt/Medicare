@@ -21,12 +21,16 @@ if (!$db_found) {
 // Récupérer la spécialité de l'URL
 $specialite = isset($_GET['specialite']) ? mysqli_real_escape_string($db_handle, $_GET['specialite']) : '';
 
+// Afficher la valeur de la variable $specialite pour le débogage
+echo "Valeur de la spécialité : " . htmlspecialchars($specialite) . "<br>";
+
 if ($specialite) {
-    // Modifier les noms de colonnes en fonction de la structure réelle de votre base de données
+    // Utilisez les noms corrects des colonnes en fonction de votre base de données
     $sql = "
-    SELECT nom, prénom, id FROM medecinspe WHERE spécialité = '$specialite'
-    UNION
-    SELECT nom, prénom, id FROM medecing WHERE spécialité = '$specialite'"; // Assurez-vous que la colonne existe dans medecing
+    SELECT nom, prénom, id FROM medecinspe WHERE spécialité = '$specialite' "; // Assurez-vous que la colonne existe dans medecing
+    
+    // Pour déboguer, affichez la requête SQL
+    echo "Requête SQL : " . $sql . "<br>";
     
     $result = mysqli_query($db_handle, $sql);
 
