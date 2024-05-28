@@ -20,7 +20,9 @@ if (!$db_found) {
 
 // Si la BDD existe, faire le traitement
 if ($db_found) {
-    $sql = "SELECT * FROM medecinspe";
+    $sql = "
+    SELECT DISTINCT spécialité AS specialite FROM medecinspe";
+    
     $result = mysqli_query($db_handle, $sql);
 
     if (!$result) {
@@ -28,16 +30,16 @@ if ($db_found) {
     }
 
     if (mysqli_num_rows($result) > 0) {
-        echo "<div class='doctor-list'>";
+        echo "<div class='speciality-list'>";
         while ($data = mysqli_fetch_assoc($result)) {
-            // Créer des liens vers les pages des médecins
-            echo "<div class='doctor'>";
-            echo "<h2 style='color: black; font-size: 25px;'><a href='medecin" . htmlspecialchars($data['id']) . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
+            // Créer des liens vers les pages des spécialités
+            echo "<div class='speciality'>";
+            echo "<h2 style='color: black; font-size: 25px;'><a href='medecins_par_specialite.php?specialite=" . urlencode($data['specialite']) . "'>" . htmlspecialchars($data['specialite']) . "</a></h2>";
             echo "</div>";
         }
         echo "</div>";
     } else {
-        echo "Aucun médecin généraliste trouvé.";
+        echo "Aucune spécialité trouvée.";
     }
 }
 
