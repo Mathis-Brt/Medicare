@@ -49,7 +49,7 @@ body {
 }
 
 .header .logo {
-    max-height: 80px; /* Augmenter la taille du logo */
+    max-height: 100px; /* Augmenter la taille du logo */
     position: absolute;
     right: 40px; /* Garder la distance par rapport au bord droit */
 }
@@ -101,7 +101,8 @@ body {
 }
 
 .footer .contact-info p {
-    margin: 10px 0; /* Ajouter de la marge au-dessus et en dessous des lignes de contact */
+    margin: 20px 0; /* Ajouter de la marge au-dessus et en dessous des lignes de contact */
+    margin-left: 300px;
 }
 
 .footer .contact-info a {
@@ -114,6 +115,7 @@ body {
 }
 
 .footer .map-container iframe {
-    max-width: 100%; /* S'assurer que la carte ne dépasse pas la largeur du conteneur */
+    max-width: 50%; /* S'assurer que la carte ne dépasse pas la largeur du conteneur */
     height: auto;
+    margin-right: 300px;
 }
