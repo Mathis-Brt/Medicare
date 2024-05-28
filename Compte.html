@@ -93,38 +93,50 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulaire de création de compte à compléter -->
-                    <form>
+                    <form action="creer_compte.php" method="POST">
                         <div class="form-group">
                             <label for="firstName">Prénom</label>
-                            <input type="text" class="form-control" id="firstName" required>
+                            <input type="text" class="form-control" id="firstName" name="prenom" required>
                         </div>
                         <div class="form-group">
                             <label for="lastName">Nom</label>
-                            <input type="text" class="form-control" id="lastName" required>
+                            <input type="text" class="form-control" id="lastName" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="date_naissance">Date de Naissance</label>
+                            <input type="date" class="form-control" id="date_naissance" name="date_naissance" required>
                         </div>
                         <div class="form-group">
                             <label for="address">Adresse postale</label>
-                            <input type="text" class="form-control" id="address" required>
+                            <input type="text" class="form-control" id="address" name="adresse" required>
                         </div>
                         <div class="form-group">
                             <label for="city">Ville</label>
-                            <input type="text" class="form-control" id="city" required>
+                            <input type="text" class="form-control" id="city" name="ville" required>
                         </div>
                         <div class="form-group">
                             <label for="postalCode">Code Postal</label>
-                            <input type="text" class="form-control" id="postalCode" required>
+                            <input type="text" class="form-control" id="postalCode" name="code_postal" required>
                         </div>
                         <div class="form-group">
                             <label for="country">Pays</label>
-                            <input type="text" class="form-control" id="country" required>
+                            <input type="text" class="form-control" id="country" name="pays" required>
                         </div>
                         <div class="form-group">
                             <label for="phoneNumber">Numéro de téléphone du client</label>
-                            <input type="tel" class="form-control" id="phoneNumber" required>
+                            <input type="tel" class="form-control" id="phoneNumber" name="telephone" required>
                         </div>
                         <div class="form-group">
                             <label for="carteVitale">Carte Vitale du client</label>
-                            <input type="text" class="form-control" id="carteVitale" required>
+                            <input type="text" class="form-control" id="carteVitale" name="carte_vitale" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse_email">Adresse e-mail</label>
+                            <input type="email" class="form-control" id="adresse_email" name="adresse_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mot_de_passe">Mot de passe</label>
+                            <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
@@ -145,14 +157,14 @@
                 </div>
                 <div class="modal-body">
                     <!-- Formulaire de connexion à compléter -->
-                    <form>
+                    <form action="connexion.php" method="POST">
                         <div class="form-group">
                             <label for="loginEmail">Adresse e-mail</label>
-                            <input type="email" class="form-control" id="loginEmail" required>
+                            <input type="email" class="form-control" id="loginEmail" name="loginEmail" required>
                         </div>
                         <div class="form-group">
                             <label for="loginPassword">Mot de passe</label>
-                            <input type="password" class="form-control" id="loginPassword" required>
+                            <input type="password" class="form-control" id="loginPassword" name="loginPassword" required>
                         </div>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
@@ -185,5 +197,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
