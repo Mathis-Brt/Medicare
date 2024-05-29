@@ -68,7 +68,7 @@
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             // Bouton de retour
-            echo "<div class='back-button' style='margin-left: 40px;'>";
+            echo "<div class='back-button' style='margin-left: 30px;'>";
             echo "<a href='medecine_generale.php' class='btn btn-primary'>Retour</a>";
             echo "</div>";
 
