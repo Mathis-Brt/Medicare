@@ -47,7 +47,21 @@
             if ($result && mysqli_num_rows($result) > 0) {
                 echo "<ul>";
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<li><a href='about:blank'>" . htmlspecialchars($row['spécialité']) . "</a></li>";
+                    echo "<li><a href='";
+                    if ($row['spécialité'] === "Dépistage covid-19") {
+                        echo "labo_covid.php";
+                    } elseif ($row['spécialité'] === "Biologie préventive") {
+                        echo "labo_preventive.php";
+                    } elseif ($row['spécialité'] === "Biologie de la femme enceinte") {
+                        echo "labo_enceinte.php";
+                    } elseif ($row['spécialité'] === "Biologie de routine") {
+                        echo "labo_routine.php";
+                    } elseif ($row['spécialité'] === "Cancérologie") {
+                        echo "labo_cancerologie.php";
+                    } elseif ($row['spécialité'] === "Gynécologie") {
+                        echo "labo_gynecologie.php";
+                    }
+                    echo "'>" . htmlspecialchars($row['spécialité']) . "</a></li>";
                 }
                 echo "</ul>";
             } else {
