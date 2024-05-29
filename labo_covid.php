@@ -86,8 +86,9 @@
             <?php
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
                     echo "<div class='doctor-info'>";
-                    echo "<div class='doctor-photo'><img src='" . htmlspecialchars($row['photo']) . "' alt='Photo du laboratoire'></div>";
+                    echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du laboratoire'></div>";
                     echo "<div class='doctor-details'>";
                     echo "<p><strong>Nom:</strong> " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
@@ -101,7 +102,7 @@
             ?>
         </div>
         <br>
-        <img src="medecin/planning_med1.png" alt="Planning medecin" width="900" height="110">
+        <img src="medecin/planning_covid.png" alt="Planning medecin" width="850" height="100">
     </main>
     <footer class="footer">
         <div class="contact-info">
