@@ -45,17 +45,35 @@
 
             // Affichage des spécialités des médecins
             if ($result && mysqli_num_rows($result) > 0) {
-                echo "<ul>";
                 while ($row = mysqli_fetch_assoc($result)) {
-                    echo "<li><a href='";
-                    if ($row['spécialité'] === "Addictologie") {
-                        echo "addictologue.php";
-                    } else {
-                        echo "medecinSpe.php?specialite=" . urlencode($row['spécialité']);
+                    echo "<p><a href='";
+                    switch ($row['spécialité']) {
+                        case "Addictologie":
+                            echo "addictologue.php";
+                            break;
+                        case "Allergologie":
+                            echo "allergologue.php";
+                            break;
+                        case "Cardiologie":
+                            echo "cardiologue.php";
+                            break;
+                        case "Dermatologie":
+                            echo "dermatologue.php";
+                            break;
+                        case "Endocrinologie":
+                            echo "endocrinologue.php";
+                            break;
+                        case "Gastroentérologie":
+                            echo "gastroenterologue.php";
+                            break;
+                        case "Hématologie":
+                            echo "hematologie.php";
+                            break;
+                        default:
+                            echo "medecinSpe.php?specialite=" . urlencode($row['spécialité']);
                     }
-                    echo "'>" . htmlspecialchars($row['spécialité']) . "</a></li>";
+                    echo "'>" . htmlspecialchars($row['spécialité']) . "</a></p>";
                 }
-                echo "</ul>";
             } else {
                 echo "<p>Aucune spécialité de médecin trouvée.</p>";
             }
