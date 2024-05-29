@@ -1,0 +1,232 @@
+<?php include('session_check.php'); ?>
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médecine générale - Tout parcourir - Medicare</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="logo.medicare.png" type="image/png">
+    <style>
+        .button-container a:nth-child(5) {
+            background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
+        }
+
+        .main-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .main-button-container a {
+            margin: 0 10px;
+            padding: 8px 15px;
+            background-color: lightblue;
+            color: black;
+            text-align: center;
+            text-decoration: none;
+            font-size: 0.9em;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .main-button-container a:hover {
+            background-color: deepskyblue;
+        }
+
+        .title{
+            text-align: center;
+            margin-top: 40px;
+            font-size: 1.5em; /* Taille de police plus grande */
+            font-family: 'Copperplate Gothic Bold' ; /* Utilisation de la nouvelle police */
+            text-decoration: underline; /* Souligner le texte */
+        }
+        
+        #user-info {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <div class="title-container">
+            <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
+        </div>
+        <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
+        <img src="logo.png" alt="Logo Medicare" class="small-logo">
+    </header>
+    <nav class="navigation">
+        <div class="button-container">
+        <a href="accueil.php" class="button">Accueil</a>
+            <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
+            <a href="recherche.php" class="button">Recherche</a>
+            <a href="rdv.php" class="button">Rendez-vous</a>
+            <?php if (isset($_SESSION['email'])): ?>
+                <a href="compte.php" class="button">Votre compte</a>
+            <?php else: ?>
+                <a href="connexion.php" class="button">Connexion</a>
+            <?php endif; ?>
+        </div>
+    </nav>
+
+    <main class="section">
+        <h2 style="color: black;" class="title">Bienvenue sur votre espace personnel</h2>
+        <div class="main-button-container">
+            <a href="#" onclick="openCreateAccountModal()">Créer un compte</a>
+            <a href="#" onclick="openLoginModal()">Se connecter</a>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="contact-info">
+            <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
+            <p>Adresse: 10 Rue Sextius Michel, Paris, 75015</p>
+            <p>Email: <a href="mailto:omnes.medicare@gmail.com">omnes.medicare@gmail.com</a></p>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </footer>
+
+    <!-- Modal de création de compte -->
+    <div id="createAccountModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Créer un compte</h5>
+                    <button type="button" class="close" onclick="closeCreateAccountModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulaire de création de compte à compléter -->
+                    <form action="creer_compte.php" method="POST">
+                        <div class="form-group">
+                            <label for="firstName">Prénom</label>
+                            <input type="text" class="form-control" id="firstName" name="prenom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Nom</label>
+                            <input type="text" class="form-control" id="lastName" name="nom" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="address">Adresse postale</label>
+                            <input type="text" class="form-control" id="address" name="adresse" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">Ville</label>
+                            <input type="text" class="form-control" id="city" name="ville" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="postalCode">Code Postal</label>
+                            <input type="text" class="form-control" id="postalCode" name="code_postal" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="country">Pays</label>
+                            <input type="text" class="form-control" id="country" name="pays" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phoneNumber">Numéro de téléphone</label>
+                            <input type="tel" class="form-control" id="phoneNumber" name="telephone" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="carteVitale">Carte Vitale</label>
+                            <input type="text" class="form-control" id="carteVitale" name="carte_vitale" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="adresse_email">Adresse e-mail</label>
+                            <input type="email" class="form-control" id="adresse_email" name="adresse_email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="mot_de_passe">Mot de passe</label>
+                            <input type="password" class="form-control" id="mot_de_passe" name="mot_de_passe" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="payment_type">Type de paiement</label>
+                            <select class="form-control" id="payment_type" name="payment_type" required>
+                                <option value="Paypal">Paypal</option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="Visa">Visa</option>
+                                <option value="Visa">American Express</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="card_number">Numéro de carte</label>
+                            <input type="text" class="form-control" id="card_number" name="card_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="expiry_date">Date d'expiration (YYYY-MM-01)</label>
+                            <input type="text" class="form-control" id="expiry_date" name="expiry_date" placeholder="YYYY-MM-01" pattern="^\d{4}-(0[1-9]|1[0-2])-01$" title="Format attendu : YYYY-MM-01" required>
+                            <small id="expiryDateHelp" class="form-text text-muted">Format attendu : YYYY-MM-01</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="card_name">Nom sur la carte</label>
+                            <input type="text" class="form-control" id="card_name" name="card_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="security_code">Code de sécurité</label>
+                            <input type="text" class="form-control" id="security_code" name="security_code" maxlength="3" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                    
+                </div>                
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de connexion -->
+    <div id="loginModal" class="modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Se connecter</h5>
+                    <button type="button" class="close" onclick="closeLoginModal()">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Formulaire de connexion à compléter -->
+                    <form action="connexion.php" method="POST">
+                        <div class="form-group">
+                            <label for="loginEmail">Adresse e-mail</label>
+                            <input type="email" class="form-control" id="loginEmail" name="loginEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="loginPassword">Mot de passe</label>
+                            <input type="password" class="form-control" id="loginPassword" name="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Valider</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openCreateAccountModal() {
+            $('#createAccountModal').modal('show');
+        }
+
+        function closeCreateAccountModal() {
+            $('#createAccountModal').modal('hide');
+        }
+
+        function openLoginModal() {
+            $('#loginModal').modal('show');
+        }
+
+        function closeLoginModal() {
+            $('#loginModal').modal('hide');
+        }
+    </script>
+
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
