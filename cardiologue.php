@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
-        .doctor-info {
+.doctor-info {
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -32,15 +32,28 @@
             background-color: #f9f9f9; /* Couleur de fond du rectangle */
             box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
         }
+        .doctor-navigation-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            padding: 10px;
+        }
         .doctor-navigation {
             text-align: center;
             font-size: 30px; /* Augmenter la taille de la police */
             color: white; /* Changer la couleur de la police en blanc */
-            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            flex: 1;
+            display: flex;
+            justify-content: center;
         }
         .doctor-specialty {
             font-size: 25px; /* Taille de la police pour la spécialité */
             color: black; /* Couleur de la police */
+        }
+        .back-button a {
+            color: white;
+            margin-left: 30px /* Couleur du texte du bouton de retour */
         }
     </style>
 </head>
@@ -63,6 +76,12 @@
         // Requête SQL pour récupérer les informations des médecins addictologues
         $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Cardiologie'";
         $result = mysqli_query($db_handle, $sql);
+
+        echo "<div class='doctor-navigation-container'>";
+            echo "<div class='back-button'>";
+            echo "<a href='medecins_specialistes.php' class='btn btn-primary'>Retour</a>";
+            echo "</div>";
+
         
         // Affichage des informations
         if ($result && mysqli_num_rows($result) > 0) {
@@ -86,8 +105,9 @@
             
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $photo = htmlspecialchars($row['photo']);
                     echo "<div class='doctor-info'>";
-                    echo "<div class='doctor-photo'><img src='medecin/medecinh.jpg' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
+                    echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                     echo "<div class='doctor-details'>";
                     echo "<p><strong>Cardiologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";

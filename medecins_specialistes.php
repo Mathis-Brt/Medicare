@@ -24,11 +24,11 @@
     </header>
     <nav class="navigation">
         <div class="button-container">
-            <a href="accueil.html" class="button">Accueil</a>
-            <a href="tout_parcourir.html" class="button">Tout Parcourir</a>
-            <a href="recherche.html" class="button">Recherche</a>
-            <a href="rdv.html" class="button">Rendez-vous</a>
-            <a href="Compte.html" class="button">Votre compte</a>
+            <a href="accueil.php" class="button">Accueil</a>
+            <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
+            <a href="recherche.php" class="button">Recherche</a>
+            <a href="rdv.php" class="button">Rendez-vous</a>
+            <a href="Compte.php" class="button">Votre compte</a>
         </div>
     </nav>
     <main class="section">
