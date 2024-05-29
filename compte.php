@@ -54,6 +54,18 @@ $codesecurite = $_SESSION['codesecurite'];
             background-color: #f9f9f9;
         }
 
+        .deconnexion-button {
+            display: block;
+            width: 20%;
+            padding: 10px;
+            text-align: center;
+            background-color: red;
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 
@@ -68,11 +80,15 @@ $codesecurite = $_SESSION['codesecurite'];
     </header>
     <nav class="navigation">
         <div class="button-container">
-            <a href="accueil.html" class="button">Accueil</a>
-            <a href="tout_parcourir.html" class="button">Tout Parcourir</a>
-            <a href="recherche.html" class="button">Recherche</a>
-            <a href="rdv.html" class="button">Rendez-vous</a>
-            <a href="Compte.html" class="button">Votre compte</a>
+            <a href="accueil.php" class="button">Accueil</a>
+            <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
+            <a href="recherche.php" class="button">Recherche</a>
+            <a href="rdv.php" class="button">Rendez-vous</a>
+            <?php if (isset($_SESSION['email'])): ?>
+                <a href="compte.php" class="button">Votre compte</a>
+            <?php else: ?>
+                <a href="connexion.php" class="button">Connexion</a>
+            <?php endif; ?>
         </div>
     </nav>
     <main class="section">
@@ -98,7 +114,7 @@ $codesecurite = $_SESSION['codesecurite'];
     </div>
 
     <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
-    
+
     </main>
     <footer class="footer">
         <div class="contact-info">
