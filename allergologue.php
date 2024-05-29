@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
-        .doctor-info {
+.doctor-info {
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -32,15 +32,28 @@
             background-color: #f9f9f9; /* Couleur de fond du rectangle */
             box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
         }
+        .doctor-navigation-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            padding: 10px;
+        }
         .doctor-navigation {
             text-align: center;
             font-size: 30px; /* Augmenter la taille de la police */
             color: white; /* Changer la couleur de la police en blanc */
-            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            flex: 1;
+            display: flex;
+            justify-content: center;
         }
         .doctor-specialty {
             font-size: 25px; /* Taille de la police pour la spécialité */
             color: black; /* Couleur de la police */
+        }
+        .back-button a {
+            color: white;
+            margin-left: 30px /* Couleur du texte du bouton de retour */
         }
     </style>
 </head>
@@ -54,30 +67,37 @@
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
     </header>
     <nav class="navigation">
-    <?php
-    // Connexion à la base de données
-    $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
+        <?php
+        // Connexion à la base de données
+        $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
-    // Vérification de la connexion
-    if ($db_handle) {
-        // Requête SQL pour récupérer les informations des médecins addictologues
-        $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Allergologie'";
-        $result = mysqli_query($db_handle, $sql);
-        
-        // Affichage des informations
-        if ($result && mysqli_num_rows($result) > 0) {
-            echo "<div class='doctor-navigation'>";
-            echo "<a href='#' style='color: white;'>Allergologie</a>"; // Ajout du style pour la couleur blanche
+        // Vérification de la connexion
+        if ($db_handle) {
+            // Requête SQL pour récupérer les informations des médecins allergologues
+            $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Allergologie'";
+            $result = mysqli_query($db_handle, $sql);
+
+            echo "<div class='doctor-navigation-container'>";
+            echo "<div class='back-button'>";
+            echo "<a href='medecins_specialistes.php' class='btn btn-primary'>Retour</a>";
+            echo "</div>";
+
+            // Affichage des informations
+            if ($result && mysqli_num_rows($result) > 0) {
+                echo "<div class='doctor-navigation'>";
+                echo "<a href='#' style='color: white;'>Allergologie</a>";
+                echo "</div>";
+            } else {
+                echo "<div class='doctor-navigation'>";
+                echo "<p>Aucun résultat trouvé.</p>";
+                echo "</div>";
+            }
             echo "</div>";
         } else {
-            echo "<p>Aucun résultat  trouvé.</p>";
+            echo "<p>Erreur de connexion à la base de données.</p>";
         }
-    } else {
-        echo "<p>Erreur de connexion à la base de données.</p>";
-    }
-    ?>
-</nav>
-
+        ?>
+    </nav>
     <main class="section">
         <div class="doctor-container">
             <?php

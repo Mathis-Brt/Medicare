@@ -53,7 +53,7 @@
         }
         .back-button a {
             color: white;
-            margin-left: 30px; /* Couleur du texte du bouton de retour */
+            margin-left: 30px /* Couleur du texte du bouton de retour */
         }
     </style>
 </head>
