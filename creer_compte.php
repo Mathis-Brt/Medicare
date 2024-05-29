@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prépare et exécute la requête d'insertion
-    $sql = "INSERT INTO client (prénom, nom, adresse, ville, cp, pays, telephone, cartevitale, mail, password, typepaiement, numerocarte, nomcarte, dateexpiration, codesecurité)
+    $sql = "INSERT INTO client (prenom, nom, adresse, ville, cp, pays, telephone, cartevitale, mail, password, typepaiement, numerocarte, nomcarte, dateexpiration, codesecurite)
         VALUES ('$prenom', '$nom', '$adresse', '$ville', '$code_postal', '$pays', '$telephone', '$carte_vitale', '$adresse_email', '$mot_de_passe', '$payment_type', '$card_number', '$card_name', '$date_expiration_formatted', '$security_code')";
 
     if ($conn->query($sql) === TRUE) {

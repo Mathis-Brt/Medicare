@@ -43,6 +43,17 @@ $codesecurite = $_SESSION['codesecurite'];
         .button-container a:nth-child(5) {
             background-color: lightblue;
         }
+
+        .info-box {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 20px 0;
+            width: 300px;
+            color: black;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
     </style>
 </head>
 
@@ -67,6 +78,8 @@ $codesecurite = $_SESSION['codesecurite'];
     <main class="section">
 
     <h1>Bienvenue sur votre compte</h1>
+
+    <div class="info-box">
     
     <p>Votre adresse e-mail : <?php echo $email; ?></p>
     <p>Nom : <?php echo $nom; ?></p>
@@ -82,7 +95,10 @@ $codesecurite = $_SESSION['codesecurite'];
     <p>Nom sur la Carte : <?php echo $nomcarte; ?></p>
     <p>Date d'expiration : <?php echo $dateexpiration; ?></p>
     <p>Code de Sécurité : <?php echo $codesecurite; ?></p>
+    </div>
 
+    <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
+    
     </main>
     <footer class="footer">
         <div class="contact-info">
