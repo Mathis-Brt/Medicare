@@ -67,10 +67,6 @@
         $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Addictologie'";
         $result = mysqli_query($db_handle, $sql);
 
-        echo "<div class='back-button'>";
-        echo "<a href='medecine_generale.php' class='btn btn-primary'>Retour</a>";
-        echo "</div>";
-
         // Affichage des informations
         if ($result && mysqli_num_rows($result) > 0) {
             echo "<div class='doctor-navigation'>";
