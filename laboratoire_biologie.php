@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Laboratoire biologie médicale - Tout parcourir - Medicare</title>
+    <title>Médecins spécialistes - Tout parcourir - Medicare</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
@@ -32,7 +32,34 @@
         </div>
     </nav>
     <main class="section">
+        <h3 style="color: black;font-size:25px;font-weight: bold;" class="card-text">Voici la liste des différents services proposés par nos laboratoires : </h3>
+        <?php
+        // Connexion à la base de données
+        $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
+        // Vérification de la connexion
+        if ($db_handle) {
+            // Requête SQL pour récupérer les spécialités des médecins
+            $sql = "SELECT DISTINCT spécialité FROM labo";
+            $result = mysqli_query($db_handle, $sql);
+
+            // Affichage des spécialités des médecins
+            if ($result && mysqli_num_rows($result) > 0) {
+                echo "<ul>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<li><a href='about:blank'>" . htmlspecialchars($row['spécialité']) . "</a></li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>Aucune spécialité de médecin trouvée.</p>";
+            }
+
+            // Fermer la connexion
+            mysqli_close($db_handle);
+        } else {
+            echo "<p>Erreur de connexion à la base de données.</p>";
+        }
+        ?>
     </main>
     <footer class="footer">
         <div class="contact-info">
