@@ -33,13 +33,38 @@
     </nav>
     <main class="section">
         <h3 style="color: black;font-size:25px;font-weight: bold;" class="card-text">Voici la liste de nos différents médecins spécialistes : </h3>
-       <?php
-        // Afficher les erreurs PHP
-        error_reporting(E_ALL);
-        ini_set('display_errors', 1);
+        <?php
+        // Connexion à la base de données
+        $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
-        // Inclure le fichier PHP
-        include 'medecinSpe.php';
+        // Vérification de la connexion
+        if ($db_handle) {
+            // Requête SQL pour récupérer les spécialités des médecins
+            $sql = "SELECT DISTINCT spécialité FROM medecinspe";
+            $result = mysqli_query($db_handle, $sql);
+
+            // Affichage des spécialités des médecins
+            if ($result && mysqli_num_rows($result) > 0) {
+                echo "<ul>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<li><a href='";
+                    if ($row['spécialité'] === "Addictologie") {
+                        echo "addictologue.php";
+                    } else {
+                        echo "medecinSpe.php?specialite=" . urlencode($row['spécialité']);
+                    }
+                    echo "'>" . htmlspecialchars($row['spécialité']) . "</a></li>";
+                }
+                echo "</ul>";
+            } else {
+                echo "<p>Aucune spécialité de médecin trouvée.</p>";
+            }
+
+            // Fermer la connexion
+            mysqli_close($db_handle);
+        } else {
+            echo "<p>Erreur de connexion à la base de données.</p>";
+        }
         ?>
     </main>
     <footer class="footer">

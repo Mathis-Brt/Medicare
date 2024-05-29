@@ -54,68 +54,49 @@
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
     </header>
     <nav class="navigation">
-        <?php
-        // Connexion à la base de données
-        $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
+    <?php
+    // Connexion à la base de données
+    $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
-        if (!$db_handle) {
-            die("Erreur de connexion à la base de données : " . mysqli_connect_error());
-        }
-
-        $db_found = mysqli_select_db($db_handle, $database);
-
-        if (!$db_found) {
-            die("Base de données non trouvée : " . mysqli_error($db_handle));
-        }
-
-        // Récupérer la spécialité de l'URL
-        $specialite = isset($_GET['specialite']) ? mysqli_real_escape_string($db_handle, $_GET['specialite']) : '';
-
-        if ($specialite) {
-            // Utilisez les noms corrects des colonnes en fonction de votre base de données
-            $sql = "SELECT nom, prénom, id FROM medecinspe WHERE spécialité = '$specialite'"; // Assurez-vous que la colonne existe dans medecing
-            
-            $result = mysqli_query($db_handle, $sql);
-
-            if (!$result) {
-                die("Erreur dans la requête SQL : " . mysqli_error($db_handle));
-            }
-
-            if (mysqli_num_rows($result) > 0) {
-                echo "<div class='doctor-list'>";
-                echo "<h2>" . htmlspecialchars($specialite) . "</h2>";
-                while ($data = mysqli_fetch_assoc($result)) {
-                    // Afficher les médecins
-                    echo "<div class='doctor'>";
-                    echo "<h2 style='color: black; font-size: 25px;'><a href='medecin" . htmlspecialchars($data['id']) . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
-                    echo "</div>";
-                }
-                echo "</div>";
-            } else {
-                echo "Aucun médecin trouvé pour cette spécialité.";
-            }
+    // Vérification de la connexion
+    if ($db_handle) {
+        // Requête SQL pour récupérer les informations des médecins addictologues
+        $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Addictologie'";
+        $result = mysqli_query($db_handle, $sql);
+        
+        // Affichage des informations
+        if ($result && mysqli_num_rows($result) > 0) {
+            echo "<div class='doctor-navigation'>";
+            echo "<a href='#' style='color: white;'>Addictologie</a>"; // Ajout du style pour la couleur blanche
+            echo "</div>";
         } else {
-            echo "Spécialité non spécifiée.";
+            echo "<p>Aucun résultat trouvé.</p>";
         }
+    } else {
+        echo "<p>Erreur de connexion à la base de données.</p>";
+    }
+    ?>
+</nav>
 
-        // Fermer la connexion
-        mysqli_close($db_handle);
-        ?>
-    </nav>
     <main class="section">
         <div class="doctor-container">
             <?php
+            // Réinitialisation du pointeur de résultat
+            mysqli_data_seek($result, 0);
+            
             if ($result && mysqli_num_rows($result) > 0) {
-                echo "<div class='doctor-info'>";
-                echo "<div class='doctor-photo'><img src='medecin/medecinh.jpg' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
-                echo "<div class='doctor-details'>";
-                echo "<p><strong>Médecin généraliste</strong></p>";
-                echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
-                echo "<p><strong>Numéro de téléphone:</strong> Non défini</p>";
-                echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
-                echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
-                echo "</div>";
-                echo "</div>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    echo "<div class='doctor-info'>";
+                    echo "<div class='doctor-photo'><img src='medecin/medecinh.jpg' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
+                    echo "<div class='doctor-details'>";
+                    echo "<p><strong>Addictologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
+                    echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
+                    echo "<p><strong>Numéro de téléphone:</strong> Non défini</p>";
+                    echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
+                    echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
+                    echo "</div>";
+                    echo "</div>";
+                }
             }
             ?>
         </div>
@@ -136,4 +117,3 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
