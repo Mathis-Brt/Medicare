@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Médecins spécialistes - Tout parcourir - Medicare</title>
+    <title>Médecins spécialistes - Medicare</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
@@ -54,31 +54,36 @@
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
     </header>
     <nav class="navigation">
-        <?php
-        // Connexion à la base de données
-        $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
+    <?php
+    // Connexion à la base de données
+    $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
-        // Vérification de la connexion
-        if ($db_handle) {
-            // Requête SQL pour récupérer les informations du médecin avec id = 1
-            $sql = "SELECT * FROM medecing WHERE id = 1";
-            $result = mysqli_query($db_handle, $sql);
+    // Vérification de la connexion
+    if ($db_handle) {
+        // Requête SQL pour récupérer les informations du médecin avec id = 1
+        $sql = "SELECT * FROM medecing WHERE id = 1";
+        $result = mysqli_query($db_handle, $sql);
 
-            // Affichage des informations
-            if ($result && mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_assoc($result);
-                echo "<div class='doctor-navigation'>";
-                echo "<p>Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
-                //echo "<img src='" . $row['photo'] . "' height='80' width='100'>";
-                echo "</div>";
-            } else {
-                echo "<p>Aucun résultat trouvé.</p>";
-            }
+        // Affichage des informations
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
+            echo "<div class='doctor-navigation'>";
+            echo "<p>Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
+            //echo "<img src='" . $row['photo'] . "' height='80' width='100'>";
+            echo "</div>";
+
+            // Bouton de retour
+            echo "<div class='back-button'>";
+            echo "<a href='medecine_generale.php' class='btn btn-primary'>Retour</a>";
+            echo "</div>";
         } else {
-            echo "<p>Erreur de connexion à la base de données.</p>";
+            echo "<p>Aucun résultat trouvé.</p>";
         }
-        ?>
-    </nav>
+    } else {
+        echo "<p>Erreur de connexion à la base de données.</p>";
+    }
+    ?>
+</nav>
     <main class="section">
         <div class="doctor-container">
             <?php
