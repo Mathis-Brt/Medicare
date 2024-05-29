@@ -53,7 +53,7 @@
         <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
     </header>
-    <nav class="navigation">
+    <nav class="navigation" style="display: flex; align-items: center;">
     <?php
     // Connexion à la base de données
     $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
@@ -67,14 +67,14 @@
         // Affichage des informations
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
-            echo "<div class='doctor-navigation'>";
-            echo "<p>Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
-            //echo "<img src='" . $row['photo'] . "' height='80' width='100'>";
+            // Bouton de retour
+            echo "<div class='back-button' style='margin-left: 40px;'>";
+            echo "<a href='medecine_generale.php' class='btn btn-primary'>Retour</a>";
             echo "</div>";
 
-            // Bouton de retour
-            echo "<div class='back-button'>";
-            echo "<a href='medecine_generale.php' class='btn btn-primary'>Retour</a>";
+            echo "<div class='doctor-navigation' style='margin-left: auto; margin-right: auto;'>";
+            echo "<p>Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
+            //echo "<img src='" . $row['photo'] . "' height='80' width='100'>";
             echo "</div>";
         } else {
             echo "<p>Aucun résultat trouvé.</p>";
