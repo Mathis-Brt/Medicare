@@ -42,6 +42,9 @@
             font-size: 25px; /* Taille de la police pour la spécialité */
             color: black; /* Couleur de la police */
         }
+        .back-button {
+            margin-left: 10px; /* Décalage du bouton "Retour" vers la gauche */
+        }
     </style>
 </head>
 <body>
@@ -63,14 +66,18 @@
         // Requête SQL pour récupérer les informations des médecins addictologues
         $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Addictologie'";
         $result = mysqli_query($db_handle, $sql);
-        
+
+        echo "<div class='back-button'>";
+        echo "<a href='medecine_generale.php' class='btn btn-primary'>Retour</a>";
+        echo "</div>";
+
         // Affichage des informations
         if ($result && mysqli_num_rows($result) > 0) {
             echo "<div class='doctor-navigation'>";
             echo "<a href='#' style='color: white;'>Addictologie</a>"; // Ajout du style pour la couleur blanche
             echo "</div>";
         } else {
-            echo "<p>Aucun résultat  trouvé.</p>";
+            echo "<p>Aucun résultat trouvé.</p>";
         }
     } else {
         echo "<p>Erreur de connexion à la base de données.</p>";
@@ -86,8 +93,9 @@
             
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
+                    $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
                     echo "<div class='doctor-info'>";
-                    echo "<div class='doctor-photo'><img src='medecin/medecinh.jpg' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
+                    echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                     echo "<div class='doctor-details'>";
                     echo "<p><strong>Addictologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
