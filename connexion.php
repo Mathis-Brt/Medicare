@@ -27,9 +27,10 @@ $result = $stmt->get_result();
 // Vérifier si des données correspondantes sont trouvées dans la base de données
 if ($result->num_rows > 0) {
     // Données de connexion correctes
-    $row = $result->fetch_assoc(); // Récupérer les données de l'utilisateur
-    header("Location: client.html");
-    exit(); // Assure que le code suivant ne sera pas exécuté après la redirection
+    session_start();
+    $_SESSION['email'] = $email;
+    header("Location: compte.php");
+    exit();
 } else {
     // Aucune donnée correspondante trouvée, afficher un message d'erreur
     echo "Adresse e-mail ou mot de passe incorrect.";
