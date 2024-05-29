@@ -88,7 +88,7 @@
                 echo "<div class='doctor-details'>";
                 echo "<p><strong>Médecin généraliste</strong></p>";
                 echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
-                echo "<p><strong>Numéro de téléphone:</strong> Non défini</p>";
+                echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                 echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
                 echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
                 echo "</div>";
@@ -96,6 +96,8 @@
             }
             ?>
         </div>
+        <br>
+        <img src="medecin/planning_med1.png" alt="Planning medecin" width="900" height="110">
     </main>
     <footer class="footer">
         <div class="contact-info">
