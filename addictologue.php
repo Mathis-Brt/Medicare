@@ -70,7 +70,7 @@
             echo "<a href='#' style='color: white;'>Addictologie</a>"; // Ajout du style pour la couleur blanche
             echo "</div>";
         } else {
-            echo "<p>Aucun résultat trouvé.</p>";
+            echo "<p>Aucun résultat  trouvé.</p>";
         }
     } else {
         echo "<p>Erreur de connexion à la base de données.</p>";
