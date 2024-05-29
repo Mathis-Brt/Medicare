@@ -1,41 +1,43 @@
 <?php
-// Vérifie si le formulaire a été soumis
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Récupère les données du formulaire
-    $loginEmail = $_POST['loginEmail'];
-    $loginPassword = $_POST['loginPassword'];
+// Connexion à la base de données
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "medecing";
 
-    // Connexion à la base de données
-    $servername = "localhost";
-    $username = "utilisateur";
-    $password = "mot_de_passe";
-    $dbname = "medecing";
+// Créer une connexion
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Création de la connexion
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Vérifie la connexion
-    if ($conn->connect_error) {
-        die("La connexion a échoué : " . $conn->connect_error);
-    }
-
-    // Prépare et exécute la requête de sélection
-    $sql = "SELECT mot_de_passe FROM clients WHERE adresse_email='$loginEmail'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Vérifie le mot de passe
-        $row = $result->fetch_assoc();
-        if (password_verify($loginPassword, $row['mot_de_passe'])) {
-            echo "Connexion réussie";
-        } else {
-            echo "Mot de passe incorrect";
-        }
-    } else {
-        echo "Adresse e-mail non trouvée";
-    }
-
-    // Ferme la connexion
-    $conn->close();
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("Connexion échouée : " . $conn->connect_error);
 }
+
+// Récupérer les données du formulaire de connexion
+$email = $_POST['loginEmail'];
+$password = $_POST['loginPassword'];
+
+// Préparer la requête SQL avec une requête préparée pour éviter les injections SQL
+$sql = "SELECT * FROM client WHERE mail = ? AND password = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("ss", $email, $password);
+$stmt->execute();
+$result = $stmt->get_result();
+
+// Vérifier si des données correspondantes sont trouvées dans la base de données
+if ($result->num_rows > 0) {
+    // Données de connexion correctes
+    $row = $result->fetch_assoc(); // Récupérer les données de l'utilisateur
+    header("Location: client.html");
+    exit(); // Assure que le code suivant ne sera pas exécuté après la redirection
+} else {
+    // Aucune donnée correspondante trouvée, afficher un message d'erreur
+    echo "Adresse e-mail ou mot de passe incorrect.";
+    // Vous pouvez également ajouter un bouton pour retourner à la page de connexion
+    echo '<a href="Compte.html">Retour à la page de connexion</a>';
+}
+
+// Fermer la connexion à la base de données
+$stmt->close();
+$conn->close();
 ?>
