@@ -11,31 +11,28 @@
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
         .button-container a:nth-child(3) {
-            background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
+            background-color: lightblue;
         }
-             /* Ajout de styles pour centrer la barre de recherche */
-         .search-container {
-             text-align: center; /* Centrer le contenu */
-             margin-top: 50px; /* Espacement par rapport au haut de la page */
-         }
-
+        .search-container {
+            text-align: center;
+            margin-top: 50px;
+        }
         .search-input {
-            width: 50%; /* Largeur de la barre de recherche réduite */
-            padding: 8px; /* Espacement interne réduit */
-            font-size: 0.8em; /* Taille de police réduite */
-            border: 1px solid #ccc; /* Bordure */
-            border-radius: 5px; /* Coins arrondis */
-            box-sizing: border-box; /* Prendre en compte le padding et la bordure dans la largeur */
+            width: 50%;
+            padding: 8px;
+            font-size: 0.8em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
         }
-
         .search-button {
-            padding: 8px 16px; /* Espacement interne réduit */
-            font-size: 0.8em; /* Taille de police réduite */
-            background-color: rgb(32, 67, 104); /* Couleur de fond */
-            color: white; /* Couleur du texte */
-            border: none; /* Pas de bordure */
-            border-radius: 5px; /* Coins arrondis */
-            cursor: pointer; /* Curseur pointer pour indiquer l'interactivité */
+            padding: 8px 16px;
+            font-size: 0.8em;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -50,7 +47,7 @@
     </header>
     <nav class="navigation">
         <div class="button-container">
-        <a href="accueil.php" class="button">Accueil</a>
+            <a href="accueil.php" class="button">Accueil</a>
             <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
             <a href="recherche.php" class="button">Recherche</a>
             <a href="rdv.php" class="button">Rendez-vous</a>
@@ -64,8 +61,10 @@
     <main class="section">
         <!-- Barre de recherche -->
         <div class="search-container">
-            <input type="text" class="search-input" placeholder="Rechercher un médecin, une spécialité ou un établissement...">
-            <button class="search-button">Rechercher</button>
+            <form action="recherche_action.php" method="GET">
+                <input type="text" name="query" class="search-input" placeholder="Rechercher un médecin, une spécialité ou un établissement...">
+                <button type="submit" class="search-button">Rechercher</button>
+            </form>
         </div>
         <br>
         <p style="color: black;font-size:18px;font-weight: bold;" class="card-text">Si vous souhaitez consulter les spécialités, les médecins ou les services disponibles : <a href="tout_parcourir.html">cliquez ici</a>.</p>
