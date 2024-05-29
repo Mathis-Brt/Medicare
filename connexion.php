@@ -27,8 +27,22 @@ $result = $stmt->get_result();
 // Vérifier si des données correspondantes sont trouvées dans la base de données
 if ($result->num_rows > 0) {
     // Données de connexion correctes
+    $row = $result->fetch_assoc(); // Récupérer toutes les données du client
     session_start();
     $_SESSION['email'] = $email;
+    $_SESSION['nom'] = $row['nom'];
+    $_SESSION['prenom'] = $row['prenom'];
+    $_SESSION['adresse'] = $row['adresse'];
+    $_SESSION['ville'] = $row['ville'];
+    $_SESSION['cp'] = $row['cp'];
+    $_SESSION['pays'] = $row['pays'];
+    $_SESSION['telephone'] = $row['telephone'];
+    $_SESSION['cartevitale'] = $row['cartevitale'];
+    $_SESSION['typepaiement'] = $row['typepaiement'];
+    $_SESSION['numerocarte'] = $row['numerocarte'];
+    $_SESSION['nomcarte'] = $row['nomcarte'];
+    $_SESSION['dateexpiration'] = $row['dateexpiration'];
+    $_SESSION['codesecurite'] = $row['codesecurite'];
     header("Location: compte.php");
     exit();
 } else {

@@ -67,6 +67,7 @@ $codesecurite = $_SESSION['codesecurite'];
     <main class="section">
 
     <h1>Bienvenue sur votre compte</h1>
+    
     <p>Votre adresse e-mail : <?php echo $email; ?></p>
     <p>Nom : <?php echo $nom; ?></p>
     <p>Prénom : <?php echo $prenom; ?></p>
