@@ -69,6 +69,7 @@
                 $row = mysqli_fetch_assoc($result);
                 echo "<div class='doctor-navigation'>";
                 echo "<p>Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
+                //echo "<img src='" . $row['photo'] . "' height='80' width='100'>";
                 echo "</div>";
             } else {
                 echo "<p>Aucun résultat trouvé.</p>";
@@ -83,7 +84,7 @@
             <?php
             if ($result && mysqli_num_rows($result) > 0) {
                 echo "<div class='doctor-info'>";
-                echo "<div class='doctor-photo'><img src='photo_doctor.jpg' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
+                echo "<div class='doctor-photo'><img src='medecin/medecinh.jpg' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                 echo "<div class='doctor-details'>";
                 echo "<p><strong>Médecin généraliste</strong></p>";
                 echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";

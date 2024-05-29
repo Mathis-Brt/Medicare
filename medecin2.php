@@ -21,6 +21,7 @@
         if ($result && mysqli_num_rows($result) > 0) {
             $row = mysqli_fetch_assoc($result);
             echo "<h1>Dr. " . $row['nom'] . " " . $row['prénom'] . "</h1>";
+            echo "<img src='" . $data['photo'] . "' height='80' width='100'>";
             echo "<p><strong>Bureau:</strong> " . $row['bureau'] . "</p>";
             echo "<p><strong>Email:</strong> " . $row['mail'] . "</p>";
             echo "<p><strong>Expérience:</strong> " . $row['experience'] . "</p>";

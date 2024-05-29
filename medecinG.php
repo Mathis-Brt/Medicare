@@ -33,7 +33,7 @@ if ($db_found) {
             // Créer des liens vers les pages des médecins
             echo "<div class='doctor'>";
             echo "<h2 style='color: black; font-size: 25px;'><a href='medecin" . htmlspecialchars($data['id']) . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
-            echo "<img src='" . $data['Couverture'] . "' height='80' width='100'>";
+            //echo "<img src='" . $data['photo'] . "' height='80' width='100'>";
             echo "</div>";
         }
         echo "</div>";
