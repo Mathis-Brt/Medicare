@@ -50,7 +50,7 @@
     </header>
     <nav class="navigation">
         <div class="button-container">
-        <a href="accueil.php" class="button">Accueil</a>
+            <a href="accueil.php" class="button">Accueil</a>
             <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
             <a href="recherche.php" class="button">Recherche</a>
             <a href="rdv.php" class="button">Rendez-vous</a>

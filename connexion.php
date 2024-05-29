@@ -46,7 +46,7 @@ if ($result->num_rows > 0) {
     header("Location: compte.php");
     exit();
 } else {
-    
+    // Aucune donnée correspondante trouvée, afficher un message d'erreur
     echo "Adresse e-mail ou mot de passe incorrect.";
     // Vous pouvez également ajouter un bouton pour retourner à la page de connexion
     echo '<a href="Compte.html">Retour à la page de connexion</a>';
