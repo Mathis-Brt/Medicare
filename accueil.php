@@ -76,19 +76,20 @@ session_start(); // Démarrer la session
         <br><h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
 
 
+
         <div class="container">
     <div class="row">
         <div class="col-md-4">
             <div class="card">
-                <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
+                <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
                 <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Lutte contre le cancer : récolte de cheveux. Pour participer à la collecte, rendez-vous dans notre service de cancérologie <a href="https://www.google.com/maps/place/ECE+Paris/@48.851225,2.288566,15z/data=!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?hl=en&entry=ttu" target="_blank">ici</a>.</p>
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare située ici.</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
+                <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail">
                 <div class="card-body">
                     <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
                 </div>
@@ -96,50 +97,16 @@ session_start(); // Démarrer la session
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
+                <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail">
                 <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer,<a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank"> cliquez-ici.</a></p>
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
                 </div>
             </div>
         </div>
     </div>
 </div>
 
-
-        <!-- Modals for Medicare images -->
-        <div class="modal fade" id="medicare1Modal">
-            <div class="modal
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="Medicare1.jpg" class="img-fluid" alt="Medicare 1">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="medicare2Modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="Medicare2.jpg" class="img-fluid" alt="Medicare 2">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal fade" id="medicare3Modal">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-body">
-                        <img src="Medicare3.jpg" class="img-fluid" alt="Medicare 3">
-                    </div>
-                </div>
-            </div>
-        </div>
     </main>
-
-
-
-
     <footer class="footer">
         <div class="contact-info">
             <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
