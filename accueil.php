@@ -112,33 +112,33 @@ session_start(); // Démarrer la session
         <h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare <a href="https://www.google.com/maps?ll=48.851225,2.288566&z=15&t=m&hl=en&gl=US&mapclient=embed&cid=1621113763460852342" target="_blank"> située ici.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="medecin/grippe.png" alt="Medicare 3" class="card-img-top img-thumbnail">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
+                <div class="card-body">
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare <a href="https://www.google.com/maps?ll=48.851225,2.288566&z=15&t=m&hl=en&gl=US&mapclient=embed&cid=1621113763460852342" target="_blank"> située ici.</a></p>
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="medecin/grippe.png" alt="Medicare 3" class="card-img-top img-thumbnail">
+                <div class="card-body">
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail">
+                <div class="card-body">
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     </main>
     <footer class="footer">
