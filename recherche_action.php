@@ -44,33 +44,21 @@
             $query = mysqli_real_escape_string($db_handle, $_GET['query']);
 
             // Vérifier les termes spécifiques pour redirection
-            if (strcasecmp($query, 'Addictologie') == 0) {
-                header("Location: addictologue.php");
-                exit();
-            }
-            if (strcasecmp($query, 'Hématologie') == 0) {
-                header("Location: hematologie.php");
-                exit();
-            }
-            if (strcasecmp($query, 'Allergologie') == 0) {
-                header("Location: allergologue.php");
-                exit();
-            }
-            if (strcasecmp($query, 'Cardiologie') == 0) {
-                header("Location: cardiologue.php");
-                exit();
-            }
-            if (strcasecmp($query, 'Dermatologie') == 0) {
-                header("Location: dermatologue.php");
-                exit();
-            }
-            if (strcasecmp($query, 'Endocrinologie') == 0) {
-                header("Location: endocrinologue.php");
-                exit();
-            }
-            if (strcasecmp($query, 'Gastroenterologie') == 0) {
-                header("Location: gastroenterologue.php");
-                exit();
+            $specialities = [
+                'Addictologie' => 'addictologue.php',
+                'Hématologie' => 'hematologie.php',
+                'Allergologie' => 'allergologue.php',
+                'Cardiologie' => 'cardiologue.php',
+                'Dermatologie' => 'dermatologue.php',
+                'Endocrinologie' => 'endocrinologue.php',
+                'Gastroenterologie' => 'gastroenterologue.php'
+            ];
+
+            foreach ($specialities as $term => $page) {
+                if (strcasecmp($query, $term) == 0) {
+                    header("Location: $page");
+                    exit();
+                }
             }
 
             // Requête SQL pour rechercher les médecins, spécialités ou établissements correspondants
@@ -95,13 +83,17 @@
 
             // Affichage des résultats
             if ($result && mysqli_num_rows($result) > 0) {
-                $foundDoctor = false;
                 while ($row = mysqli_fetch_assoc($result)) {
-                    if (strcasecmp($query, $row['nom']) == 0 || strcasecmp($query, $row['prénom']) == 0) {
-                        // Redirection vers la page du médecin
-                        header("Location: page_medecin.php?id=" . $row['id']);
+                    $nom = strtolower(str_replace(' ', '', $row['nom']));
+                    $prenom = strtolower(str_replace(' ', '', $row['prénom']));
+                    $page_name = $nom . ".php";
+
+                    // Redirection vers la page du médecin si elle existe
+                    if (file_exists($page_name)) {
+                        header("Location: " . $page_name);
                         exit();
                     }
+
                     $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
                     echo "<div class='doctor-info'>";
                     echo "<div class='doctor-photo'><img src='medecin/" . $photo . "' alt='Photo de " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";

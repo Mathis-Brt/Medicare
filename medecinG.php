@@ -31,8 +31,9 @@ if ($db_found) {
         echo "<div class='doctor-list'>";
         while ($data = mysqli_fetch_assoc($result)) {
             // Créer des liens vers les pages des médecins
+            $nom_sanitized = strtolower(str_replace(' ', '', htmlspecialchars($data['nom'])));
             echo "<div class='doctor'>";
-            echo "<h2 style='color: black; font-size: 25px;'><a href='medecin" . htmlspecialchars($data['id']) . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
+            echo "<h2 style='color: black; font-size: 25px;'><a href='" . $nom_sanitized . ".php'>" . htmlspecialchars($data['nom']) . " " . htmlspecialchars($data['prénom']) . "</a></h2>";
             //echo "<img src='" . $data['photo'] . "' height='80' width='100'>";
             echo "</div>";
         }
