@@ -51,7 +51,18 @@
                 'Cardiologie' => 'cardiologue.php',
                 'Dermatologie' => 'dermatologue.php',
                 'Endocrinologie' => 'endocrinologue.php',
-                'Gastroenterologie' => 'gastroenterologue.php'
+                'Gastroenterologie' => 'gastroenterologue.php',
+                'Dépistage covid-19' =>'covid.php',
+                'Covid-19' =>'covid.php',
+                'Covid' =>'covid.php',
+                'Biologie préventive'=>'preventive.php',
+                'Préventive'=>'preventive.php',
+                'Biologie de la femme enceinte'=> 'enceinte.php',
+                'Enceinte'=> 'enceinte.php',
+                'Biologie de routine'=>'routine.php',
+                'Routine'=>'routine.php',
+                'Cancérologie'=> 'cancerologie.php',
+                'Gynécologie'=> 'gynecologie.php'
             ];
 
             foreach ($specialities as $term => $page) {

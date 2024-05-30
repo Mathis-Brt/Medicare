@@ -49,17 +49,17 @@
                 while ($row = mysqli_fetch_assoc($result)) {
                     echo "<li><a href='";
                     if ($row['spécialité'] === "Dépistage covid-19") {
-                        echo "labo_covid.php";
+                        echo "covid.php";
                     } elseif ($row['spécialité'] === "Biologie préventive") {
-                        echo "labo_preventive.php";
+                        echo "preventive.php";
                     } elseif ($row['spécialité'] === "Biologie de la femme enceinte") {
-                        echo "labo_enceinte.php";
+                        echo "enceinte.php";
                     } elseif ($row['spécialité'] === "Biologie de routine") {
-                        echo "labo_routine.php";
+                        echo "routine.php";
                     } elseif ($row['spécialité'] === "Cancérologie") {
-                        echo "labo_cancerologie.php";
+                        echo "cancerologie.php";
                     } elseif ($row['spécialité'] === "Gynécologie") {
-                        echo "labo_gynecologie.php";
+                        echo "gynecologie.php";
                     }
                     echo "'>" . htmlspecialchars($row['spécialité']) . "</a></li>";
                 }
