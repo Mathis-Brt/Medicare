@@ -1,4 +1,8 @@
-<?php include('session_check.php'); ?>
+<?php
+session_start(); // Démarrer la session
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="fr">
@@ -33,7 +37,7 @@
             <?php if (isset($_SESSION['email'])): ?>
                 <a href="compte.php" class="button">Votre compte</a>
             <?php else: ?>
-                <a href="connexion.php" class="button">Connexion</a>
+                <a href="Compte.html" class="button">Connexion</a>
             <?php endif; ?>
         </div>
     </nav>

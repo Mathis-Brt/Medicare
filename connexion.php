@@ -1,4 +1,8 @@
 <?php
+session_start(); // Démarrer la session
+?>
+
+<?php
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
@@ -46,7 +50,7 @@ if ($result->num_rows > 0) {
     header("Location: compte.php");
     exit();
 } else {
-    echo "<script>alert('Adresse e-mail ou mot de passe incorrect.'); window.location.href = 'Compte.html';</script>";
+   echo "<script>alert('Adresse e-mail ou mot de passe incorrect.'); window.location.href = 'Compte.html';</script>";
 }
 
 // Fermer la connexion à la base de données
