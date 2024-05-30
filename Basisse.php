@@ -42,6 +42,13 @@
             font-size: 25px; /* Taille de la police pour la spécialité */
             color: black; /* Couleur de la police */
         }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-group .btn {
+            margin: 5px;
+        }
     </style>
 </head>
 <body>
@@ -83,7 +90,7 @@
         echo "<p>Erreur de connexion à la base de données.</p>";
     }
     ?>
-</nav>
+    </nav>
     <main class="section">
         <div class="doctor-container">
             <?php
@@ -95,7 +102,6 @@
                 echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
                 echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                 echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
-                echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
                 echo "</div>";
                 echo "</div>";
             }
@@ -103,6 +109,11 @@
         </div>
         <br>
         <img src="medecin/planning_med1.png" alt="Planning medecin" width="900" height="110">
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php'">Prendre un rendez-vous</button>
+            <button class="btn btn-secondary" onclick="window.location.href='communiquer_medecin.php'">Communiquer avec le médecin</button>
+            <button class="btn btn-info" onclick="window.open('generate_cv.php?id=1', '_blank')">Voir son CV</button>
+        </div>
     </main>
     <footer class="footer">
         <div class="contact-info">

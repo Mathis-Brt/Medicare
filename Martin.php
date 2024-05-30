@@ -103,6 +103,11 @@
         </div>
         <br>
         <img src="medecin/planning_med5.png" alt="Planning medecin" width="900" height="110">
+        <div class="button-group">
+            <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php'">Prendre un rendez-vous</button>
+            <button class="btn btn-secondary" onclick="window.location.href='communiquer_medecin.php'">Communiquer avec le médecin</button>
+            <button class="btn btn-info" onclick="window.open('generate_cv.php?id=5', '_blank')">Voir son CV</button>
+        </div>
     </main>
     <footer class="footer">
         <div class="contact-info">

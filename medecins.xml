@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<medecins>
+    <medecin>
+        <id>1</id>
+        <nom>Basisse</nom>
+        <prénom>Mathieu</prénom>
+        <bureau>321</bureau>
+        <mail>basisse.mathieu@gmail.com</mail>
+        <experience>Médecin Généraliste Centre Médical de la Rivière, Bordeaux, France 2021 - Présent Soins primaires et gestion des maladies courantes. Suivi des patients chroniques. Coordination avec les spécialistes.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinh.jpg</photo>
+        <telephone>0678432901</telephone>
+        <age>45</age>
+        <formation>Doctorat en Médecine, Université de Bordeaux</formation>
+    </medecin>
+    <medecin>
+        <id>2</id>
+        <nom>Pinault</nom>
+        <prénom>Dorothée</prénom>
+        <bureau>104</bureau>
+        <mail>dorothee.pinault@gmail.com</mail>
+        <experience>Médecin Généraliste Cabinet Médical du Parc, Lyon, France 2018 - Présent Consultations quotidiennes pour adultes et enfants. Prévention et éducation à la santé. Prescription de traitements et suivi des patients.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinf.jpg</photo>
+        <telephone>0684532902</telephone>
+        <age>38</age>
+        <formation>Doctorat en Médecine, Université de Lyon</formation>
+    </medecin>
+    <medecin>
+        <id>3</id>
+        <nom>Vetus</nom>
+        <prénom>Thomas</prénom>
+        <bureau>243</bureau>
+        <mail>thomas.vetus@gmail.com</mail>
+        <experience>Médecin Généraliste Clinique SantéPlus, Toulouse, France 2019 - Présent Diagnostic et traitement des maladies aiguës et chroniques. Réalisation de bilans de santé. Gestion des soins de routine et des vaccinations.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinh2.jpg</photo>
+        <telephone>0696732903</telephone>
+        <age>52</age>
+        <formation>Doctorat en Médecine, Université de Toulouse</formation>
+    </medecin>
+    <medecin>
+        <id>4</id>
+        <nom>Mazotie</nom>
+        <prénom>Patricia</prénom>
+        <bureau>501</bureau>
+        <mail>mazotie.patricia@hotmail.com</mail>
+        <experience>Médecin Généraliste Cabinet Médical de la Fontaine, Paris, France 2016 - Présent Consultations quotidiennes pour adultes, adolescents et enfants.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinf2.jpg</photo>
+        <telephone>0645232904</telephone>
+        <age>40</age>
+        <formation>Doctorat en Médecine, Université de Paris</formation>
+    </medecin>
+    <medecin>
+        <id>5</id>
+        <nom>Martin</nom>
+        <prénom>Sarah</prénom>
+        <bureau>220</bureau>
+        <mail>sarah.martin@outlook.com</mail>
+        <experience>Médecin Généraliste Clinique de Santé Familiale, Marseille, France 2019 - Présent Soins de santé primaires pour les patients de tous âges. Suivi des femmes enceintes et des nourrissons. Gestion des urgences médicales.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinf3.jpg</photo>
+        <telephone>0678932905</telephone>
+        <age>33</age>
+        <formation>Doctorat en Médecine, Université de Marseille</formation>
+    </medecin>
+    <medecin>
+        <id>6</id>
+        <nom>Dubois</nom>
+        <prénom>Julien</prénom>
+        <bureau>299</bureau>
+        <mail>dubois.julien@gmail.com</mail>
+        <experience>Médecin Généraliste Cabinet Médical du Vieux Moulin, Lyon, France 2017 - Présent Consultations médicales régulières pour évaluer la santé générale des patients. Gestion des affections aiguës et chroniques.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinh3.png</photo>
+        <telephone>0654532906</telephone>
+        <age>48</age>
+        <formation>Doctorat en Médecine, Université de Lyon</formation>
+    </medecin>
+</medecins>
