@@ -24,6 +24,8 @@ session_start(); // Démarrer la session
         }
         .medicare-container img {
             margin-bottom: 20px; /* Espace entre l'image et le texte */
+            max-width: 500px; /* Largeur maximale de l'image */
+            max-height: 500px; /* Hauteur maximale de l'image */
         }
         .text-container {
             text-align: justify;
@@ -80,14 +82,14 @@ session_start(); // Démarrer la session
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="medecin/medecinf.jpg" class="d-block w-100" alt="Med 01">
+                        <img src="medecin/france1.jpg" class="d-block w-100" alt="Med 01">
                     </div>
                     <div class="carousel-item">
-                        <img src="medecin/medecinh.jpg" class="d-block w-100" alt="Med 2">
+                        <img src="medecin/france2.jpg" class="d-block w-100" alt="Med 2">
                     </div>
                     <div class="carousel-item">
                         <img
-                        src="medecin/medecinf2.jpg" class="d-block w-100" alt="Med 3">
+                        src="medecin/france3.jpg" class="d-block w-100" alt="Med 3">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -108,7 +110,7 @@ session_start(); // Démarrer la session
                     <div class="card">
                         <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
                         <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare située ici.</p>
+                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare <a href="https://www.google.com/maps?ll=48.851225,2.288566&z=15&t=m&hl=en&gl=US&mapclient=embed&cid=1621113763460852342" target="_blank"> située ici.</p>
                         </div>
                     </div>
                 </div>
