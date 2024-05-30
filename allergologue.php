@@ -8,7 +8,7 @@
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
-.doctor-info {
+        .doctor-info {
             display: flex;
             justify-content: center;
             align-items: flex-start;
@@ -53,7 +53,15 @@
         }
         .back-button a {
             color: white;
-            margin-left: 30px /* Couleur du texte du bouton de retour */
+            margin-left: 30px; /* Couleur du texte du bouton de retour */
+        }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .button-group button {
+            margin: 0 5px; /* Réduire la marge entre les boutons */
         }
     </style>
 </head>
@@ -105,6 +113,7 @@
             mysqli_data_seek($result, 0);
             
             if ($result && mysqli_num_rows($result) > 0) {
+                $counter = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $photo = htmlspecialchars($row['photo']);
                     echo "<div class='doctor-info'>";
@@ -116,6 +125,13 @@
                     echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
                     echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
                     echo "</div>";
+                    echo "</div>";
+
+                    // Affichage des boutons sous chaque médecin
+                    echo "<div class='button-group'>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php'\">Prendre un rendez-vous</button>";
+                    echo "<button class='btn btn-secondary' onclick=\"window.location.href='communiquer_medecin.php'\">Communiquer avec le médecin</button>";
+                    echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
                     echo "</div>";
                 }
             }

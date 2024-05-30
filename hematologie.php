@@ -55,6 +55,14 @@
             color: white;
             margin-left: 30px /* Couleur du texte du bouton de retour */
         }
+        .button-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .button-group button {
+            margin: 0 5px; /* Réduire la marge entre les boutons */
+        }
     </style>
 </head>
 <body>
@@ -73,7 +81,7 @@
 
     // Vérification de la connexion
     if ($db_handle) {
-        // Requête SQL pour récupérer les informations des médecins addictologues
+        // Requête SQL pour récupérer les informations des médecins hématologues
         $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Hématologie'";
         $result = mysqli_query($db_handle, $sql);
 
@@ -115,11 +123,19 @@
                     echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
                     echo "</div>";
                     echo "</div>";
+
+                    // Affichage des boutons sous chaque médecin
+                    echo "<div class='button-group'>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php'\">Prendre un rendez-vous</button>";
+                    echo "<button class='btn btn-secondary' onclick=\"window.location.href='communiquer_medecin.php'\">Communiquer avec le médecin</button>";
+                    echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
+                    echo "</div>";
                 }
             }
             ?>
         </div>
     </main>
+
     <footer class="footer">
         <div class="contact-info">
             <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
