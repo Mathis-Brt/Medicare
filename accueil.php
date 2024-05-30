@@ -70,44 +70,45 @@ session_start(); // Démarrer la session
         <div class="medicare-container">
             <img src="medicare_accueil.jpg" alt="Image Medicare Accueil" class="medicare-image">
             <div class="text-container">
-                <p style="color: black; font-size: 18px;">Medicare est un groupe de services médicaux affilié à Omnes, dédié à fournir des soins de santé de haute qualité et des informations médicales fiables. Grâce à une équipe de professionnels de santé expérimentés et à des technologies de pointe, Medicare s'engage à améliorer le bien-être de ses patients et à innover dans le domaine médical.</p>
+                <p style="color: black; font-size: 18px;">Medicare est un groupe de services médicaux affilié à Omnes, dédié à fournir des soins de santé de haute qualité et des informations médicales fiables. Nos clients ont la possibilité de consulter en personne ou à distance des médecins généralistes ainsi que des médecins spécialistes dans plusieurs spécialités. De plus, nous offrons la possibilité de réaliser différents types de tests dans nos laboratoires de biologie. Grâce à une équipe de professionnels de santé expérimentés et à des technologies de pointe, Medicare s'engage à améliorer le bien-être de ses patients et à innover dans le domaine médical.</p>
             </div>
         </div>
-        <br><h2 style="color: black;" class="centered-title">Bulletin santé de la semaine</h2><br>
-
+        <br><h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
 
 
         <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Lutte contre le cancer : récolte de cheveux. Trouvez le point de collecte le plus proche de chez vous.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card">
-                        <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
-                        <div class="card-body">
-                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes.</p>
-                        </div>
-                    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card">
+                <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare1Modal">
+                <div class="card-body">
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Lutte contre le cancer : récolte de cheveux. Pour participer à la collecte, rendez-vous dans notre service de cancérologie <a href="https://www.google.com/maps/place/ECE+Paris/@48.851225,2.288566,15z/data=!4m6!3m5!1s0x47e6701b4f58251b:0x167f5a60fb94aa76!8m2!3d48.8512252!4d2.2885659!16s%2Fg%2F11dyjwlyp?hl=en&entry=ttu" target="_blank">ici</a>.</p>
                 </div>
             </div>
         </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare3Modal">
+                <div class="card-body">
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card">
+                <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail" data-toggle="modal" data-target="#medicare2Modal">
+                <div class="card-body">
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer,<a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank"> cliquez-ici.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
         <!-- Modals for Medicare images -->
         <div class="modal fade" id="medicare1Modal">
+            <div class="modal
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
