@@ -2,7 +2,6 @@
 session_start(); // Démarrer la session
 ?>
 
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -21,12 +20,14 @@ session_start(); // Démarrer la session
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column; /* Alignement vertical */
         }
         .medicare-container img {
-            margin-right: 20px; /* Espace entre l'image et le texte */
+            margin-bottom: 20px; /* Espace entre l'image et le texte */
         }
         .text-container {
-            flex: 1; /* Permet au conteneur de texte de prendre l'espace restant */
+            text-align: justify;
+            width:1000px;
         }
         .centered-title {
             text-align: center;
@@ -66,45 +67,69 @@ session_start(); // Démarrer la session
     </nav>
 
     <main class="section">
-        <h2 style="color: black;" class="centered-title2">Bienvenue sur Medicare</h2><br><br>
+        <h2 style="color: black;" class="centered-title2">Bienvenue sur Medicare</h2><br>
         <div class="medicare-container">
-            <img src="medicare_accueil.jpg" alt="Image Medicare Accueil" class="medicare-image">
             <div class="text-container">
                 <p style="color: black; font-size: 18px;">Medicare est un groupe de services médicaux affilié à Omnes, dédié à fournir des soins de santé de haute qualité et des informations médicales fiables. Nos clients ont la possibilité de consulter en personne ou à distance des médecins généralistes ainsi que des médecins spécialistes dans plusieurs spécialités. De plus, nous offrons la possibilité de réaliser différents types de tests dans nos laboratoires de biologie. Grâce à une équipe de professionnels de santé expérimentés et à des technologies de pointe, Medicare s'engage à améliorer le bien-être de ses patients et à innover dans le domaine médical.</p>
             </div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="medecin/medecinf.jpg" class="d-block w-100" alt="Med 01">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/medecinh.jpg" class="d-block w-100" alt="Med 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img
+                        src="medecin/medecinf2.jpg" class="d-block w-100" alt="Med 3">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
-        <br><h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
-
-
+        <h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
 
         <div class="container">
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
-                <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare située ici.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
+                        <div class="card-body">
+                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare située ici.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="medecin/grippe.png" alt="Medicare 3" class="card-img-top img-thumbnail">
+                        <div class="card-body">
+                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail">
+                        <div class="card-body">
+                            <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail">
-                <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-md-4">
-            <div class="card">
-                <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail">
-                <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
     </main>
     <footer class="footer">
