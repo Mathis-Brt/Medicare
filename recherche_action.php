@@ -43,51 +43,78 @@
             // Récupérer la requête de recherche
             $query = mysqli_real_escape_string($db_handle, $_GET['query']);
 
-            // Requête SQL pour rechercher les médecins généralistes
-            $sql_generalistes = "SELECT nom, prénom, bureau, mail, experience, photo, téléphone, 'Médecin Généraliste' AS spécialité 
-                                 FROM medecing 
-                                 WHERE nom LIKE '%$query%' OR prénom LIKE '%$query%'";
-            
-            // Requête SQL pour rechercher les médecins spécialistes
-            $sql_specialistes = "SELECT nom, prénom, bureau, mail, experience, photo, téléphone, spécialité 
-                                 FROM medecinspe 
-                                 WHERE nom LIKE '%$query%' OR prénom LIKE '%$query%' OR spécialité LIKE '%$query%' OR établissement LIKE '%$query%'";
-            
-            // Requête SQL pour rechercher les laboratoires
-            $sql_labo = "SELECT nom, bureau, mail, spécialité, photo, téléphone, consigne AS experience 
-                        FROM labo 
-                        WHERE nom LIKE '%$query%' OR spécialité LIKE '%$query%'";
-
-            // Exécution des requêtes
-            $result_generalistes = mysqli_query($db_handle, $sql_generalistes);
-            $result_specialistes = mysqli_query($db_handle, $sql_specialistes);
-            $result_labo = mysqli_query($db_handle, $sql_labo);
-
-            // Fonction pour afficher les résultats
-            function afficher_resultats($result, $type) {
-                if ($result && mysqli_num_rows($result) > 0) {
-                    while ($row = mysqli_fetch_assoc($result)) {
-                        $photo = htmlspecialchars($row['photo']); 
-                        echo "<div class='doctor-info'>";
-                        echo "<div class='doctor-photo'><img src='medecin/" . $photo . "' alt='Photo du " . htmlspecialchars($type) . " " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
-                        echo "<div class='doctor-details'>";
-                        echo "<p><strong>" . htmlspecialchars($row['spécialité']) . ":</strong> " . ($type === 'Laboratoire' ? '' : 'Dr ') . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
-                        echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
-                        echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['téléphone']) . "</p>";
-                        echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
-                        echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
-                        echo "</div>";
-                        echo "</div>";
-                    }
-                }
+            // Vérifier les termes spécifiques pour redirection
+            if (strcasecmp($query, 'Addictologie') == 0) {
+                header("Location: addictologue.php");
+                exit();
+            }
+            if (strcasecmp($query, 'Hématologie') == 0) {
+                header("Location: hematologie.php");
+                exit();
+            }
+            if (strcasecmp($query, 'Allergologie') == 0) {
+                header("Location: allergologue.php");
+                exit();
+            }
+            if (strcasecmp($query, 'Cardiologie') == 0) {
+                header("Location: cardiologue.php");
+                exit();
+            }
+            if (strcasecmp($query, 'Dermatologie') == 0) {
+                header("Location: dermatologue.php");
+                exit();
+            }
+            if (strcasecmp($query, 'Endocrinologie') == 0) {
+                header("Location: endocrinologue.php");
+                exit();
+            }
+            if (strcasecmp($query, 'Gastroenterologie') == 0) {
+                header("Location: gastroenterologue.php");
+                exit();
             }
 
-            // Affichage des résultats
-            afficher_resultats($result_generalistes, 'Médecin Généraliste');
-            afficher_resultats($result_specialistes, 'Médecin Spécialiste');
-            afficher_resultats($result_labo, 'Laboratoire');
+            // Requête SQL pour rechercher les médecins, spécialités ou établissements correspondants
+            $sql = "
+                SELECT 'medecinspe' AS source, id, nom, prénom, spécialité AS detail, bureau, mail, experience, photo, telephone
+                FROM medecinspe
+                WHERE nom LIKE '%$query%' 
+                   OR prénom LIKE '%$query%' 
+                   OR spécialité LIKE '%$query%'
+                UNION
+                SELECT 'medecing' AS source, id, nom, prénom, '' AS detail, bureau, mail, experience, photo, telephone
+                FROM medecing
+                WHERE nom LIKE '%$query%' 
+                   OR prénom LIKE '%$query%'
+                UNION
+                SELECT 'labo' AS source, id, nom, '' AS prénom, spécialité AS detail, bureau, mail, consigne AS experience, photo, telephone
+                FROM labo
+                WHERE nom LIKE '%$query%' 
+                   OR spécialité LIKE '%$query%'
+            ";
+            $result = mysqli_query($db_handle, $sql);
 
-            if (mysqli_num_rows($result_generalistes) == 0 && mysqli_num_rows($result_specialistes) == 0 && mysqli_num_rows($result_labo) == 0) {
+            // Affichage des résultats
+            if ($result && mysqli_num_rows($result) > 0) {
+                $foundDoctor = false;
+                while ($row = mysqli_fetch_assoc($result)) {
+                    if (strcasecmp($query, $row['nom']) == 0 || strcasecmp($query, $row['prénom']) == 0) {
+                        // Redirection vers la page du médecin
+                        header("Location: page_medecin.php?id=" . $row['id']);
+                        exit();
+                    }
+                    $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
+                    echo "<div class='doctor-info'>";
+                    echo "<div class='doctor-photo'><img src='medecin/" . $photo . "' alt='Photo de " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
+                    echo "<div class='doctor-details'>";
+                    echo "<p><strong>" . htmlspecialchars($row['detail']) . ":</strong> " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
+                    echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
+                    echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
+                    echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
+                    echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
+                    echo "</div>";
+                    echo "</div>";
+                }
+            } else {
                 echo "<p>Aucun résultat trouvé pour '<strong>" . htmlspecialchars($query) . "</strong>'.</p>";
             }
         } else {
