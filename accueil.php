@@ -24,8 +24,8 @@ session_start(); // Démarrer la session
         }
         .medicare-container img {
             margin-bottom: 20px; /* Espace entre l'image et le texte */
-            max-width: 500px; /* Largeur maximale de l'image */
-            max-height: 500px; /* Hauteur maximale de l'image */
+            max-width: 350px; /* Largeur maximale de l'image */
+            max-height: 350px; /* Hauteur maximale de l'image */
         }
         .text-container {
             text-align: justify;
@@ -79,17 +79,24 @@ session_start(); // Démarrer la session
                     <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
                     <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
                 </ol>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
-                        <img src="medecin/france1.jpg" class="d-block w-100" alt="Med 01">
+                        <img src="medecin/carroussel1.png" class="d-block w-100" alt="Med 1">
                     </div>
                     <div class="carousel-item">
-                        <img src="medecin/france2.jpg" class="d-block w-100" alt="Med 2">
+                        <img src="medecin/carroussel2.png" class="d-block w-100" alt="Med 2">
                     </div>
                     <div class="carousel-item">
-                        <img
-                        src="medecin/france3.jpg" class="d-block w-100" alt="Med 3">
+                        <img src="medecin/carroussel3.png" class="d-block w-100" alt="Med 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/carroussel4.png" class="d-block w-100" alt="Med 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/carroussel5.png" class="d-block w-100" alt="Med 3">
                     </div>
                 </div>
                 <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
