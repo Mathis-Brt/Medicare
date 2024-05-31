@@ -80,7 +80,16 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
         <main class="section">
             <h1>Confirmer Rendez-vous</h1>
             <p>Rendez-vous prévu pour le <?php echo $jour; ?> à <?php echo $heure; ?> avec le médecin <?php echo $nom_medecin; ?> </p>
-            <!-- Autres éléments de la page -->
+            
+
+            <form action="valider_rendezvous.php" method="post">
+                    <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
+                    <input type="hidden" name="nom_client" value="<?php echo $nom_client; ?>">
+                    <input type="hidden" name="date_heure" value="<?php echo $date_heure; ?>">
+                    <input type="hidden" name="email_client" value="<?php echo $email_client; ?>">
+                    <button type="submit" class="confirm-button">Confirmer</button>
+                </form>
+                
         </main>
         <footer class="footer">
             <div class="contact-info">
