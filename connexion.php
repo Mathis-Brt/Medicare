@@ -40,6 +40,13 @@ $stmt_medecin->bind_param("ss", $email, $password);
 $stmt_medecin->execute();
 $result_medecin = $stmt_medecin->get_result();
 
+// Préparer la requête SQL pour les médecins généralistes
+$sql_medecing = "SELECT * FROM medecing WHERE mail = ? AND password = ?";
+$stmt_medecing = $conn->prepare($sql_medecing);
+$stmt_medecing->bind_param("ss", $email, $password);
+$stmt_medecing->execute();
+$result_medecing = $stmt_medecing->get_result();
+
 // Vérifier si des données correspondantes sont trouvées pour le client
 if ($result_client->num_rows > 0) {
     $row = $result_client->fetch_assoc();
@@ -87,6 +94,20 @@ if ($result_client->num_rows > 0) {
     $_SESSION['telephone'] = $row['telephone'];
     header("Location: medecin_dashboard.php");
     exit();
+} elseif ($result_medecing->num_rows > 0) {
+    $row = $result_medecing->fetch_assoc();
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = 'medecing';
+    $_SESSION['nom'] = $row['nom'];
+    $_SESSION['prenom'] = $row['prenom'];
+    $_SESSION['specialite'] = $row['specialite'];
+    $_SESSION['adresse'] = $row['adresse'];
+    $_SESSION['ville'] = $row['ville'];
+    $_SESSION['cp'] = $row['cp'];
+    $_SESSION['pays'] = $row['pays'];
+    $_SESSION['telephone'] = $row['telephone'];
+    header("Location: medecing_dashboard.php");
+    exit();
 } else {
     echo "<script>alert('Adresse e-mail ou mot de passe incorrect.'); window.location.href = 'Compte.html';</script>";
 }
@@ -95,5 +116,6 @@ if ($result_client->num_rows > 0) {
 $stmt_client->close();
 $stmt_admin->close();
 $stmt_medecin->close();
+$stmt_medecing->close();
 $conn->close();
 ?>
