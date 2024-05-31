@@ -1,4 +1,3 @@
-
 <?php
 // Connexion à la base de données
 $servername = "localhost";
@@ -65,52 +64,72 @@ $conn->close();
             font-size: 12px;
         }
         table {
-            font-size: 25px; /* Taille de police plus petite */
-            width: auto; /* Réduire la largeur du tableau */
-            margin-left: 0; /* Positionner à gauche */
+            font-size: 12px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
         }
         th, td {
-            
+            padding: 4px;
             text-align: center;
-            width: 10px; /* Réduire la largeur des colonnes */
+            width: 20px; /* Largeur des colonnes */
         }
-        h2 {
-            font-size: 16px; /* Réduire la taille de la police du titre */
+        h1.title {
+            font-size: 40px;
+            text-align: center;
         }
         .container {
-            width: auto; /* Ajuster la largeur du conteneur */
-            margin-left: 0; /* Positionner à gauche */
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
         }
         .return-button {
             margin-top: 10px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
+        .navigation .button-container .button {
+            font-size: 14px;
+            padding: 10px 20px;
+        }
+
+        .dispo-D {
+        color: green;
+        font-weight: bold;
+        }
+
+        .dispo-I {
+             color: red;
+            font-weight: bold;
+}
     </style>
 </head>
 <body>
     <div class="wrapper">
         <header class="header">
-        <div class="title-container">
-            <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
-        </div>
-        <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
-        <img src="logo.png" alt="Logo Medicare" class="small-logo">
+            <div class="title-container">
+                <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
+            </div>
+            <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
+            <img src="logo.png" alt="Logo Medicare" class="small-logo">
         </header>
         <nav class="navigation">
-        <div class="button-container">
-            <a href="accueil.php" class="button">Accueil</a>
-            <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
-            <a href="recherche.php" class="button">Recherche</a>
-            <a href="rdv.php" class="button">Rendez-vous</a>
-            <?php if (isset($_SESSION['email'])): ?>
-                <a href="compte.php" class="button">Votre compte</a>
-            <?php else: ?>
-                <a href="Compte.html" class="button">Connexion</a>
-            <?php endif; ?>
-        </div>
-    </nav>
+            <div class="button-container">
+                <a href="accueil.php" class="button">Accueil</a>
+                <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
+                <a href="recherche.php" class="button">Recherche</a>
+                <a href="rdv.php" class="button">Rendez-vous</a>
+                <?php if (isset($_SESSION['email'])): ?>
+                    <a href="compte.php" class="button">Votre compte</a>
+                <?php else: ?>
+                    <a href="Compte.html" class="button">Connexion</a>
+                <?php endif; ?>
+            </div>
+        </nav>
         <main class="section">
-            <div class="container">
-                <h1>Disponibilités du Médecin</h1>
+            <div class="container"><br>
+            <h1 style="color: black;" class="title">Disponibilités du Médecin</h1><br>
                 <table class="table table-bordered">
                     <thead>
                         <tr>
@@ -138,30 +157,39 @@ $conn->close();
                             foreach ($jours as $jour) {
                                 echo "<td>";
                                 if (isset($disponibilites[$jour][$heure])) {
-                                    echo ($disponibilites[$jour][$heure] ? "D" : "I");
+                                    // Si la disponibilité est D, ajoute la classe dispo-D, sinon ajoute la classe dispo-I
+                                    $classe_dispo = $disponibilites[$jour][$heure] ? 'dispo-D' : 'dispo-I';
+                                    echo '<a href="confirmer_rendezvous.php?heure=' . urlencode($heure) . '&jour=' . urlencode($jour) . '&id_medecin=' . urlencode($id) . '" class="' . $classe_dispo . '">' . ($disponibilites[$jour][$heure] ? "D" : "I") . '</a>';
                                 } else {
-                                    echo "I";
+                                    echo '<span class="dispo-I">I</span>'; // Si la disponibilité n'est pas définie, affiche "I" en rouge
                                 }
                                 echo "</td>";
                             }
                             echo "</tr>";
                         }
+                        
                         ?>
                     </tbody>
                 </table>
+
+                <div class="legend">
+        
+        <p><span class="dispo-D">D</span> : Créneaux disponibles</p>
+        <p><span class="dispo-I">I</span> : Créneaux indisponibles</p>
+        </div> <br>
                 <button class="btn btn-primary return-button" onclick="history.back()">Retour</button>
             </div>
         </main>
         <footer class="footer">
-        <div class="contact-info">
-            <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
-            <p>Adresse: 10 Rue Sextius Michel, Paris, 75015</p>
-            <p>Email: <a href="mailto:omnes.medicare@gmail.com">omnes.medicare@gmail.com</a></p>
-        </div>
-        <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-        </div>
-    </footer>
+            <div class="contact-info">
+                <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
+                <p>Adresse: 10 Rue Sextius Michel, Paris, 75015</p>
+                <p>Email: <a href="mailto:omnes.medicare@gmail.com">omnes.medicare@gmail.com</a></p>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </footer>
     </div>
 </body>
 </html>
