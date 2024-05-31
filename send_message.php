@@ -11,38 +11,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['message']) && isset($_
 
     // Vérification de la connexion
     if ($db_handle) {
-        // Préparation de la requête d'insertion du message dans la table message
-        $sql = "INSERT INTO message (medecing_id, medecinspe_id, client_id, conversation) VALUES (?, ?, ?, ?)";
+        // Insérer une nouvelle entrée dans la table `medecinspe`
+        $sql_insert_medecinspe = "INSERT INTO medecinspe (nom, spécialité) VALUES (?, ?)";
         
-        // Préparation de la requête avec une déclaration préparée
-        if ($stmt = mysqli_prepare($db_handle, $sql)) {
-            // Liaison des paramètres à la déclaration préparée
-            mysqli_stmt_bind_param($stmt, "iiss", $medecin_id, $medecin_id, $client_id, $message);
+        if ($stmt = mysqli_prepare($db_handle, $sql_insert_medecinspe)) {
+            $nom = "Nom Médecin";  // Remplacez par les données réelles si disponibles
+            $specialite = "Spécialité";  // Remplacez par les données réelles si disponibles
             
-            // Exécution de la déclaration préparée
+            mysqli_stmt_bind_param($stmt, "ss", $nom, $specialite);
+            
             if (mysqli_stmt_execute($stmt)) {
-                // Réponse envoyée au client si l'insertion est réussie
-                echo "Message envoyé avec succès.";
+                $medecinspe_id = mysqli_insert_id($db_handle);
+                
+                // Préparation de la requête d'insertion du message dans la table message
+                $sql_insert_message = "INSERT INTO message (medecing_id, medecinspe_id, client_id, conversation) VALUES (?, ?, ?, ?)";
+                
+                if ($stmt_message = mysqli_prepare($db_handle, $sql_insert_message)) {
+                    mysqli_stmt_bind_param($stmt_message, "iiis", $medecin_id, $medecinspe_id, $client_id, $message);
+                    
+                    if (mysqli_stmt_execute($stmt_message)) {
+                        echo "success";
+                    } else {
+                        //echo "Error inserting message: " . mysqli_error($db_handle);
+                    }
+
+                    mysqli_stmt_close($stmt_message);
+                } else {
+                    //echo "Error preparing message statement: " . mysqli_error($db_handle);
+                }
             } else {
-                // Réponse envoyée au client en cas d'échec de l'insertion
-                echo "Erreur lors de l'envoi du message à la base de données.";
+                //echo "Error inserting medecinspe: " . mysqli_error($db_handle);
             }
 
-            // Fermeture de la déclaration préparée
             mysqli_stmt_close($stmt);
         } else {
-            // Réponse envoyée au client en cas d'échec de préparation de la requête
-            echo "Erreur lors de la préparation de la requête d'insertion.";
+            //echo "Error preparing medecinspe statement: " . mysqli_error($db_handle);
         }
 
-        // Fermeture de la connexion à la base de données
         mysqli_close($db_handle);
     } else {
-        // Réponse envoyée au client en cas d'erreur de connexion à la base de données
-        echo "Erreur de connexion à la base de données.";
+        //echo "Error connecting to database: " . mysqli_connect_error();
     }
 } else {
-    // Réponse envoyée au client si le message n'est pas envoyé via la méthode POST
-    echo "Aucun message reçu.";
+    //echo "Invalid request";
 }
 ?>
