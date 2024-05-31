@@ -120,6 +120,5 @@ mysqli_close($db_handle);
         <?php endif; ?>
     </div>
 </body>
-
 </html>
 
