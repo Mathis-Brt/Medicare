@@ -116,7 +116,7 @@ mysqli_close($db_handle);
                 </tbody>
             </table>
         <?php else: ?>
-            <p>Aucune disponibilité trouvée pour ce médecin.</p>
+            <p>Aucune disponibilité  trouvée pour ce médecin.</p>
         <?php endif; ?>
     </div>
 </body>
