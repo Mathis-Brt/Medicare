@@ -185,6 +185,7 @@
 <div id="chatBox">
     <div id="chatHeader">
         Chat avec le médecin
+        <button id="closeChatButton" onclick="toggleChat()" style="float: right; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">&times;</button>
     </div>
     <div id="chatBody">
         <!-- Les messages seront affichés ici -->
@@ -192,56 +193,80 @@
     <div id="chatFooter">
         <input type="text" id="chatInput" placeholder="Écrire un message...">
         <button onclick="sendMessage()">Envoyer</button>
-        <div id="notification" style="display: none; padding: 10px; background-color: #d4edda; text-align: center;">
-        Message envoyé avec succès.
-    </div>
-        
+        <!--<div id="notification" style="display: none; padding: 10px; background-color: #d4edda; text-align: center;">
+            Message envoyé avec succès.-->
+        </div>
     </div>
 </div>
+
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
     function toggleChat() {
-        var chatBox = document.getElementById('chatBox');
-        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-            chatBox.style.display = 'block';
-        } else {
-            chatBox.style.display = 'none';
-        }
+    var chatBox = document.getElementById('chatBox');
+    if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+        chatBox.style.display = 'block';
+        loadMessages(); // Charger les messages lorsque le chat s'ouvre
+    } else {
+        chatBox.style.display = 'none';
     }
+}
 
-    function sendMessage() {
-        var chatInput = document.getElementById('chatInput');
-        var message = chatInput.value;
-        if (message.trim() !== "") {
-            $.ajax({
-                url: 'send_message.php',
-                type: 'POST',
-                data: { message: message },
-                success: function(response) {
-                    var chatBody = document.getElementById('chatBody');
-                    var newMessage = document.createElement('div');
-                    newMessage.textContent = message;
-                    newMessage.className = 'chat-message sent';
-                    chatBody.appendChild(newMessage);
-                    chatInput.value = "";
-                    chatBody.scrollTop = chatBody.scrollHeight;
-
-                    // Afficher la notification
-                    var notification = document.getElementById('notification');
-                    notification.style.display = 'block';
-                    setTimeout(function() {
-                        notification.style.display = 'none';
-                    }, 3000); // Disparaît après 3 secondes
-                },
-                error: function(xhr, status, error) {
-                    console.error(error);
-                    alert('Une erreur est survenue lors de l\'envoi du message.');
-                }
-            });
+function loadMessages() {
+    var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+    var client_id = '12345';  // Id du client à remplacer dynamiquement
+    $.ajax({
+        url: 'fetch_messages.php',
+        type: 'GET',
+        data: { medecing_id: medecing_id, client_id: client_id },
+        success: function(response) {
+            var chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = response;
+            chatBody.scrollTop = chatBody.scrollHeight;
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+            alert('Une erreur est survenue lors du chargement des messages.');
         }
+    });
+}
+
+function sendMessage() {
+    var chatInput = document.getElementById('chatInput');
+    var message = chatInput.value;
+    if (message.trim() !== "") {
+        var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+        var client_id = '12345';  // Id du client à remplacer dynamiquement
+        var medecinspe_id = 2;  // Id du spécialiste à remplacer dynamiquement, si nécessaire
+        $.ajax({
+            url: 'send_message.php',
+            type: 'POST',
+            data: { message: message, medecing_id: medecing_id, client_id: client_id, medecinspe_id: medecinspe_id },
+            success: function(response) {
+                var chatBody = document.getElementById('chatBody');
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message sent';
+                chatBody.appendChild(newMessage);
+                chatInput.value = "";
+                chatBody.scrollTop = chatBody.scrollHeight;
+
+                // Afficher la notification
+                var notification = document.getElementById('notification');
+                notification.style.display = 'block';
+                setTimeout(function() {
+                    notification.style.display = 'none';
+                }, 3000); // Disparaît après 3 secondes
+            },
+            error: function(xhr, status, error) {
+                console.error(error);
+                alert('Une erreur est survenue lors de l\'envoi du message.');
+            }
+        });
     }
+}
+
 </script>
 </body>
 </html>
