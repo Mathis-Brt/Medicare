@@ -192,10 +192,8 @@
     <div id="chatFooter">
         <input type="text" id="chatInput" placeholder="Écrire un message...">
         <button onclick="sendMessage()">Envoyer</button>
-        <div id="notification" style="display: none; padding: 10px; background-color: #d4edda; text-align: left;">
-    Message envoyé avec succès.
-</div>
-
+        <div id="notification" style="display: none; padding: 10px; background-color: #d4edda; text-align: center;">
+        Message envoyé avec succès.
     </div>
         
     </div>
