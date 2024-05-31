@@ -1,34 +1,28 @@
 <?php
-// Démarrer la session
 session_start();
 
-// Vérifier si l'utilisateur est connecté en vérifiant la variable de session
 if (!isset($_SESSION['email'])) {
-    // Rediriger vers la page de connexion si l'utilisateur n'est pas connecté
     header("Location: connexion.php");
     exit();
 }
 
-// Maintenant vous pouvez récupérer les informations de l'utilisateur depuis la session ou la base de données
-$email = $_SESSION['email'];// Assurez-vous que 'email' correspond au nom de la colonne dans votre base de données
-$nom = $_SESSION['nom'];
-$prenom = $_SESSION['prenom'];
-$adresse = $_SESSION['adresse'];
-$ville = $_SESSION['ville'];
-$cp = $_SESSION['cp'];
-$pays = $_SESSION['pays'];
-$telephone = $_SESSION['telephone'];
-$cartevitale = $_SESSION['cartevitale'];
-$typepaiement = $_SESSION['typepaiement'];
-$numerocarte = $_SESSION['numerocarte'];
-$nomcarte = $_SESSION['nomcarte'];
-$dateexpiration = $_SESSION['dateexpiration'];
-$codesecurite = $_SESSION['codesecurite'];
+$email = $_SESSION['email'];
+$role = $_SESSION['role'];
 
+$nom = isset($_SESSION['nom']) ? $_SESSION['nom'] : '';
+$prenom = isset($_SESSION['prenom']) ? $_SESSION['prenom'] : '';
+$adresse = isset($_SESSION['adresse']) ? $_SESSION['adresse'] : '';
+$ville = isset($_SESSION['ville']) ? $_SESSION['ville'] : '';
+$cp = isset($_SESSION['cp']) ? $_SESSION['cp'] : '';
+$pays = isset($_SESSION['pays']) ? $_SESSION['pays'] : '';
+$telephone = isset($_SESSION['telephone']) ? $_SESSION['telephone'] : '';
+$cartevitale = isset($_SESSION['cartevitale']) ? $_SESSION['cartevitale'] : '';
+$typepaiement = isset($_SESSION['typepaiement']) ? $_SESSION['typepaiement'] : '';
+$numerocarte = isset($_SESSION['numerocarte']) ? $_SESSION['numerocarte'] : '';
+$nomcarte = isset($_SESSION['nomcarte']) ? $_SESSION['nomcarte'] : '';
+$dateexpiration = isset($_SESSION['dateexpiration']) ? $_SESSION['dateexpiration'] : '';
+$codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '';
 
-// Vous pouvez afficher d'autres informations de l'utilisateur ici
-
-// Inclure votre HTML pour la page de compte
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -43,7 +37,6 @@ $codesecurite = $_SESSION['codesecurite'];
         .button-container a:nth-child(5) {
             background-color: lightblue;
         }
-
         .info-box {
             border: 1px solid #ccc;
             padding: 15px;
@@ -53,7 +46,6 @@ $codesecurite = $_SESSION['codesecurite'];
             font-size: 14px;
             background-color: #f9f9f9;
         }
-
         .deconnexion-button {
             display: block;
             width: 20%;
@@ -65,10 +57,8 @@ $codesecurite = $_SESSION['codesecurite'];
             font-size: 16px;
             margin-top: 20px;
         }
-
     </style>
 </head>
-
 <body>
 <div class="wrapper">
     <header class="header">
@@ -92,29 +82,29 @@ $codesecurite = $_SESSION['codesecurite'];
         </div>
     </nav>
     <main class="section">
-
-    <h1>Bienvenue sur votre compte</h1>
-
-    <div class="info-box">
-    
-    <p>Votre adresse e-mail : <?php echo $email; ?></p>
-    <p>Nom : <?php echo $nom; ?></p>
-    <p>Prénom : <?php echo $prenom; ?></p>
-    <p>Adresse : <?php echo $adresse; ?></p>
-    <p>Ville : <?php echo $ville; ?></p>
-    <p>Code Postal : <?php echo $cp; ?></p>
-    <p>Pays : <?php echo $pays; ?></p>
-    <p>Téléphone : <?php echo $telephone; ?></p>
-    <p>Carte Vitale : <?php echo $cartevitale; ?></p>
-    <p>Type de Paiement : <?php echo $typepaiement; ?></p>
-    <p>Numéro de Carte : <?php echo $numerocarte; ?></p>
-    <p>Nom sur la Carte : <?php echo $nomcarte; ?></p>
-    <p>Date d'expiration : <?php echo $dateexpiration; ?></p>
-    <p>Code de Sécurité : <?php echo $codesecurite; ?></p>
-    </div>
-
-    <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
-
+        <h1>Bienvenue sur votre compte</h1>
+        <div class="info-box">
+            <p>Votre adresse e-mail : <?php echo $email; ?></p>
+            <?php if ($role === 'admin'): ?>
+                <p>Rôle : Administrateur</p>
+            <?php endif; ?>
+            <?php if ($role === 'client'): ?>
+                <p>Nom : <?php echo $nom; ?></p>
+                <p>Prénom : <?php echo $prenom; ?></p>
+                <p>Adresse : <?php echo $adresse; ?></p>
+                <p>Ville : <?php echo $ville; ?></p>
+                <p>Code Postal : <?php echo $cp; ?></p>
+                <p>Pays : <?php echo $pays; ?></p>
+                <p>Téléphone : <?php echo $telephone; ?></p>
+                <p>Carte Vitale : <?php echo $cartevitale; ?></p>
+                <p>Type de Paiement : <?php echo $typepaiement; ?></p>
+                <p>Numéro de Carte : <?php echo $numerocarte; ?></p>
+                <p>Nom sur la Carte : <?php echo $nomcarte; ?></p>
+                <p>Date d'expiration : <?php echo $dateexpiration; ?></p>
+                <p>Code de Sécurité : <?php echo $codesecurite; ?></p>
+            <?php endif; ?>
+        </div>
+        <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
     </main>
     <footer class="footer">
         <div class="contact-info">
@@ -127,7 +117,6 @@ $codesecurite = $_SESSION['codesecurite'];
         </div>
     </footer>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>

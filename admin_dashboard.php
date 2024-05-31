@@ -133,7 +133,6 @@ $conn->close();
         <h1>Bienvenue sur votre compte</h1>
         <div class="info-box">
             <p>Votre adresse e-mail1 : <?php echo htmlspecialchars($email); ?></p>
-            <p>Id : <?php echo htmlspecialchars($_SESSION['id']); ?></p>
             <p>Role : Administrateur</p>
             <?php if ($role !== 'admin'): ?>
                 <p>Role : Administrateur</p>
