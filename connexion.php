@@ -33,6 +33,13 @@ $stmt_admin->bind_param("ss", $email, $password);
 $stmt_admin->execute();
 $result_admin = $stmt_admin->get_result();
 
+// Préparer la requête SQL pour les médecins spécialistes
+$sql_medecin = "SELECT * FROM medecinspe WHERE mail = ? AND password = ?";
+$stmt_medecin = $conn->prepare($sql_medecin);
+$stmt_medecin->bind_param("ss", $email, $password);
+$stmt_medecin->execute();
+$result_medecin = $stmt_medecin->get_result();
+
 // Vérifier si des données correspondantes sont trouvées pour le client
 if ($result_client->num_rows > 0) {
     $row = $result_client->fetch_assoc();
@@ -64,14 +71,21 @@ if ($result_client->num_rows > 0) {
     $_SESSION['cp'] = $row['cp'];
     $_SESSION['pays'] = $row['pays'];
     $_SESSION['telephone'] = $row['telephone'];
-    // Les champs suivants sont spécifiques aux clients et peuvent ne pas être disponibles pour les admins
-    $_SESSION['cartevitale'] = $row['cartevitale'] ?? '';
-    $_SESSION['typepaiement'] = $row['typepaiement'] ?? '';
-    $_SESSION['numerocarte'] = $row['numerocarte'] ?? '';
-    $_SESSION['nomcarte'] = $row['nomcarte'] ?? '';
-    $_SESSION['dateexpiration'] = $row['dateexpiration'] ?? '';
-    $_SESSION['codesecurite'] = $row['codesecurite'] ?? '';
     header("Location: admin_dashboard.php");
+    exit();
+} elseif ($result_medecin->num_rows > 0) {
+    $row = $result_medecin->fetch_assoc();
+    $_SESSION['email'] = $email;
+    $_SESSION['role'] = 'medecin';
+    $_SESSION['nom'] = $row['nom'];
+    $_SESSION['prenom'] = $row['prenom'];
+    $_SESSION['specialite'] = $row['specialite'];
+    $_SESSION['adresse'] = $row['adresse'];
+    $_SESSION['ville'] = $row['ville'];
+    $_SESSION['cp'] = $row['cp'];
+    $_SESSION['pays'] = $row['pays'];
+    $_SESSION['telephone'] = $row['telephone'];
+    header("Location: medecin_dashboard.php");
     exit();
 } else {
     echo "<script>alert('Adresse e-mail ou mot de passe incorrect.'); window.location.href = 'Compte.html';</script>";
@@ -80,5 +94,6 @@ if ($result_client->num_rows > 0) {
 // Fermer la connexion à la base de données
 $stmt_client->close();
 $stmt_admin->close();
+$stmt_medecin->close();
 $conn->close();
 ?>
