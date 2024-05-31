@@ -25,22 +25,22 @@
         .doctor-details {
             text-align: left;
             max-width: 600px;
-            font-size: 14px; /* Réduire la taille de la police des détails */
-            border: 1px solid #ccc; /* Bordure du rectangle */
-            padding: 20px; /* Espacement interne du rectangle */
-            border-radius: 10px; /* Coins arrondis du rectangle */
-            background-color: #f9f9f9; /* Couleur de fond du rectangle */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
+            font-size: 14px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .doctor-navigation {
             text-align: center;
-            font-size: 30px; /* Augmenter la taille de la police */
-            color: white; /* Changer la couleur de la police en blanc */
-            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            font-size: 30px;
+            color: white;
+            background-color: rgb(32, 67, 104);
         }
         .doctor-specialty {
-            font-size: 25px; /* Taille de la police pour la spécialité */
-            color: black; /* Couleur de la police */
+            font-size: 25px;
+            color: black;
         }
         .button-group {
             text-align: center;
@@ -49,13 +49,68 @@
         .button-group .btn {
             margin: 5px;
         }
+        /* Style pour le chat */
+        #chatBox {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            width: 300px;
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: white;
+            z-index: 1000;
+        }
+        #chatHeader {
+            padding: 10px;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        #chatBody {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        #chatFooter {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+        #chatFooter input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #chatFooter button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            border-radius: 5px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        .chat-message.sent {
+            text-align: right;
+            background-color: #d4edda;
+        }
     </style>
 </head>
 <body>
 <div class="wrapper">
     <header class="header">
         <div class="title-container">
-            <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
+            <h1 style="font-size: 50px;"><span>MedicareA:</span> Services Médicaux</h1>
         </div>
         <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
@@ -111,9 +166,7 @@
         <img src="medecin/planning_med1.png" alt="Planning medecin" width="900" height="110">
         <div class="button-group">
             <button class="btn btn-primary" onclick="window.open('prendre_rendezvous.php?id=1')">Prendre rendez-vous</button>
-        
-        
-            <button class="btn btn-secondary" onclick="window.location.href='communiquer_medecin.php'">Communiquer avec le médecin</button>
+            <button class="btn btn-secondary" onclick="toggleChat()">Communiquer avec le médecin</button>
             <button class="btn btn-info" onclick="window.open('generate_cv.php?id=1', '_blank')">Voir son CV</button>
         </div>
     </main>
@@ -129,7 +182,68 @@
     </footer>
 </div>
 
+<div id="chatBox">
+    <div id="chatHeader">
+        Chat avec le médecin
+    </div>
+    <div id="chatBody">
+        <!-- Les messages seront affichés ici -->
+    </div>
+    <div id="chatFooter">
+        <input type="text" id="chatInput" placeholder="Écrire un message...">
+        <button onclick="sendMessage()">Envoyer</button>
+        <div id="notification" style="display: none; padding: 10px; background-color: #d4edda; text-align: left;">
+    Message envoyé avec succès.
+</div>
+
+    </div>
+        
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleChat() {
+        var chatBox = document.getElementById('chatBox');
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'block';
+        } else {
+            chatBox.style.display = 'none';
+        }
+    }
+
+    function sendMessage() {
+        var chatInput = document.getElementById('chatInput');
+        var message = chatInput.value;
+        if (message.trim() !== "") {
+            $.ajax({
+                url: 'send_message.php',
+                type: 'POST',
+                data: { message: message },
+                success: function(response) {
+                    var chatBody = document.getElementById('chatBody');
+                    var newMessage = document.createElement('div');
+                    newMessage.textContent = message;
+                    newMessage.className = 'chat-message sent';
+                    chatBody.appendChild(newMessage);
+                    chatInput.value = "";
+                    chatBody.scrollTop = chatBody.scrollHeight;
+
+                    // Afficher la notification
+                    var notification = document.getElementById('notification');
+                    notification.style.display = 'block';
+                    setTimeout(function() {
+                        notification.style.display = 'none';
+                    }, 3000); // Disparaît après 3 secondes
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    alert('Une erreur est survenue lors de l\'envoi du message.');
+                }
+            });
+        }
+    }
+</script>
 </body>
 </html>
