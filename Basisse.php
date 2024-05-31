@@ -55,7 +55,7 @@
 <div class="wrapper">
     <header class="header">
         <div class="title-container">
-            <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
+            <h1 style="font-size: 50px;"><span>MedicareA:</span> Services Médicaux</h1>
         </div>
         <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
