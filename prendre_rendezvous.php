@@ -97,7 +97,7 @@ mysqli_close($db_handle);
 </head>
 <body>
     <div class="container">
-        <h2>Disponibilités du Médecin</h2>
+        <h2>DisponibilitésA du Médecin</h2>
         <?php if (!empty($disponibilites)): ?>
             <table class="table">
                 <thead>
