@@ -22,6 +22,7 @@ $numerocarte = isset($_SESSION['numerocarte']) ? $_SESSION['numerocarte'] : '';
 $nomcarte = isset($_SESSION['nomcarte']) ? $_SESSION['nomcarte'] : '';
 $dateexpiration = isset($_SESSION['dateexpiration']) ? $_SESSION['dateexpiration'] : '';
 $codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '';
+$specialite = isset($_SESSION['spécialité']) ? $_SESSION['spécialité'] : '';
 
 ?>
 <!DOCTYPE html>
@@ -87,8 +88,7 @@ $codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '
             <p>Votre adresse e-mail : <?php echo $email; ?></p>
             <?php if ($role === 'admin'): ?>
                 <p>Rôle : Administrateur</p>
-            <?php endif; ?>
-            <?php if ($role === 'client'): ?>
+            <?php elseif ($role === 'client'): ?>
                 <p>Nom : <?php echo $nom; ?></p>
                 <p>Prénom : <?php echo $prenom; ?></p>
                 <p>Adresse : <?php echo $adresse; ?></p>
@@ -102,6 +102,11 @@ $codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '
                 <p>Nom sur la Carte : <?php echo $nomcarte; ?></p>
                 <p>Date d'expiration : <?php echo $dateexpiration; ?></p>
                 <p>Code de Sécurité : <?php echo $codesecurite; ?></p>
+            <?php elseif ($role === 'medecin'): ?>
+                <p>Rôle : Médecin</p>
+                <p>Nom : <?php echo htmlspecialchars($nom); ?></p>
+                <p>Spécialité : <?php echo htmlspecialchars($user_data['spécialité']); ?></p>
+                <p>Téléphone : <?php echo htmlspecialchars($telephone); ?></p>
             <?php endif; ?>
         </div>
         <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
@@ -117,6 +122,7 @@ $codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '
         </div>
     </footer>
 </div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
