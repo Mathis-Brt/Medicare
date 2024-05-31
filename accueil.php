@@ -133,7 +133,7 @@ session_start(); // Démarrer la session
             <div class="card">
                 <img src="Medicare2.jpg" alt="Medicare 2" class="card-img-top img-thumbnail">
                 <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maures. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text">Levée de fonds : Rénovation urgente de l'hôpital de Saint-Maurice. Si vous souhaitez participer, <a href="https://www.helloasso.com/associations/france-nature-environnement-94/collectes/soutenons-la-lutte-pour-les-hopitaux-de-saint-maurice" target="_blank">cliquez-ici</a>.</p>
                 </div>
             </div>
         </div>
