@@ -2,7 +2,6 @@
 session_start(); // Démarrer la session
 ?>
 
-
 <!DOCTYPE html>
 
 <html lang="fr">
@@ -21,12 +20,16 @@ session_start(); // Démarrer la session
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column; /* Alignement vertical */
         }
         .medicare-container img {
-            margin-right: 20px; /* Espace entre l'image et le texte */
+            margin-bottom: 20px; /* Espace entre l'image et le texte */
+            max-width: 350px; /* Largeur maximale de l'image */
+            max-height: 350px; /* Hauteur maximale de l'image */
         }
         .text-container {
-            flex: 1; /* Permet au conteneur de texte de prendre l'espace restant */
+            text-align: justify;
+            width:1000px;
         }
         .centered-title {
             text-align: center;
@@ -66,16 +69,47 @@ session_start(); // Démarrer la session
     </nav>
 
     <main class="section">
-        <h2 style="color: black;" class="centered-title2">Bienvenue sur Medicare</h2><br><br>
+        <h2 style="color: black;" class="centered-title2">Bienvenue sur Medicare</h2><br>
         <div class="medicare-container">
-            <img src="medicare_accueil.jpg" alt="Image Medicare Accueil" class="medicare-image">
             <div class="text-container">
                 <p style="color: black; font-size: 18px;">Medicare est un groupe de services médicaux affilié à Omnes, dédié à fournir des soins de santé de haute qualité et des informations médicales fiables. Nos clients ont la possibilité de consulter en personne ou à distance des médecins généralistes ainsi que des médecins spécialistes dans plusieurs spécialités. De plus, nous offrons la possibilité de réaliser différents types de tests dans nos laboratoires de biologie. Grâce à une équipe de professionnels de santé expérimentés et à des technologies de pointe, Medicare s'engage à améliorer le bien-être de ses patients et à innover dans le domaine médical.</p>
             </div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
+                    <li data-target="#carouselExampleIndicators" data-slide-to="4"></li>
+                </ol>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="medecin/carroussel1.png" class="d-block w-100" alt="Med 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/carroussel2.png" class="d-block w-100" alt="Med 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/carroussel3.png" class="d-block w-100" alt="Med 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/carroussel4.png" class="d-block w-100" alt="Med 3">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="medecin/carroussel5.png" class="d-block w-100" alt="Med 3">
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
-        <br><h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
-
-
+        <h2 style="color: black;" class="centered-title">Bulletins santé de la semaine</h2><br>
 
         <div class="container">
     <div class="row">
@@ -83,13 +117,13 @@ session_start(); // Démarrer la session
             <div class="card">
                 <img src="Medicare1.jpg" alt="Medicare 1" class="card-img-top img-thumbnail">
                 <div class="card-body">
-                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare située ici.</p>
+                    <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Pour participer à la collecte, rendez-vous dans notre service de cancérologie du centre Medicare <a href="https://www.google.com/maps?ll=48.851225,2.288566&z=15&t=m&hl=en&gl=US&mapclient=embed&cid=1621113763460852342" target="_blank"> située ici.</a></p>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
             <div class="card">
-                <img src="Medicare3.jpg" alt="Medicare 3" class="card-img-top img-thumbnail">
+                <img src="medecin/grippe.png" alt="Medicare 3" class="card-img-top img-thumbnail">
                 <div class="card-body">
                     <p style="color: black;font-size:small;font-weight: bold;" class="card-text"> Nouvelle épidémie de grippe : Consultez votre généraliste en cas de lourds symptômes. Si vous souhaitez consulter le profil de nos différents médecins généralistes, <a href="medecine_generale.php" target="_blank">cliquez-ici</a>.</p>
                 </div>

@@ -2,8 +2,6 @@
 session_start(); // Démarrer la session
 ?>
 
-
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -16,6 +14,9 @@ session_start(); // Démarrer la session
     <style>
         .button-container a:nth-child(4) {
             background-color: lightblue;
+        }
+        table th, table td {
+            font-size: 14px; /* Taille de police réduite */
         }
     </style>
 </head>
@@ -30,7 +31,7 @@ session_start(); // Démarrer la session
     </header>
     <nav class="navigation">
         <div class="button-container">
-        <a href="accueil.php" class="button">Accueil</a>
+            <a href="accueil.php" class="button">Accueil</a>
             <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
             <a href="recherche.php" class="button">Recherche</a>
             <a href="rdv.php" class="button">Rendez-vous</a>
@@ -42,7 +43,39 @@ session_start(); // Démarrer la session
         </div>
     </nav>
     <main class="section">
-
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Médecin</th>
+                            <th scope="col">Heure rendez-vous</th>
+                            <th scope="col">Bureau</th>
+                            <th scope="col">Spécialité</th>
+                            <th scope="col">Mode de paiement</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Dr. Basisse</td>
+                            <td>03/06/2024</td>
+                            <td>Bureau n°321</td>
+                            <td>Médecin généraliste</td>
+                            <td>VISA</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-danger">Annuler le rendez-vous</button>
+                </div>
+            </div>
+        </div>
     </main>
     <footer class="footer">
         <div class="contact-info">
