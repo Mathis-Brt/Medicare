@@ -22,7 +22,6 @@ $numerocarte = isset($_SESSION['numerocarte']) ? $_SESSION['numerocarte'] : '';
 $nomcarte = isset($_SESSION['nomcarte']) ? $_SESSION['nomcarte'] : '';
 $dateexpiration = isset($_SESSION['dateexpiration']) ? $_SESSION['dateexpiration'] : '';
 $codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '';
-$specialite = isset($_SESSION['spécialité']) ? $_SESSION['spécialité'] : '';
 
 ?>
 <!DOCTYPE html>
@@ -105,7 +104,12 @@ $specialite = isset($_SESSION['spécialité']) ? $_SESSION['spécialité'] : '';
             <?php elseif ($role === 'medecin'): ?>
                 <p>Rôle : Médecin</p>
                 <p>Nom : <?php echo htmlspecialchars($nom); ?></p>
-                <p>Spécialité : <?php echo htmlspecialchars($user_data['spécialité']); ?></p>
+                <p>Médecin spécialiste </p>
+                <p>Téléphone : <?php echo htmlspecialchars($telephone); ?></p>
+            <?php elseif ($role === 'medecing'): ?>
+                <p>Rôle : Médecin</p>
+                <p>Nom : <?php echo htmlspecialchars($nom); ?></p>
+                <p>Médecin généraliste</p>
                 <p>Téléphone : <?php echo htmlspecialchars($telephone); ?></p>
             <?php endif; ?>
         </div>
