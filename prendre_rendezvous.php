@@ -1,35 +1,53 @@
+
 <?php
 // Connexion à la base de données
-$db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "medecing";
 
-// Vérification de la connexion
-if (!$db_handle) {
-    die("Erreur de connexion à la base de données : " . mysqli_connect_error());
+// Créer une connexion
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("Erreur de connexion à la base de données : " . $conn->connect_error);
 }
 
-// Vérifier si l'ID du médecin est passé en paramètre
-if(isset($_GET['id'])) {
-    $doctor_id = intval($_GET['id']); // Sécurisation de l'entrée utilisateur
+// Vérifier l'existence du paramètre 'id'
+if (!isset($_GET['id'])) {
+    die("ID de médecin non spécifié.");
+}
 
-    // Requête SQL pour récupérer les disponibilités du médecin
-    $sql = "SELECT date, time FROM disponibilites WHERE doctor_id = ?";
-    $stmt = mysqli_prepare($db_handle, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $doctor_id);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
+// Récupérer l'ID du médecin depuis l'URL
+$id = intval($_GET['id']);
 
-    // Stocker les disponibilités dans un tableau
-    $disponibilites = [];
-    while ($row = mysqli_fetch_assoc($result)) {
-        $disponibilites[] = $row;
+// Préparer et exécuter la requête pour obtenir les disponibilités
+$sql = "SELECT disponibilite FROM medecing WHERE id = ?";
+$stmt = $conn->prepare($sql);
+
+if ($stmt === false) {
+    die("Erreur de préparation de la requête : " . $conn->error);
+}
+
+$stmt->bind_param("i", $id);
+$stmt->execute();
+$result = $stmt->get_result();
+
+if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    // Décoder les disponibilités depuis la chaîne JSON
+    $disponibilites = json_decode($row['disponibilite'], true);
+    // Vérifier si le décodage a réussi
+    if ($disponibilites === null) {
+        die("Erreur lors du décodage des disponibilités.");
     }
-
-    mysqli_stmt_close($stmt);
 } else {
-    die("ID du médecin non spécifié.");
+    die("Aucune disponibilité trouvée pour ce médecin.");
 }
 
-mysqli_close($db_handle);
+$stmt->close();
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -37,88 +55,113 @@ mysqli_close($db_handle);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <title>Disponibilités du Médecin</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Styles CSS */
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
+            font-size: 12px;
         }
-
+        table {
+            font-size: 25px; /* Taille de police plus petite */
+            width: auto; /* Réduire la largeur du tableau */
+            margin-left: 0; /* Positionner à gauche */
+        }
+        th, td {
+            
+            text-align: center;
+            width: 10px; /* Réduire la largeur des colonnes */
+        }
+        h2 {
+            font-size: 16px; /* Réduire la taille de la police du titre */
+        }
         .container {
-            background-color: #fff;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            max-width: 600px;
-            text-align: center;
+            width: auto; /* Ajuster la largeur du conteneur */
+            margin-left: 0; /* Positionner à gauche */
         }
-
-        .container h2 {
-            margin-top: 0;
-        }
-
-        .info {
-            margin-bottom: 10px;
-        }
-
-        .table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        .table th, .table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-
-        .table th {
-            background-color: #f2f2f2;
-        }
-
-        .button-group {
-            display: flex;
-            justify-content: center;
-            margin-top: 20px;
-        }
-
-        .button-group button {
-            margin: 0 10px;
+        .return-button {
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h2>Disponibilités du Médecin</h2>
-        <?php if (!empty($disponibilites)): ?>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Heure</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php foreach ($disponibilites as $dispo): ?>
+    <div class="wrapper">
+        <header class="header">
+        <div class="title-container">
+            <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
+        </div>
+        <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
+        <img src="logo.png" alt="Logo Medicare" class="small-logo">
+        </header>
+        <nav class="navigation">
+        <div class="button-container">
+            <a href="accueil.php" class="button">Accueil</a>
+            <a href="tout_parcourir.php" class="button">Tout Parcourir</a>
+            <a href="recherche.php" class="button">Recherche</a>
+            <a href="rdv.php" class="button">Rendez-vous</a>
+            <?php if (isset($_SESSION['email'])): ?>
+                <a href="compte.php" class="button">Votre compte</a>
+            <?php else: ?>
+                <a href="Compte.html" class="button">Connexion</a>
+            <?php endif; ?>
+        </div>
+    </nav>
+        <main class="section">
+            <div class="container">
+                <h1>Disponibilités du Médecin</h1>
+                <table class="table table-bordered">
+                    <thead>
                         <tr>
-                            <td><?php echo htmlspecialchars($dispo['date']); ?></td>
-                            <td><?php echo htmlspecialchars($dispo['time']); ?></td>
+                            <th>Heure</th>
+                            <th>Lundi</th>
+                            <th>Mardi</th>
+                            <th>Mercredi</th>
+                            <th>Jeudi</th>
+                            <th>Vendredi</th>
+                            <th>Samedi</th>
                         </tr>
-                    <?php endforeach; ?>
-                </tbody>
-            </table>
-        <?php else: ?>
-            <p>Aucune disponibilité  trouvée pour ce médecin.</p>
-        <?php endif; ?>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Heures possibles pour les rendez-vous
+                        $heures_possibles = array('9h', '9h20', '9h40', '10h', '10h20', '10h40', '11h', '11h20', '11h40', '12h', '12h20', '12h40', '13h', '13h20', '13h40', '14h', '14h20', '14h40', '15h', '15h20', '15h40', '16h', '16h20', '16h40');
+
+                        // Jours de la semaine
+                        $jours = array('lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi');
+
+                        // Parcours des disponibilités
+                        foreach ($heures_possibles as $heure) {
+                            echo "<tr>";
+                            echo "<td>$heure</td>";
+                            foreach ($jours as $jour) {
+                                echo "<td>";
+                                if (isset($disponibilites[$jour][$heure])) {
+                                    echo ($disponibilites[$jour][$heure] ? "D" : "I");
+                                } else {
+                                    echo "I";
+                                }
+                                echo "</td>";
+                            }
+                            echo "</tr>";
+                        }
+                        ?>
+                    </tbody>
+                </table>
+                <button class="btn btn-primary return-button" onclick="history.back()">Retour</button>
+            </div>
+        </main>
+        <footer class="footer">
+        <div class="contact-info">
+            <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
+            <p>Adresse: 10 Rue Sextius Michel, Paris, 75015</p>
+            <p>Email: <a href="mailto:omnes.medicare@gmail.com">omnes.medicare@gmail.com</a></p>
+        </div>
+        <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </footer>
     </div>
 </body>
 </html>
-
