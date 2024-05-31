@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Médecins spécialistes - Medicare</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="icon" href="logo.medicare.png" type="image/png">
+    <style>
+         .doctor-info {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        .doctor-photo {
+            margin-right: 20px;
+        }
+        .doctor-photo img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .doctor-details {
+            text-align: left;
+            max-width: 600px;
+            font-size: 14px; /* Réduire la taille de la police des détails */
+            border: 1px solid #ccc; /* Bordure du rectangle */
+            padding: 20px; /* Espacement interne du rectangle */
+            border-radius: 10px; /* Coins arrondis du rectangle */
+            background-color: #f9f9f9; /* Couleur de fond du rectangle */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
+        }
+        .doctor-navigation {
+            text-align: center;
+            font-size: 30px; /* Augmenter la taille de la police */
+            color: white; /* Changer la couleur de la police en blanc */
+            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+        }
+        .doctor-specialty {
+            font-size: 25px; /* Taille de la police pour la spécialité */
+            color: black; /* Couleur de la police */
+        }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .button-group .btn {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="wrapper">
+    <header class="header">
+        <!-- Entête de la page -->
+    </header>
+    <nav class="navigation">
+        <!-- Barre de navigation -->
+    </nav>
+    <main class="section">
+        <div class="doctor-container">
+            <!-- Informations sur le médecin -->
+        </div>
+        <br>
+        <img src="medecin/planning_med1.png" alt="Planning medecin" width="900" height="110">
+        <div class="button-group">
+            <!-- Boutons d'action -->
+            <form action="prendre_rendez.php" method="post">
+                <input type="hidden" name="doctor_id" value="1"> <!-- Remplacez 1 par l'ID du médecin sélectionné -->
+                <button type="submit" class="btn btn-primary">Prendre un rendez-vous</button>
+            </form>
+            <button class="btn btn-secondary" onclick="window.location.href='communiquer_medecin.php'">Communiquer avec le médecin</button>
+            <button class="btn btn-info" onclick="window.open('generate_cv.php?id=1', '_blank')">Voir son CV</button>
+        </div>
+    </main>
+    <footer class="footer">
+        <!-- Pied de page -->
+    </footer>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
