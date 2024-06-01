@@ -47,8 +47,8 @@ if (isset($_POST['id_medecin'], $_POST['jour'], $_POST['heure'])) {
 
     // Exécuter la requête
     if ($stmt->execute()) {
-        // Rediriger vers la page d'accueil avec un message de succès
-        header("Location: rdv.php?message=Rendez-vous ajouté avec succès");
+        // Rediriger vers la page de rendez-vous avec un message de succès
+        header("Location: rdv.php?message=Rendez-vous ajouté avec succès&success=true");
         exit();
     } else {
         die("Erreur lors de l'insertion du rendez-vous : " . $stmt->error);

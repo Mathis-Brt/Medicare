@@ -1,7 +1,45 @@
 <?php
-session_start(); // Démarrer la session
-?>
+session_start();
 
+// Afficher toutes les erreurs PHP
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+// Connexion à la base de données
+$servername = "localhost";
+$username = "root";
+$password = "root";
+$dbname = "medecing";
+
+// Créer une connexion
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Vérifier la connexion
+if ($conn->connect_error) {
+    die("Erreur de connexion à la base de données : " . $conn->connect_error);
+}
+
+$rendez_vous = [];
+$is_logged_in = isset($_SESSION['email']);
+
+if ($is_logged_in) {
+    // Récupérer les rendez-vous de l'utilisateur connecté
+    $email_client = $_SESSION['email'];
+    $sql = "SELECT r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecing m ON r.medecin_id = m.id WHERE r.email_client = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("s", $email_client);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+        while ($row = $result->fetch_assoc()) {
+            $rendez_vous[] = $row;
+        }
+    }
+    $stmt->close();
+}
+
+$conn->close();
+?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -43,39 +81,39 @@ session_start(); // Démarrer la session
         </div>
     </nav>
     <main class="section">
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <table class="table">
-                        <thead>
-                        <tr>
-                            <th scope="col">Médecin</th>
-                            <th scope="col">Heure rendez-vous</th>
-                            <th scope="col">Bureau</th>
-                            <th scope="col">Spécialité</th>
-                            <th scope="col">Mode de paiement</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Dr. Basisse</td>
-                            <td>03/06/2024</td>
-                            <td>Bureau n°321</td>
-                            <td>Médecin généraliste</td>
-                            <td>VISA</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
+        <h1>Vos Rendez-vous</h1>
+        <?php if (isset($_GET['success']) && $_GET['success'] == 'true'): ?>
+            <div class="alert alert-success" role="alert">
+                Rendez-vous ajouté avec succès !
             </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-danger">Annuler le rendez-vous</button>
-                </div>
-            </div>
-        </div>
+        <?php endif; ?>
+
+        <?php if ($is_logged_in): ?>
+            <?php if (!empty($rendez_vous)): ?>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Médecin</th>
+                            <th>Jour</th>
+                            <th>Heure</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php foreach ($rendez_vous as $rdv): ?>
+                            <tr>
+                                <td><?php echo htmlspecialchars($rdv['nom_medecin']); ?></td>
+                                <td><?php echo htmlspecialchars($rdv['jour']); ?></td>
+                                <td><?php echo htmlspecialchars($rdv['heure']); ?></td>
+                            </tr>
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            <?php else: ?>
+                <p>Aucun rendez-vous à afficher.</p>
+            <?php endif; ?>
+        <?php else: ?>
+            <p>Connectez-vous pour voir vos rendez-vous.</p>
+        <?php endif; ?>
     </main>
     <footer class="footer">
         <div class="contact-info">
