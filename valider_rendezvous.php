@@ -14,10 +14,10 @@ if (!isset($_SESSION['email'])) {
 }
 
 // Vérifier si les données du formulaire sont présentes
-if (isset($_POST['id_medecin'], $_POST['nom_client'], $_POST['jour'], $_POST['heure'])) {
+if (isset($_POST['id_medecin'], $_POST['jour'], $_POST['heure'])) {
     // Récupérer les données du formulaire
     $id_medecin = $_POST['id_medecin'];
-    $nom_client = $_POST['nom_client'];
+    $email_client = $_SESSION['email']; // Récupérer l'email de l'utilisateur connecté
     $jour = $_POST['jour'];
     $heure = $_POST['heure'];
 
@@ -36,14 +36,14 @@ if (isset($_POST['id_medecin'], $_POST['nom_client'], $_POST['jour'], $_POST['he
     }
 
     // Préparer la requête d'insertion
-    $sql = "INSERT INTO rendez_vous (medecin_id, nom_client, jour, heure) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO rendez_vous (medecin_id, email_client, jour, heure) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         die("Erreur de préparation de la requête : " . $conn->error);
     }
 
     // Binder les paramètres
-    $stmt->bind_param("isss", $id_medecin, $nom_client, $jour, $heure);
+    $stmt->bind_param("isss", $id_medecin, $email_client, $jour, $heure);
 
     // Exécuter la requête
     if ($stmt->execute()) {
