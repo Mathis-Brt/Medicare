@@ -223,48 +223,97 @@
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
     </footer>
-</div>
-
-<!-- Chat Box -->
+    </div>
 <div id="chatBox">
     <div id="chatHeader">
-        <span>Chat avec le médecin</span>
-        <button id="closeChatButton" onclick="toggleChat()">×</button>
+        Chat avec le médecin
+        <button id="closeChatButton" onclick="toggleChat()" style="float: right; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">&times;</button>
     </div>
-    <div id="chatBody"></div>
+    <div id="chatBody">
+        <!-- Les messages seront affichés ici -->
+    </div>
     <div id="chatFooter">
-        <input type="text" id="messageInput" placeholder="Type a message...">
-        <button onclick="sendMessage()">Send</button>
+        <input type="text" id="chatInput" placeholder="Écrire un message...">
+        <button onclick="sendMessage()">Envoyer</button>
     </div>
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Fonction pour afficher ou masquer la boîte de chat
+    
     function toggleChat() {
-        var chatBox = document.getElementById("chatBox");
-        if (chatBox.style.display === "none") {
-            chatBox.style.display = "block";
+        var chatBox = document.getElementById('chatBox');
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'block';
+            loadMessages(); // Charger les messages lorsque le chat s'ouvre
         } else {
-            chatBox.style.display = "none";
+            chatBox.style.display = 'none';
         }
     }
 
-    // Fonction pour envoyer un message
+    function loadMessages() {
+    var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+    var client_id = '12345';  // Id du client à remplacer dynamiquement
+    var storedMessages = loadMessagesFromLocalStorage(); // Charger les messages depuis le stockage local
+    $.ajax({
+        url: 'fetch_messages.php',
+        type: 'GET',
+        data: { medecing_id: medecing_id, client_id: client_id },
+        success: function(response) {
+            var chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = response;
+            chatBody.scrollTop = chatBody.scrollHeight;
+            // Si des messages sont stockés localement, les ajouter à la fin
+            storedMessages.forEach(function(message) {
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message saved'; // Ajouter une classe spécifique aux messages sauvegardés
+                chatBody.appendChild(newMessage);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+            alert('Une erreur est survenue lors du chargement des messages.');
+        }
+    });
+}
+
+
     function sendMessage() {
-        var messageInput = document.getElementById("messageInput");
-        var message = messageInput.value.trim();
-        if (message !== "") {
-            var chatBody = document.getElementById("chatBody");
-            var messageDiv = document.createElement("div");
-            messageDiv.classList.add("chat-message", "sent");
-            messageDiv.textContent = message;
-            chatBody.appendChild(messageDiv);
-            messageInput.value = "";
-            // Vous pouvez envoyer le message au backend ici pour une communication réelle avec le médecin
+        var chatInput = document.getElementById('chatInput');
+        var message = chatInput.value;
+        if (message.trim() !== "") {
+            var newMessage = document.createElement('div');
+            newMessage.textContent = message;
+            newMessage.className = 'chat-message sent';
+            document.getElementById('chatBody').appendChild(newMessage);
+            chatInput.value = "";
+
+            // Sauvegarde le message dans le stockage local
+            saveMessageToLocalStorage(message);
         }
     }
+
+    function saveMessageToLocalStorage(message) {
+        var storedMessages = loadMessagesFromLocalStorage();
+        storedMessages.push(message);
+        localStorage.setItem('chatMessages', JSON.stringify(storedMessages));
+    }
+
+    function loadMessagesFromLocalStorage() {
+        var storedMessages = localStorage.getItem('chatMessages');
+        return storedMessages ? JSON.parse(storedMessages) : [];
+    }
+
+    window.onload = function() {
+        loadMessages();
+    };
+    
+    // Supprimer le stockage local lorsque la page est fermée
+    window.addEventListener('beforeunload', function() {
+        localStorage.removeItem('chatMessages');
+    });
 </script>
 </body>
 </html>
