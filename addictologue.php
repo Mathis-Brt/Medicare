@@ -53,7 +53,7 @@
         }
         .back-button a {
             color: white;
-            margin-left: 30px /* Couleur du texte du bouton de retour */
+            margin-left: 30px; /* Couleur du texte du bouton de retour */
         }
         .button-group {
             display: flex;
@@ -62,6 +62,78 @@
         }
         .button-group button {
             margin: 0 5px; /* Réduire la marge entre les boutons */
+        }
+        /* Style pour le chat */
+        #chatBox {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            width: 300px;
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: white;
+            z-index: 1000;
+        }
+        #chatHeader {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        #closeChatButton {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+            padding: 0;
+        }
+        #closeChatButton:hover {
+            color: #ccc;
+        }
+        #chatBody {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        #chatFooter {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+        #chatFooter input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #chatFooter button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            border-radius: 5px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        .chat-message.sent {
+            text-align: right;
+            background-color: #d4edda;
+        }
+        .chat-message.saved {
+            background-color: #d4edda;
         }
     </style>
 </head>
@@ -131,7 +203,7 @@
                     if ($counter < 2) {
                         echo "<div class='button-group'>";
                         echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php'\">Prendre un rendez-vous</button>";
-                        echo "<button class='btn btn-secondary' onclick=\"window.location.href='communiquer_medecin.php'\">Communiquer avec le médecin</button>";
+                        echo "<button class='btn btn-secondary' onclick=\"toggleChat()\">Communiquer avec le médecin</button>";
                         echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
                         echo "</div>";
                     }
@@ -153,7 +225,46 @@
     </footer>
 </div>
 
+<!-- Chat Box -->
+<div id="chatBox">
+    <div id="chatHeader">
+        <span>Chat avec le médecin</span>
+        <button id="closeChatButton" onclick="toggleChat()">×</button>
+    </div>
+    <div id="chatBody"></div>
+    <div id="chatFooter">
+        <input type="text" id="messageInput" placeholder="Type a message...">
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Fonction pour afficher ou masquer la boîte de chat
+    function toggleChat() {
+        var chatBox = document.getElementById("chatBox");
+        if (chatBox.style.display === "none") {
+            chatBox.style.display = "block";
+        } else {
+            chatBox.style.display = "none";
+        }
+    }
+
+    // Fonction pour envoyer un message
+    function sendMessage() {
+        var messageInput = document.getElementById("messageInput");
+        var message = messageInput.value.trim();
+        if (message !== "") {
+            var chatBody = document.getElementById("chatBody");
+            var messageDiv = document.createElement("div");
+            messageDiv.classList.add("chat-message", "sent");
+            messageDiv.textContent = message;
+            chatBody.appendChild(messageDiv);
+            messageInput.value = "";
+            // Vous pouvez envoyer le message au backend ici pour une communication réelle avec le médecin
+        }
+    }
+</script>
 </body>
 </html>
