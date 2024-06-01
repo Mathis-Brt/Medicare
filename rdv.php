@@ -81,7 +81,7 @@ $conn->close();
         </div>
     </nav>
     <main class="section">
-        <h1>Vos Rendez-vous</h1>
+        <h1 style="color: black;">Vos rendez-vous</h1><br>
         <?php if (isset($_GET['success']) && $_GET['success'] == 'true'): ?>
             <div class="alert alert-success" role="alert">
                 Rendez-vous ajouté avec succès !

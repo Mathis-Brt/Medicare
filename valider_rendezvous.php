@@ -21,6 +21,7 @@ if (isset($_POST['id_medecin'], $_POST['jour'], $_POST['heure'])) {
     $jour = $_POST['jour'];
     $heure = $_POST['heure'];
 
+    
     // Connexion à la base de données
     $servername = "localhost";
     $username = "root";
