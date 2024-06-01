@@ -51,8 +51,8 @@
                         case "Addictologie":
                             echo "addictologue.php";
                             break;
-                        case "Allergologie":
-                            echo "allergologue.php";
+                        case "Andrologie":
+                            echo "andrologie.php";
                             break;
                         case "Cardiologie":
                             echo "cardiologue.php";
@@ -60,15 +60,18 @@
                         case "Dermatologie":
                             echo "dermatologue.php";
                             break;
-                        case "Endocrinologie":
-                            echo "endocrinologue.php";
+                        case "Gastro-Hépato-Entérologie":
+                            echo "gastro.php";
                             break;
-                        case "Gastroentérologie":
-                            echo "gastroenterologue.php";
+                        case "Gynecologie":
+                            echo "gynecologue.php";
                             break;
-                        case "Hématologie":
-                            echo "hematologie.php";
+                        case "IST":
+                            echo "IST.php";
                             break;
+                            case "Ostheopathie":
+                                echo "osthéopathie.php";
+                                break;
                         default:
                             echo "medecinSpe.php?specialite=" . urlencode($row['spécialité']);
                     }

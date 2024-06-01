@@ -153,8 +153,8 @@
 
     // Vérification de la connexion
     if ($db_handle) {
-        // Requête SQL pour récupérer les informations des médecins gastroentérologues
-        $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Gastroenterologie'";
+        // Requête SQL pour récupérer les informations des médecins endocrinologues
+        $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Gastro-Hépato-Entérologie'";
         $result = mysqli_query($db_handle, $sql);
 
         echo "<div class='doctor-navigation-container'>";
@@ -165,7 +165,7 @@
         // Affichage des informations
         if ($result && mysqli_num_rows($result) > 0) {
             echo "<div class='doctor-navigation'>";
-            echo "<a href='#' style='color: white;'>Gastroenterologie</a>"; // Ajout du style pour la couleur blanche
+            echo "<a href='#' style='color: white;'>Gastro-Hépato-Entérologie</a>"; // Ajout du style pour la couleur blanche
             echo "</div>";
         } else {
             echo "<p>Aucun résultat  trouvé.</p>";
@@ -188,7 +188,7 @@
                     echo "<div class='doctor-info'>";
                     echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                     echo "<div class='doctor-details'>";
-                    echo "<p><strong>Gastroenterologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
+                    echo "<p><strong>Endocrinologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
                     echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                     echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
@@ -197,11 +197,11 @@
                     echo "</div>";
 
                     echo "<br>"; // Ajout d'une ligne vide
-                    echo "<img src='medecin/planning_med13.png' alt='Planning' class='planning-image' width='900' height='100'>";
+                    echo "<img src='medecin/planning_med12.png' alt='Planning' class='planning-image' width='900' height='100'>";
 
                     // Affichage des boutons sous chaque médecin
                     echo "<div class='button-group'>";
-                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=13'\">Prendre un rendez-vous</button>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=12'\">Prendre un rendez-vous</button>";
                     echo "<button class='btn btn-secondary' onclick=\"toggleChat()\">Communiquer avec le médecin</button>";
                     echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
                     echo "</div>";

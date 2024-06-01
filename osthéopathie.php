@@ -63,8 +63,8 @@
         .button-group button {
             margin: 0 5px; /* Réduire la marge entre les boutons */
         }
-        /* Style pour le chat */
-        #chatBox {
+/* Style pour le chat */
+#chatBox {
             display: none;
             position: fixed;
             bottom: 0;
@@ -147,35 +147,37 @@
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
     </header>
     <nav class="navigation">
-    <?php
-    // Connexion à la base de données
-    $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
+        <?php
+        // Connexion à la base de données
+        $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
-    // Vérification de la connexion
-    if ($db_handle) {
-        // Requête SQL pour récupérer les informations des médecins endocrinologues
-        $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Endocrinologie'";
-        $result = mysqli_query($db_handle, $sql);
+        // Vérification de la connexion
+        if ($db_handle) {
+            // Requête SQL pour récupérer les informations des médecins allergologues
+            $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Osthéopathie'";
+            $result = mysqli_query($db_handle, $sql);
 
-        echo "<div class='doctor-navigation-container'>";
-        echo "<div class='back-button'>";
-        echo "<a href='medecins_specialistes.php' class='btn btn-primary'>Retour</a>";
-        echo "</div>";
-        
-        // Affichage des informations
-        if ($result && mysqli_num_rows($result) > 0) {
-            echo "<div class='doctor-navigation'>";
-            echo "<a href='#' style='color: white;'>Endocrinologie</a>"; // Ajout du style pour la couleur blanche
+            echo "<div class='doctor-navigation-container'>";
+            echo "<div class='back-button'>";
+            echo "<a href='medecins_specialistes.php' class='btn btn-primary'>Retour</a>";
+            echo "</div>";
+
+            // Affichage des informations
+            if ($result && mysqli_num_rows($result) > 0) {
+                echo "<div class='doctor-navigation'>";
+                echo "<a href='#' style='color: white;'>Osthéopathie</a>";
+                echo "</div>";
+            } else {
+                echo "<div class='doctor-navigation'>";
+                echo "<p>Aucun résultat trouvé.</p>";
+                echo "</div>";
+            }
             echo "</div>";
         } else {
-            echo "<p>Aucun résultat  trouvé.</p>";
+            echo "<p>Erreur de connexion à la base de données.</p>";
         }
-    } else {
-        echo "<p>Erreur de connexion à la base de données.</p>";
-    }
-    ?>
-</nav>
-
+        ?>
+    </nav>
     <main class="section">
         <div class="doctor-container">
             <?php
@@ -183,12 +185,13 @@
             mysqli_data_seek($result, 0);
             
             if ($result && mysqli_num_rows($result) > 0) {
+                $counter = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $photo = htmlspecialchars($row['photo']);
                     echo "<div class='doctor-info'>";
                     echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                     echo "<div class='doctor-details'>";
-                    echo "<p><strong>Endocrinologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
+                    echo "<p><strong>Allergologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
                     echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                     echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
@@ -197,15 +200,16 @@
                     echo "</div>";
 
                     echo "<br>"; // Ajout d'une ligne vide
-                    echo "<img src='medecin/planning_med12.png' alt='Planning' class='planning-image' width='900' height='100'>";
+                    echo "<img src='medecin/planning_med9.png' alt='Planning' class='planning-image' width='900' height='100'>";
 
                     // Affichage des boutons sous chaque médecin
                     echo "<div class='button-group'>";
-                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=12'\">Prendre un rendez-vous</button>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=9'\">Prendre un rendez-vous</button>";
                     echo "<button class='btn btn-secondary' onclick=\"toggleChat()\">Communiquer avec le médecin</button>";
                     echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
                     echo "</div>";
                 }
+                
             }
             ?>
         </div>
@@ -219,7 +223,7 @@
         <div class="map-container">
             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
-        </footer>
+    </footer>
 </div>
 </div>
 <div id="chatBox">
