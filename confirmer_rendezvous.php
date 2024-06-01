@@ -1,4 +1,20 @@
 <?php
+session_start();
+
+// Afficher toutes les erreurs PHP
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
+
+
+// Vérifier si l'utilisateur est connecté
+if (!isset($_SESSION['email'])) {
+    // Si l'utilisateur n'est pas connecté, afficher une alerte et rediriger vers la page de connexion
+    echo '<script>alert("Vous devez être connecté pour confirmer un rendez-vous.");</script>';
+    header("Location: Compte.html");
+    exit();
+}
+
 // Connexion à la base de données
 $servername = "localhost";
 $username = "root";
@@ -54,6 +70,17 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     <style>
         /* Ajoutez ici vos styles spécifiques si nécessaire */
     </style>
+
+<script>
+    function confirmRendezVous() {
+        var isLoggedIn = "<?php echo isset($_SESSION['email']) ? 'true' : 'false'; ?>";
+        console.log(isLoggedIn);
+        if (!isLoggedIn) {
+            alert('Vous devez être connecté pour prendre un rendez-vous.');
+            return false;
+        }
+    }
+</script>
 </head>
 <body>
     <div class="wrapper">
@@ -83,12 +110,13 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
             
 
             <form action="valider_rendezvous.php" method="post">
-                    <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
-                    <input type="hidden" name="nom_client" value="<?php echo $nom_client; ?>">
-                    <input type="hidden" name="date_heure" value="<?php echo $date_heure; ?>">
-                    <input type="hidden" name="email_client" value="<?php echo $email_client; ?>">
-                    <button type="submit" class="confirm-button">Confirmer</button>
-                </form>
+    <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
+    <input type="hidden" name="nom_client" value="<?php echo $nom_client; ?>">
+    <input type="hidden" name="jour" value="<?php echo $jour; ?>">
+    <input type="hidden" name="heure" value="<?php echo $heure; ?>">
+    <button type="submit" class="confirm-button">Confirmer</button>
+</form>
+
                 
         </main>
         <footer class="footer">
@@ -109,3 +137,4 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
 // Fermer la connexion à la base de données
 $conn->close();
 ?>
+
