@@ -82,7 +82,7 @@ $codesecurite = isset($_SESSION['codesecurite']) ? $_SESSION['codesecurite'] : '
         </div>
     </nav>
     <main class="section">
-        <h1>Bienvenue sur votre compte</h1>
+        <h1 style="color: black;">Bienvenue sur votre compte</h1>
         <div class="info-box">
             <p>Votre adresse e-mail : <?php echo $email; ?></p>
             <?php if ($role === 'admin'): ?>
