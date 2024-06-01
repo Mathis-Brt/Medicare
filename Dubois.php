@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -26,22 +25,80 @@
         .doctor-details {
             text-align: left;
             max-width: 600px;
-            font-size: 14px; /* Réduire la taille de la police des détails */
-            border: 1px solid #ccc; /* Bordure du rectangle */
-            padding: 20px; /* Espacement interne du rectangle */
-            border-radius: 10px; /* Coins arrondis du rectangle */
-            background-color: #f9f9f9; /* Couleur de fond du rectangle */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
+            font-size: 14px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .doctor-navigation {
             text-align: center;
-            font-size: 30px; /* Augmenter la taille de la police */
-            color: white; /* Changer la couleur de la police en blanc */
-            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            font-size: 30px;
+            color: white;
+            background-color: rgb(32, 67, 104);
         }
         .doctor-specialty {
-            font-size: 25px; /* Taille de la police pour la spécialité */
-            color: black; /* Couleur de la police */
+            font-size: 25px;
+            color: black;
+        }
+        /* Style pour le chat */
+        #chatBox {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            width: 300px;
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: white;
+            z-index: 1000;
+        }
+        #chatHeader {
+            padding: 10px;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        #chatBody {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        #chatFooter {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+        #chatFooter input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #chatFooter button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            border-radius: 5px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        .chat-message.sent {
+            text-align: right;
+            background-color: #d4edda;
+        }
+        .chat-message.saved {
+            background-color: #d4edda;
         }
     </style>
 </head>
@@ -61,7 +118,7 @@
 
     // Vérification de la connexion
     if ($db_handle) {
-        // Requête SQL pour récupérer les informations du médecin avec id = 1
+        // Requête SQL pour récupérer les informations du médecin avec id = 6
         $sql = "SELECT * FROM medecing WHERE id = 6";
         $result = mysqli_query($db_handle, $sql);
 
@@ -103,10 +160,11 @@
             ?>
         </div>
         <br>
-        <img src="medecin/planning_med6.png" alt="Planning medecin" width="900" height="110">
+        <img src="medecin/planning_med6.png" alt
+        ="Planning medecin" width="900" height="110">
         <div class="button-group">
             <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php?id=6'">Prendre rendez-vous</button>
-            <button class="btn btn-secondary" onclick="window.location.href='communiquer_medecin.php'">Communiquer avec le médecin</button>
+            <button class="btn btn-secondary" onclick="toggleChat()">Communiquer avec le médecin</button>
             <button class="btn btn-info" onclick="window.open('generate_cv.php?id=6', '_blank')">Voir son CV</button>
         </div>
     </main>
@@ -122,7 +180,95 @@
     </footer>
 </div>
 
+<div id="chatBox">
+    <div id="chatHeader">
+        Chat avec le médecin
+        <button id="closeChatButton" onclick="toggleChat()" style="float: right; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">&times;</button>
+    </div>
+    <div id="chatBody">
+        <!-- Les messages seront affichés ici -->
+    </div>
+    <div id="chatFooter">
+        <input type="text" id="chatInput" placeholder="Écrire un message...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleChat() {
+        var chatBox = document.getElementById('chatBox');
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'block';
+            loadMessages(); // Charger les messages lorsque le chat s'ouvre
+        } else {
+            chatBox.style.display = 'none';
+        }
+    }
+
+    function loadMessages() {
+    var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+    var client_id = '12345';  // Id du client à remplacer dynamiquement
+    var storedMessages = loadMessagesFromLocalStorage(); // Charger les messages depuis le stockage local
+    $.ajax({
+        url: 'fetch_messages.php',
+        type: 'GET',
+        data: { medecing_id: medecing_id, client_id: client_id },
+        success: function(response) {
+            var chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = response;
+            chatBody.scrollTop = chatBody.scrollHeight;
+            // Si des messages sont stockés localement, les ajouter à la fin
+            storedMessages.forEach(function(message) {
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message saved'; // Ajouter une classe spécifique aux messages sauvegardés
+                chatBody.appendChild(newMessage);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+            alert('Une erreur est survenue lors du chargement des messages.');
+        }
+    });
+}
+
+
+    function sendMessage() {
+        var chatInput = document.getElementById('chatInput');
+        var message = chatInput.value;
+        if (message.trim() !== "") {
+            var newMessage = document.createElement('div');
+            newMessage.textContent = message;
+            newMessage.className = 'chat-message sent';
+            document.getElementById('chatBody').appendChild(newMessage);
+            chatInput.value = "";
+
+            // Sauvegarde le message dans le stockage local
+            saveMessageToLocalStorage(message);
+        }
+    }
+
+    function saveMessageToLocalStorage(message) {
+        var storedMessages = loadMessagesFromLocalStorage();
+        storedMessages.push(message);
+        localStorage.setItem('chatMessages', JSON.stringify(storedMessages));
+    }
+
+    function loadMessagesFromLocalStorage() {
+        var storedMessages = localStorage.getItem('chatMessages');
+        return storedMessages ? JSON.parse(storedMessages) : [];
+    }
+
+    window.onload = function() {
+        loadMessages();
+    };
+    
+    // Supprimer le stockage local lorsque la page est fermée
+    window.addEventListener('beforeunload', function() {
+        localStorage.removeItem('chatMessages');
+    });
+</script>
 </body>
 </html>

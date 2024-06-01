@@ -154,7 +154,7 @@ $conn->close();
                 <p>Code de Sécurité : <?php echo htmlspecialchars($_SESSION['codesecurite']); ?></p>
             <?php elseif ($role === 'medecin'): ?>
                 <p>Nom : <?php echo htmlspecialchars($_SESSION['nom']); ?></p>
-                <p>Spécialité : <?php echo htmlspecialchars($user_data['spécialité']); ?></p>
+                <p>Médecin spécialiste</p>
                 <p>Téléphone : <?php echo htmlspecialchars($_SESSION['telephone']); ?></p>
             <?php endif; ?>
         </div>

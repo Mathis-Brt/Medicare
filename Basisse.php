@@ -104,13 +104,17 @@
             text-align: right;
             background-color: #d4edda;
         }
+        .chat-message.saved {
+    background-color: #d4edda; /* Couleur verte */
+}
+
     </style>
 </head>
 <body>
 <div class="wrapper">
     <header class="header">
         <div class="title-container">
-            <h1 style="font-size: 50px;"><span>MedicareA:</span> Services Médicaux</h1>
+            <h1 style="font-size: 50px;"><span>Medicare:</span> Services Médicaux</h1>
         </div>
         <img src="logo_medicare2.png" alt="Medicare Logo" class="logo">
         <img src="logo.png" alt="Logo Medicare" class="small-logo">
@@ -165,7 +169,7 @@
         <br>
         <img src="medecin/planning_med1.png" alt="Planning medecin" width="900" height="110">
         <div class="button-group">
-        <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php?id=1'">Prendre rendez-vous</button>
+            <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php?id=1'">Prendre rendez-vous</button>
             <button class="btn btn-secondary" onclick="toggleChat()">Communiquer avec le médecin</button>
             <button class="btn btn-info" onclick="window.open('generate_cv.php?id=1', '_blank')">Voir son CV</button>
         </div>
@@ -203,19 +207,35 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 <script>
-    function toggleChat() {
-    var chatBox = document.getElementById('chatBox');
-    if (chatBox.style.display === 'none' || chatBox.style.display === '') {
-        chatBox.style.display = 'block';
-        loadMessages(); // Charger les messages lorsque le chat s'ouvre
-    } else {
-        chatBox.style.display = 'none';
+    // Fonction pour sauvegarder les messages dans le stockage local
+    function saveMessages(messages) {
+        localStorage.setItem('chatMessages', JSON.stringify(messages));
     }
-}
 
-function loadMessages() {
+    // Fonction pour charger les messages depuis le stockage local
+    function loadMessagesFromLocalStorage() {
+        var savedMessages = localStorage.getItem('chatMessages');
+        if (savedMessages) {
+            return JSON.parse(savedMessages);
+        }
+        return [];
+    }
+
+    function toggleChat() {
+        var chatBox = document.getElementById('chatBox');
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'block';
+            loadMessages(); // Charger les messages depuis le serveur
+        } else {
+            chatBox.style.display = 'none';
+            saveMessages(chatMessages); // Sauvegarder les messages localement avant de fermer le chat
+        }
+    }
+
+    function loadMessages() {
     var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
     var client_id = '12345';  // Id du client à remplacer dynamiquement
+    var storedMessages = loadMessagesFromLocalStorage(); // Charger les messages depuis le stockage local
     $.ajax({
         url: 'fetch_messages.php',
         type: 'GET',
@@ -224,6 +244,13 @@ function loadMessages() {
             var chatBody = document.getElementById('chatBody');
             chatBody.innerHTML = response;
             chatBody.scrollTop = chatBody.scrollHeight;
+            // Si des messages sont stockés localement, les ajouter à la fin
+            storedMessages.forEach(function(message) {
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message saved'; // Ajouter une classe spécifique aux messages sauvegardés
+                chatBody.appendChild(newMessage);
+            });
         },
         error: function(xhr, status, error) {
             console.error(error);
@@ -232,41 +259,53 @@ function loadMessages() {
     });
 }
 
-function sendMessage() {
-    var chatInput = document.getElementById('chatInput');
-    var message = chatInput.value;
-    if (message.trim() !== "") {
-        var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
-        var client_id = '12345';  // Id du client à remplacer dynamiquement
-        var medecinspe_id = 2;  // Id du spécialiste à remplacer dynamiquement, si nécessaire
-        $.ajax({
-            url: 'send_message.php',
-            type: 'POST',
-            data: { message: message, medecing_id: medecing_id, client_id: client_id, medecinspe_id: medecinspe_id },
-            success: function(response) {
-                var chatBody = document.getElementById('chatBody');
-                var newMessage = document.createElement('div');
-                newMessage.textContent = message;
-                newMessage.className = 'chat-message sent';
-                chatBody.appendChild(newMessage);
-                chatInput.value = "";
-                chatBody.scrollTop = chatBody.scrollHeight;
 
-                // Afficher la notification
-                var notification = document.getElementById('notification');
-                notification.style.display = 'block';
-                setTimeout(function() {
-                    notification.style.display = 'none';
-                }, 3000); // Disparaît après 3 secondes
-            },
-            error: function(xhr, status, error) {
-                console.error(error);
-                alert('Une erreur est survenue lors de l\'envoi du message.');
-            }
-        });
+    // Array pour stocker les messages du chat
+    var chatMessages = [];
+
+    function sendMessage() {
+        var chatInput = document.getElementById('chatInput');
+        var message = chatInput.value;
+        if (message.trim() !== "") {
+            var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+            var client_id = '12345';  // Id du client à remplacer dynamiquement
+            var medecinspe_id = 2;  // Id du spécialiste à remplacer dynamiquement, si nécessaire
+            $.ajax({
+                url: 'send_message.php',
+                type: 'POST',
+                data: { message: message, medecing_id: medecing_id, client_id: client_id, medecinspe_id: medecinspe_id },
+                success: function(response) {
+                    var chatBody = document.getElementById('chatBody');
+                    var newMessage = document.createElement('div');
+                    newMessage.textContent = message;
+                    newMessage.className = 'chat-message sent';
+                    chatBody.appendChild(newMessage);
+                    chatInput.value = "";
+                    chatBody.scrollTop = chatBody.scrollHeight;
+
+                    // Ajouter le message envoyé à l'array des messages et le sauvegarder localement
+                    chatMessages.push(message);
+                    saveMessages(chatMessages);
+
+                    // Afficher la notification
+                    var notification = document.getElementById('notification');
+                    notification.style.display = 'block';
+                    setTimeout(function() {
+                        notification.style.display = 'none';
+                    }, 3000); // Disparaît après 3 secondes
+                },
+                error: function(xhr, status, error) {
+                    console.error(error);
+                    alert('Une erreur est survenue lors de l\'envoi du message.');
+                }
+            });
+        }
     }
-}
 
+    // Charger les messages localement au chargement de la page
+    window.onload = function() {
+        loadMessages();
+    };
 </script>
 </body>
 </html>
