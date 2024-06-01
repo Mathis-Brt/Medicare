@@ -16,12 +16,16 @@
         }
         .doctor-photo {
             margin-right: 20px;
+            max-width: 200px;
+            max-height: 200px;
         }
         .doctor-photo img {
-            max-width: 200px;
-            height: auto;
-            border-radius: 10px;
-        }
+        max-width: 200px;
+        max-height: 200px;
+        width: auto;
+        height: auto;
+        border-radius: 10px;
+    }
         .doctor-details {
             text-align: left;
             max-width: 600px;
@@ -180,16 +184,17 @@
     </nav>
     <main class="section">
         <div class="doctor-container">
-            <?php
+        <?php
             // Réinitialisation du pointeur de résultat
             mysqli_data_seek($result, 0);
-            
+
             if ($result && mysqli_num_rows($result) > 0) {
                 $counter = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
                     $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
                     echo "<div class='doctor-info'>";
-                    echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
+                    // Affichage de l'image du médecin
+                    echo "<img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "' class='doctor-photo'>";
                     echo "<div class='doctor-details'>";
                     echo "<p><strong>Addictologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
@@ -198,6 +203,16 @@
                     echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
                     echo "</div>";
                     echo "</div>";
+
+                    // Affichage de l'image "planning_med8.png" sous le premier médecin
+                    if ($counter === 0) {
+                        echo "<img src='medecin/planning_med7.png' alt='Planning' class='planning-image' width='900' height='100'>";
+                    }
+                    
+                    // Affichage de l'image "planning_med7.png" sous le deuxième médecin
+                    if ($counter === 1) {
+                        echo "<img src='medecin/planning_med8.png' alt='Planning médical' class='planning-image' width='900' height='100'>";
+                    }
 
                     // Affichage des boutons sous le premier et le deuxième médecin
                     if ($counter < 2) {
@@ -216,7 +231,7 @@
     <footer class="footer">
         <div class="contact-info">
             <p>Téléphone: <a href="tel:+33 1 44 39 06 01">+33 1 44 39 06 01</a></p>
-            <p>Adresse: 10 Rue Sextius Michel, Paris, 75015</p>
+            <p>AdreAsse: 10 Rue Sextius Michel, Paris, 75015</p>
             <p>Email: <a href="mailto:omnes.medicare@gmail.com">omnes.medicare@gmail.com</a></p>
         </div>
         <div class="map-container">
