@@ -204,13 +204,14 @@
                     echo "</div>";
                     echo "</div>";
 
-                    // Affichage de l'image "planning_med8.png" sous le premier médecin
                     if ($counter === 0) {
+                        echo "<br>"; // Ajout d'une ligne vide
                         echo "<img src='medecin/planning_med7.png' alt='Planning' class='planning-image' width='900' height='100'>";
                     }
-                    
-                    // Affichage de l'image "planning_med7.png" sous le deuxième médecin
+                                    
+                    // Ajoutez une ligne vide avant le deuxième planning
                     if ($counter === 1) {
+                        echo "<br>"; // Ajout d'une ligne vide
                         echo "<img src='medecin/planning_med8.png' alt='Planning médical' class='planning-image' width='900' height='100'>";
                     }
 
