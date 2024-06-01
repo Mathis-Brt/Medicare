@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -42,6 +41,64 @@
         .doctor-specialty {
             font-size: 25px; /* Taille de la police pour la spécialité */
             color: black; /* Couleur de la police */
+        }
+                /* Style pour le chat */
+                #chatBox {
+            display: none;
+            position: fixed;
+            bottom: 0;
+            right: 15px;
+            width: 300px;
+            max-width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 10px 10px 0 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background-color: white;
+            z-index: 1000;
+        }
+        #chatHeader {
+            padding: 10px;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+        }
+        #chatBody {
+            padding: 10px;
+            height: 200px;
+            overflow-y: auto;
+        }
+        #chatFooter {
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            display: flex;
+        }
+        #chatFooter input {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        #chatFooter button {
+            margin-left: 5px;
+            padding: 5px 10px;
+            border: none;
+            background-color: rgb(32, 67, 104);
+            color: white;
+            border-radius: 5px;
+        }
+        .chat-message {
+            margin-bottom: 10px;
+            padding: 8px;
+            border-radius: 5px;
+            background-color: #f1f1f1;
+        }
+        .chat-message.sent {
+            text-align: right;
+            background-color: #d4edda;
+        }
+        .chat-message.saved {
+            background-color: #d4edda;
         }
     </style>
 </head>
@@ -106,7 +163,7 @@
         <img src="medecin/planning_med5.png" alt="Planning medecin" width="900" height="110">
         <div class="button-group">
             <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php?id=5'">Prendre rendez-vous</button>
-            <button class="btn btn-secondary" onclick="window.location.href='communiquer_medecin.php'">Communiquer avec le médecin</button>
+            <button class="btn btn-secondary" onclick="toggleChat()">Communiquer avec le médecin</button>
             <button class="btn btn-info" onclick="window.open('generate_cv.php?id=5', '_blank')">Voir son CV</button>
         </div>
     </main>
@@ -117,12 +174,100 @@
             <p>Email: <a href="mailto:omnes.medicare@gmail.com">omnes.medicare@gmail.com</a></p>
         </div>
         <div class="map-container">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f5a60fb94aa76!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1623867849655!5m2!1sen!2sus" width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.6918020384956!2d2.2863122156753424!3d48.8512221792878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e6701b4f58251b%3A0x167f504c7355a389!2s10%20Rue%20Sextius%20Michel%2C%2075015%20Paris%2C%20France!5e0!3m2!1sen!2sus!4v1689197546288!5m2!1sen!2sus" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </div>
     </footer>
 </div>
 
+<div id="chatBox">
+    <div id="chatHeader">
+        Chat avec le médecin
+        <button id="closeChatButton" onclick="toggleChat()" style="float: right; background: none; border: none; color: white; font-size: 20px; cursor: pointer;">&times;</button>
+    </div>
+    <div id="chatBody">
+        <!-- Les messages seront affichés ici -->
+    </div>
+    <div id="chatFooter">
+        <input type="text" id="chatInput" placeholder="Écrire un message...">
+        <button onclick="sendMessage()">Envoyer</button>
+    </div>
+</div>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+<script>
+    function toggleChat() {
+        var chatBox = document.getElementById('chatBox');
+        if (chatBox.style.display === 'none' || chatBox.style.display === '') {
+            chatBox.style.display = 'block';
+            loadMessages(); // Charger les messages lorsque le chat s'ouvre
+        } else {
+            chatBox.style.display = 'none';
+        }
+    }
+
+    function loadMessages() {
+    var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+    var client_id = '12345';  // Id du client à remplacer dynamiquement
+    var storedMessages = loadMessagesFromLocalStorage(); // Charger les messages depuis le stockage local
+    $.ajax({
+        url: 'fetch_messages.php',
+        type: 'GET',
+        data: { medecing_id: medecing_id, client_id: client_id },
+        success: function(response) {
+            var chatBody = document.getElementById('chatBody');
+            chatBody.innerHTML = response;
+            chatBody.scrollTop = chatBody.scrollHeight;
+            // Si des messages sont stockés localement, les ajouter à la fin
+            storedMessages.forEach(function(message) {
+                var newMessage = document.createElement('div');
+                newMessage.textContent = message;
+                newMessage.className = 'chat-message saved'; // Ajouter une classe spécifique aux messages sauvegardés
+                chatBody.appendChild(newMessage);
+            });
+        },
+        error: function(xhr, status, error) {
+            console.error(error);
+            alert('Une erreur est survenue lors du chargement des messages.');
+        }
+    });
+}
+
+
+    function sendMessage() {
+        var chatInput = document.getElementById('chatInput');
+        var message = chatInput.value;
+        if (message.trim() !== "") {
+            var newMessage = document.createElement('div');
+            newMessage.textContent = message;
+            newMessage.className = 'chat-message sent';
+            document.getElementById('chatBody').appendChild(newMessage);
+            chatInput.value = "";
+
+            // Sauvegarde le message dans le stockage local
+            saveMessageToLocalStorage(message);
+        }
+    }
+
+    function saveMessageToLocalStorage(message) {
+        var storedMessages = loadMessagesFromLocalStorage();
+        storedMessages.push(message);
+        localStorage.setItem('chatMessages', JSON.stringify(storedMessages));
+    }
+
+    function loadMessagesFromLocalStorage() {
+        var storedMessages = localStorage.getItem('chatMessages');
+        return storedMessages ? JSON.parse(storedMessages) : [];
+    }
+
+    window.onload = function() {
+        loadMessages();
+    };
+    
+    // Supprimer le stockage local lorsque la page est fermée
+    window.addEventListener('beforeunload', function() {
+        localStorage.removeItem('chatMessages');
+    });
+</script>
 </body>
 </html>
