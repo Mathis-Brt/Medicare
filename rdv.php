@@ -25,7 +25,7 @@ $is_logged_in = isset($_SESSION['email']);
 if ($is_logged_in) {
     // Récupérer les rendez-vous de l'utilisateur connecté
     $email_client = $_SESSION['email'];
-    $sql = "SELECT r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecing m ON r.medecin_id = m.id WHERE r.email_client = ?";
+    $sql = "SELECT r.id, r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecing m ON r.medecin_id = m.id WHERE r.email_client = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email_client);
     $stmt->execute();
@@ -34,6 +34,21 @@ if ($is_logged_in) {
         while ($row = $result->fetch_assoc()) {
             $rendez_vous[] = $row;
         }
+    }
+    $stmt->close();
+}
+
+// Fonction pour annuler un rendez-vous
+if(isset($_POST['annuler_rdv'])) {
+    $rdv_id = $_POST['rdv_id'];
+    $sql = "DELETE FROM rendez_vous WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $rdv_id);
+    if ($stmt->execute()) {
+        header("Location: rdv.php?success=true");
+        exit();
+    } else {
+        echo "Erreur lors de l'annulation du rendez-vous : " . $conn->error;
     }
     $stmt->close();
 }
@@ -83,9 +98,7 @@ $conn->close();
     <main class="section">
         <h1 style="color: black;">Vos rendez-vous</h1><br>
         <?php if (isset($_GET['success']) && $_GET['success'] == 'true'): ?>
-            <div class="alert alert-success" role="alert">
-                Rendez-vous ajouté avec succès !
-            </div>
+            
         <?php endif; ?>
 
         <?php if ($is_logged_in): ?>
@@ -96,6 +109,7 @@ $conn->close();
                             <th>Médecin</th>
                             <th>Jour</th>
                             <th>Heure</th>
+                            <th>Action</th> <!-- Nouvelle colonne pour le bouton d'annulation -->
                         </tr>
                     </thead>
                     <tbody>
@@ -104,6 +118,12 @@ $conn->close();
                                 <td><?php echo htmlspecialchars($rdv['nom_medecin']); ?></td>
                                 <td><?php echo htmlspecialchars($rdv['jour']); ?></td>
                                 <td><?php echo htmlspecialchars($rdv['heure']); ?></td>
+                                <td>
+                                    <form action="" method="post">
+                                        <input type="hidden" name="rdv_id" value="<?php echo $rdv['id']; ?>">
+                                        <button type="submit" name="annuler_rdv" class="btn btn-danger">Annuler</button>
+                                    </form>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
