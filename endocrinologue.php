@@ -201,7 +201,7 @@
 
                     // Affichage des boutons sous chaque médecin
                     echo "<div class='button-group'>";
-                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php'\">Prendre un rendez-vous</button>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=12'\">Prendre un rendez-vous</button>";
                     echo "<button class='btn btn-secondary' onclick=\"toggleChat()\">Communiquer avec le médecin</button>";
                     echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
                     echo "</div>";
