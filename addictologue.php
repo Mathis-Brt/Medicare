@@ -203,22 +203,22 @@
                     echo "<p><strong>Expérience:</strong> " . htmlspecialchars($row['experience']) . "</p>";
                     echo "</div>";
                     echo "</div>";
-
+            
                     if ($counter === 0) {
                         echo "<br>"; // Ajout d'une ligne vide
                         echo "<img src='medecin/planning_med7.png' alt='Planning' class='planning-image' width='900' height='100'>";
                     }
-                                    
+                                                
                     // Ajoutez une ligne vide avant le deuxième planning
                     if ($counter === 1) {
                         echo "<br>"; // Ajout d'une ligne vide
                         echo "<img src='medecin/planning_med8.png' alt='Planning médical' class='planning-image' width='900' height='100'>";
                     }
-
+            
                     // Affichage des boutons sous le premier et le deuxième médecin
                     if ($counter < 2) {
                         echo "<div class='button-group'>";
-                        echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php'\">Prendre un rendez-vous</button>";
+                        echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=" . htmlspecialchars($row['id']) . "'\">Prendre un rendez-vous</button>";
                         echo "<button class='btn btn-secondary' onclick=\"toggleChat()\">Communiquer avec le médecin</button>";
                         echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
                         echo "</div>";
