@@ -77,6 +77,8 @@
             <?php endif; ?>
         </div>
         <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
+        <a href="ajouter_medecin.php" class="supprimer-button">Ajout medecin/labo</a>
+
         <a href="suppmedecin.php" class="supprimer-button">Supprimer medecin/labo</a>
         <div style="clear: both;"></div> <!-- Pour éviter que le contenu suivant ne se superpose -->
     </main>
