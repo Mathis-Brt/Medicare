@@ -196,6 +196,9 @@
                     echo "</div>";
                     echo "</div>";
 
+                    echo "<br>"; // Ajout d'une ligne vide
+                    echo "<img src='medecin/planning_med13.png' alt='Planning' class='planning-image' width='900' height='100'>";
+
                     // Affichage des boutons sous chaque médecin
                     echo "<div class='button-group'>";
                     echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php'\">Prendre un rendez-vous</button>";
