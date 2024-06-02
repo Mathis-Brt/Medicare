@@ -148,32 +148,46 @@
     </header>
     <nav class="navigation">
     <?php
-    // Connexion à la base de données
-    $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
+// Connexion à la base de données
+$db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
-    // Vérification de la connexion
-    if ($db_handle) {
-        // Requête SQL pour récupérer les informations des médecins dermatologues
-        $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Dermatologie'";
-        $result = mysqli_query($db_handle, $sql);
+// Vérification de la connexion
+if ($db_handle) {
+    // Requête SQL pour récupérer les informations des médecins allergologues
+    $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Dermatologie'";
+    $result = mysqli_query($db_handle, $sql);
 
-        echo "<div class='doctor-navigation-container'>";
-        echo "<div class='back-button'>";
-        echo "<a href='medecins_specialistes.php' class='btn btn-primary'>Retour</a>";
+    echo "<div class='doctor-navigation-container'>";
+    echo "<div class='back-button'>";
+    echo "<a href='medecins_specialistes.php' class='btn btn-primary'>Retour</a>";
+    echo "</div>";
+
+    // Affichage des informations
+    if ($result && mysqli_num_rows($result) > 0) {
+        echo "<div class='doctor-navigation'>";
+        echo "<a href='#' style='color: white;'>Dermatologie</a>";
         echo "</div>";
-        
-        // Affichage des informations
-        if ($result && mysqli_num_rows($result) > 0) {
-            echo "<div class='doctor-navigation'>";
-            echo "<a href='#' style='color: white;'>Dermatologie</a>"; // Ajout du style pour la couleur blanche
-            echo "</div>";
+
+        // Requête SQL pour récupérer l'e-mail du médecin
+        $sql_email = "SELECT mail FROM medecinspe WHERE spécialité = 'Dermatologie' LIMIT 1"; // Limitez à 1 car c'est pour un seul médecin
+        $result_email = mysqli_query($db_handle, $sql_email);
+
+        if ($result_email && mysqli_num_rows($result_email) > 0) {
+            $row_email = mysqli_fetch_assoc($result_email);
+            $doctor_email = $row_email['mail']; // Stocker l'e-mail du médecin dans une variable
         } else {
-            echo "<p>Aucun résultat  trouvé.</p>";
+            echo "<p>Aucun résultat trouvé pour l'e-mail du médecin.</p>";
         }
     } else {
-        echo "<p>Erreur de connexion à la base de données.</p>";
+        echo "<div class='doctor-navigation'>";
+        echo "<p>Aucun résultat trouvé.</p>";
+        echo "</div>";
     }
-    ?>
+    echo "</div>";
+} else {
+    echo "<p>Erreur de connexion à la base de données.</p>";
+}
+?>
 </nav>
 
     <main class="section">
@@ -204,6 +218,7 @@
                     echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=11'\">Prendre un rendez-vous</button>";
                     echo "<button class='btn btn-secondary' onclick=\"toggleChat()\">Communiquer avec le médecin</button>";
                     echo "<button class='btn btn-info' onclick=\"window.open('generate_cv.php?id=" . htmlspecialchars($row['id']) . "', '_blank')\">Voir son CV</button>";
+                    echo "<button class='btn btn-success' onclick=\"contactDoctorByEmail('" . htmlspecialchars($doctor_email) . "')\">Contacter par e-mail</button>";
                     echo "</div>";
                 }
             }
@@ -307,6 +322,11 @@
     window.onload = function() {
         loadMessages();
     };
+
+    function contactDoctorByEmail(email) {
+    // Ouvrir un lien de messagerie avec l'e-mail prérempli
+    window.location.href = "mailto:" + email;
+}
     
     // Supprimer le stockage local lorsque la page est fermée
     window.addEventListener('beforeunload', function() {
