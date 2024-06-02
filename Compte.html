@@ -16,10 +16,11 @@
             display: flex;
             justify-content: center;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .main-button-container a {
-            margin: 0 10px;
+            margin: 10px;
             padding: 8px 15px;
             background-color: lightblue;
             color: black;
@@ -34,14 +35,14 @@
             background-color: deepskyblue;
         }
 
-        .title{
+        .title {
             text-align: center;
             margin-top: 40px;
             font-size: 1.5em; /* Taille de police plus grande */
-            font-family: 'Copperplate Gothic Bold' ; /* Utilisation de la nouvelle police */
+            font-family: 'Copperplate Gothic Bold'; /* Utilisation de la nouvelle police */
             text-decoration: underline; /* Souligner le texte */
         }
-        
+
         #user-info {
             display: none;
         }
@@ -71,6 +72,8 @@
         <div class="main-button-container">
             <a href="#" onclick="openCreateAccountModal()">Créer un compte</a>
             <a href="#" onclick="openLoginModal()">Se connecter</a>
+            <a href="creation_medecin.php">Création Médecin</a>
+            <a href="creation_admin.php">Création Admin</a>
         </div>
     </main>
 
@@ -166,8 +169,7 @@
                         </div>
                         <button type="submit" class="btn btn-primary">Valider</button>
                     </form>
-                    
-                </div>                
+                </div>
             </div>
         </div>
     </div>
