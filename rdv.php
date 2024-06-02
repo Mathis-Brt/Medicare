@@ -25,17 +25,32 @@ $is_logged_in = isset($_SESSION['email']);
 if ($is_logged_in) {
     // Récupérer les rendez-vous de l'utilisateur connecté
     $email_client = $_SESSION['email'];
-    $sql = "SELECT r.id, r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecing m ON r.medecin_id = m.id WHERE r.email_client = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email_client);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
+
+    // Récupérer les rendez-vous des médecins généralistes
+    $sql_generalistes = "SELECT r.id, r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecing m ON r.medecin_id = m.id WHERE r.email_client = ? AND r.medecin_id BETWEEN 1 AND 6";
+    $stmt_generalistes = $conn->prepare($sql_generalistes);
+    $stmt_generalistes->bind_param("s", $email_client);
+    $stmt_generalistes->execute();
+    $result_generalistes = $stmt_generalistes->get_result();
+    if ($result_generalistes->num_rows > 0) {
+        while ($row = $result_generalistes->fetch_assoc()) {
             $rendez_vous[] = $row;
         }
     }
-    $stmt->close();
+    $stmt_generalistes->close();
+
+    // Récupérer les rendez-vous des médecins spécialistes
+    $sql_specialistes = "SELECT r.id, r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecinspe m ON r.medecin_id = m.id WHERE r.email_client = ? AND r.medecin_id BETWEEN 7 AND 14";
+    $stmt_specialistes = $conn->prepare($sql_specialistes);
+    $stmt_specialistes->bind_param("s", $email_client);
+    $stmt_specialistes->execute();
+    $result_specialistes = $stmt_specialistes->get_result();
+    if ($result_specialistes->num_rows > 0) {
+        while ($row = $result_specialistes->fetch_assoc()) {
+            $rendez_vous[] = $row;
+        }
+    }
+    $stmt_specialistes->close();
 }
 
 // Fonction pour annuler un rendez-vous

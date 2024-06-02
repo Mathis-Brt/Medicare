@@ -5,8 +5,6 @@ session_start();
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-
-
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['email'])) {
     // Si l'utilisateur n'est pas connecté, afficher une alerte et rediriger vers la page de connexion
@@ -35,21 +33,33 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     $jour = htmlspecialchars($_GET['jour']);
     $id_medecin = htmlspecialchars($_GET['id_medecin']);
 
-    // Requête SQL pour récupérer le nom du médecin
-    $stmt = $conn->prepare("SELECT nom FROM medecing WHERE id = ?");
-    $stmt->bind_param("i", $id_medecin);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $nom_medecin = $row["nom"];
+    // Déterminer de quelle table récupérer les informations du médecin
+    if ($id_medecin >= 1 && $id_medecin <= 6) {
+        // Médecin généraliste
+        $stmt = $conn->prepare("SELECT nom FROM medecing WHERE id = ?");
+    } elseif ($id_medecin >= 7 && $id_medecin <= 14) {
+        // Médecin spécialisé
+        $stmt = $conn->prepare("SELECT nom FROM medecinspe WHERE id = ?");
     } else {
         $nom_medecin = "Médecin non trouvé";
+        $stmt = null;
     }
 
-    // Fermer la requête préparée
-    $stmt->close();
+    if ($stmt) {
+        $stmt->bind_param("i", $id_medecin);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $nom_medecin = $row["nom"];
+        } else {
+            $nom_medecin = "Médecin non trouvé";
+        }
+
+        // Fermer la requête préparée
+        $stmt->close();
+    }
 } else {
     $heure = "";
     $jour = "";
