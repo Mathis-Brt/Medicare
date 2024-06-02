@@ -63,7 +63,7 @@
             <?php if (isset($_SESSION['email'])): ?>
                 <a href="compte.php" class="button">Votre compte</a>
             <?php else: ?>
-                <a href="connexion.php" class="button">Connexion</a>
+                <a href="connexion.php" class="button">Votre compte</a>
             <?php endif; ?>
         </div>
     </nav>
@@ -73,7 +73,7 @@
             <p>Votre adresse e-mail : <?php echo htmlspecialchars($email); ?></p>
             <p>Role : Administrateur</p>
             <?php if ($role !== 'admin'): ?>
-                <p>Role : Client</p>
+
             <?php endif; ?>
         </div>
         <a href="deconnexion.php" class="deconnexion-button">Déconnexion</a>
