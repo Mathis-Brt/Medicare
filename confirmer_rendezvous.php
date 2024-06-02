@@ -104,25 +104,21 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
             <p> Veuillez rentrer vos informations bancaires pour confirmer le rendez-vous</p>
 
             <form action="valider_rendezvous.php" method="post">
-                <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
-                <input type="hidden" name="jour" value="<?php echo $jour; ?>">
-                <input type="hidden" name="heure" value="<?php echo $heure; ?>">
-            
+    <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
+    <input type="hidden" name="jour" value="<?php echo $jour; ?>">
+    <input type="hidden" name="heure" value="<?php echo $heure; ?>">
+    <label for="nomcarte">Nom sur la carte :</label>
+    <input type="text" id="nomcarte" name="nomcarte" required>
+    <br>
+    <label for="numerocarte">Numéro de carte :</label>
+    <input type="text" id="numerocarte" name="numerocarte" pattern="\d{16}" title="Le numéro de carte doit contenir 16 chiffres" required>
+    <br>
+    <label for="codesecret">Code de sécurité :</label>
+    <input type="password" id="codesecret" name="codesecret" pattern="\d{3}" title="Le code de sécurité doit contenir 3 chiffres" required>
+    <br>
+    <button type="submit" class="confirm-button">Confirmer</button>
+</form>
 
-                <label for="nomcarte">Nom sur la carte :</label>
-                <input type="text" id="nomcarte" name="nomcarte" required>
-                <br>
-
-                <label for="numerocarte">Numéro de carte :</label>
-                <input type="text" id="numerocarte" name="numerocarte" pattern="\d{16}" title="Le numéro de carte doit contenir 16 chiffres" required>
-                <br>
-
-                <label for="codesecret">Code de sécurité :</label>
-                <input type="password" id="codesecret" name="codesecret" pattern="\d{3}" title="Le code de sécurité doit contenir 3 chiffres" required>
-                <br>
-
-                <button type="submit" class="confirm-button">Confirmer</button>
-            </form>
         </main>
         <footer class="footer">
             <div class="contact-info">
