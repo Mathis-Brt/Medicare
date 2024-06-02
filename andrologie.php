@@ -191,7 +191,7 @@
                     echo "<div class='doctor-info'>";
                     echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                     echo "<div class='doctor-details'>";
-                    echo "<p><strong>Allergologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
+                    echo "<p><strong>Andrologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
                     echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                     echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";

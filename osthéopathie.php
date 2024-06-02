@@ -191,7 +191,7 @@
                     echo "<div class='doctor-info'>";
                     echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "'></div>";
                     echo "<div class='doctor-details'>";
-                    echo "<p><strong>Allergologue:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
+                    echo "<p><strong>Osthéopathe:</strong> Dr " . htmlspecialchars($row['nom']) . "</p>";
                     echo "<p><strong>Bureau:</strong> " . htmlspecialchars($row['bureau']) . "</p>";
                     echo "<p><strong>Numéro de téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                     echo "<p><strong>Email:</strong> " . htmlspecialchars($row['mail']) . "</p>";
@@ -200,7 +200,7 @@
                     echo "</div>";
 
                     echo "<br>"; // Ajout d'une ligne vide
-                    echo "<img src='medecin/planning_med9.png' alt='Planning' class='planning-image' width='900' height='100'>";
+                    echo "<img src='medecin/planning_med15.png' alt='Planning' class='planning-image' width='900' height='100'>";
 
                     // Affichage des boutons sous chaque médecin
                     echo "<div class='button-group'>";
