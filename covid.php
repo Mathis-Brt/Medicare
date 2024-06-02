@@ -90,7 +90,7 @@
             <?php
             if ($result && mysqli_num_rows($result) > 0) {
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
+                    $photo = htmlspecialchars($row['photo']); 
                     echo "<div class='doctor-info'>";
                     echo "<div class='doctor-photo'><img src='" . $photo . "' alt='Photo du laboratoire'></div>";
                     echo "<div class='doctor-details'>";

@@ -153,7 +153,7 @@ $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
 // Vérification de la connexion
 if ($db_handle) {
-    // Requête SQL pour récupérer les informations des médecins allergologues
+    // Requête SQL pour récupérer les informations des médecins 
     $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Cardiologie'";
     $result = mysqli_query($db_handle, $sql);
 

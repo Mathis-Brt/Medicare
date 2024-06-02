@@ -29,35 +29,35 @@
         .doctor-details {
             text-align: left;
             max-width: 600px;
-            font-size: 14px; /* Réduire la taille de la police des détails */
-            border: 1px solid #ccc; /* Bordure du rectangle */
-            padding: 20px; /* Espacement interne du rectangle */
-            border-radius: 10px; /* Coins arrondis du rectangle */
-            background-color: #f9f9f9; /* Couleur de fond du rectangle */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
+            font-size: 14px; 
+            border: 1px solid #ccc;
+            padding: 20px; 
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .doctor-navigation-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            background-color: rgb(32, 67, 104);
             padding: 10px;
         }
         .doctor-navigation {
             text-align: center;
-            font-size: 30px; /* Augmenter la taille de la police */
-            color: white; /* Changer la couleur de la police en blanc */
+            font-size: 30px;
+            color: white; 
             flex: 1;
             display: flex;
             justify-content: center;
         }
         .doctor-specialty {
-            font-size: 25px; /* Taille de la police pour la spécialité */
-            color: black; /* Couleur de la police */
+            font-size: 25px; 
+            color: black; 
         }
         .back-button a {
             color: white;
-            margin-left: 30px; /* Couleur du texte du bouton de retour */
+            margin-left: 30px;
         }
         .button-group {
             display: flex;
@@ -65,7 +65,7 @@
             margin-top: 15px;
         }
         .button-group button {
-            margin: 0 5px; /* Réduire la marge entre les boutons */
+            margin: 0 5px;
         }
         /* Style pour le chat */
         #chatBox {
@@ -157,7 +157,7 @@ $db_handle = mysqli_connect('localhost', 'root', 'root', 'medecing');
 
 // Vérification de la connexion
 if ($db_handle) {
-    // Requête SQL pour récupérer les informations des médecins allergologues
+    // Requête SQL pour récupérer les informations des médecins
     $sql = "SELECT * FROM medecinspe WHERE spécialité = 'Addictologie'";
     $result = mysqli_query($db_handle, $sql);
 
@@ -202,7 +202,7 @@ if ($db_handle) {
             if ($result && mysqli_num_rows($result) > 0) {
                 $counter = 0;
                 while ($row = mysqli_fetch_assoc($result)) {
-                    $photo = htmlspecialchars($row['photo']); // Assuming 'photo' is the column name for image path
+                    $photo = htmlspecialchars($row['photo']); 
                     echo "<div class='doctor-info'>";
                     // Affichage de l'image du médecin
                     echo "<img src='" . $photo . "' alt='Photo du Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "' class='doctor-photo'>";
@@ -216,13 +216,13 @@ if ($db_handle) {
                     echo "</div>";
             
                     if ($counter === 0) {
-                        echo "<br>"; // Ajout d'une ligne vide
+                        echo "<br>"; 
                         echo "<img src='medecin/planning_med7.png' alt='Planning' class='planning-image' width='900' height='100'>";
                     }
                                                 
                     // Ajoutez une ligne vide avant le deuxième planning
                     if ($counter === 1) {
-                        echo "<br>"; // Ajout d'une ligne vide
+                        echo "<br>";
                         echo "<img src='medecin/planning_med8.png' alt='Planning médical' class='planning-image' width='900' height='100'>";
                     }
             
@@ -281,7 +281,7 @@ if ($db_handle) {
     }
 
     function loadMessages() {
-    var medecing_id = 1;  // Id du médecin à remplacer dynamiquement
+    var medecing_id = 1;
     var client_id = '12345';  // Id du client à remplacer dynamiquement
     var storedMessages = loadMessagesFromLocalStorage(); // Charger les messages depuis le stockage local
     $.ajax({

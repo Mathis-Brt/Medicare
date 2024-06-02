@@ -13,7 +13,7 @@ session_start(); // Démarrer la session
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
         .button-container a:nth-child(2) {
-            background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
+            background-color: lightblue; 
         }
     </style>
 </head>

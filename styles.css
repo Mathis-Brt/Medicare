@@ -14,13 +14,13 @@ body {
 .wrapper {
     width: 100%;
     max-width: 1800px;
-    margin: 0 auto; /* Centrer le contenu */
+    margin: 0 auto;
     background-color: white;
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* S'assurer que le wrapper prend toute la hauteur de la fenêtre */
+    min-height: 100vh;
 }
 
 .header {
@@ -28,7 +28,7 @@ body {
     justify-content: space-between;
     align-items: center;
     background-color: lightblue;
-    padding: 20px 30px; /* Augmenter le padding pour un header plus grand */
+    padding: 20px 30px; 
     position: relative;
 }
 
@@ -39,43 +39,43 @@ body {
 }
 
 .header h1 {
-    font-size: 2.5em; /* Augmenter la taille de la police */
-    color: blue; /* Couleur rouge pour "Medicare" */
+    font-size: 2.5em;
+    color: blue;
     margin: 0;
 }
 
 .header h1 span {
-    color: red; /* Couleur bleue pour "Services Médicaux" */
+    color: red; 
 }
 
 .header .logo {
-    max-height: 125px; /* Augmenter la taille du logo */
+    max-height: 125px;
     position: absolute;
-    left: 25px; /* Ajouter le logo à gauche du titre */
-    top: 50%; /* Centrer verticalement */
+    left: 25px;
+    top: 50%; 
     transform: translateY(-50%);
 }
 
 .header .small-logo {
-    max-height: 85px; /* Réduire la taille du petit logo */
+    max-height: 85px; 
 }
 
 .navigation {
     background-color: rgb(32, 67, 104);
     padding: 20px 0;
     border-bottom: 2px solid #ccc;
-    text-align: center; /* Centrer les boutons */
+    text-align: center; 
 }
 
 .button-container {
     display: flex;
     justify-content: center;
-    gap: 10px; /* Ajuster l'espacement entre les boutons */
+    gap: 10px;
 }
 
 .button {
-    background-color: rgb(32, 67, 104); /* Couleur de fond des boutons */
-    color: white; /* Couleur du texte des boutons */
+    background-color: rgb(32, 67, 104); 
+    color: white;
     padding: 10px 20px;
     text-decoration: none;
     font-size: 1em;
@@ -84,11 +84,11 @@ body {
 }
 
 .section {
-    flex-grow: 1; /* Faire grandir la section pour occuper l'espace disponible */
+    flex-grow: 1; 
     padding: 20px;
     text-align: center;
-    font-size: 2em; /* Taille de police ajustée pour le texte de la section */
-    color: #4169e1; /* Couleur bleue pour le texte de la section */
+    font-size: 2em; 
+    color: #4169e1;
 
     background-color: #FFFFF0;
 }
@@ -97,23 +97,23 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin: 0 auto; /* Pour centrer le contenu */
-    max-width: 1200px; /* Ajuste la largeur maximale si nécessaire */
+    margin: 0 auto; 
+    max-width: 1200px; 
 }
 
 .medicare-image {
-    width: 30%; /* Ajuste la taille de l'image selon tes besoins */
+    width: 30%; 
 }
 
 .text-container {
-    width: 50%; /* Ajuste la largeur du conteneur de texte selon tes besoins */
+    width: 50%; 
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centrer verticalement */
+    justify-content: center; 
 }
 
 .text-container h2 {
-    text-align: center; /* Centrer horizontalement */
+    text-align: center; 
 }
 
 .footer {
@@ -125,25 +125,25 @@ body {
     flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
-    gap: 20px; /* Ajouter de l'espace entre les éléments du footer */
+    gap: 20px; 
 }
 
 .footer .contact-info p {
-    margin: 20px 0; /* Ajouter de la marge au-dessus et en dessous des lignes de contact */
+    margin: 20px 0; 
     margin-left: 300px;
 }
 
 .footer .contact-info a {
-    color: #333; /* Couleur des liens dans les informations de contact */
-    text-decoration: none; /* Enlever la décoration des liens */
+    color: #333; 
+    text-decoration: none;
 }
 
 .footer .contact-info a:hover {
-    text-decoration: underline; /* Ajouter une décoration au survol */
+    text-decoration: underline; 
 }
 
 .footer .map-container iframe {
-    max-width: 50%; /* S'assurer que la carte ne dépasse pas la largeur du conteneur */
+    max-width: 50%; 
     height: auto;
     margin-right: 300px;
 }

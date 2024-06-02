@@ -35,12 +35,12 @@
 
         .deconnexion-button {
             background-color: red;
-            float: left; /* Pour placer à gauche */
+            float: left; 
         }
 
         .supprimer-button {
             background-color: orange;
-            float: right; /* Pour placer à droite */
+            float: right; 
         }
     </style>
 </head>

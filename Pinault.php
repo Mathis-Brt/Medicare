@@ -26,22 +26,22 @@
         .doctor-details {
             text-align: left;
             max-width: 600px;
-            font-size: 14px; /* Réduire la taille de la police des détails */
-            border: 1px solid #ccc; /* Bordure du rectangle */
-            padding: 20px; /* Espacement interne du rectangle */
-            border-radius: 10px; /* Coins arrondis du rectangle */
-            background-color: #f9f9f9; /* Couleur de fond du rectangle */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombre du rectangle */
+            font-size: 14px; 
+            border: 1px solid #ccc; 
+            padding: 20px; 
+            border-radius: 10px; 
+            background-color: #f9f9f9;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
         }
         .doctor-navigation {
             text-align: center;
-            font-size: 30px; /* Augmenter la taille de la police */
-            color: white; /* Changer la couleur de la police en blanc */
-            background-color: rgb(32, 67, 104); /* Couleur de fond pour contraster avec le texte blanc */
+            font-size: 30px; 
+            color: white;
+            background-color: rgb(32, 67, 104); 
         }
         .doctor-specialty {
-            font-size: 25px; /* Taille de la police pour la spécialité */
-            color: black; /* Couleur de la police */
+            font-size: 25px; 
+            color: black; 
         }
         /* Style pour le chat */
         #chatBox {

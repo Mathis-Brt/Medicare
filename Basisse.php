@@ -105,7 +105,7 @@
             background-color: #d4edda;
         }
         .chat-message.saved {
-    background-color: #d4edda; /* Couleur verte */
+    background-color: #d4edda;
 }
 
     </style>

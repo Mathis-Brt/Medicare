@@ -1,5 +1,5 @@
 <?php
-session_start(); // Démarrer la session
+session_start(); 
 ?>
 
 <!DOCTYPE html>
@@ -14,18 +14,18 @@ session_start(); // Démarrer la session
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
         .button-container a:nth-child(1) {
-            background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
+            background-color: lightblue;
         }
         .medicare-container {
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column; /* Alignement vertical */
+            flex-direction: column;
         }
         .medicare-container img {
-            margin-bottom: 20px; /* Espace entre l'image et le texte */
-            max-width: 350px; /* Largeur maximale de l'image */
-            max-height: 350px; /* Hauteur maximale de l'image */
+            margin-bottom: 20px; 
+            max-width: 350px;
+            max-height: 350px; 
         }
         .text-container {
             text-align: justify;
@@ -39,9 +39,9 @@ session_start(); // Démarrer la session
         .centered-title2 {
             text-align: center;
             margin-top: 40px;
-            font-size: 2em; /* Taille de police plus grande */
-            font-family: 'Copperplate Gothic Bold' ; /* Utilisation de la nouvelle police */
-            text-decoration: underline; /* Souligner le texte */
+            font-size: 2em; 
+            font-family: 'Copperplate Gothic Bold' ;
+            text-decoration: underline;
         }
     </style>
 </head>

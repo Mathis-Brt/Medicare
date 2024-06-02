@@ -11,7 +11,7 @@
     <link rel="icon" href="logo.medicare.png" type="image/png">
     <style>
         .button-container a:nth-child(5) {
-            background-color: lightblue; /* Changement de couleur du fond du bouton "Tout Parcourir" */
+            background-color: lightblue; 
         }
 
         .main-button-container {
@@ -39,9 +39,9 @@
         .title{
             text-align: center;
             margin-top: 40px;
-            font-size: 1.5em; /* Taille de police plus grande */
-            font-family: 'Copperplate Gothic Bold' ; /* Utilisation de la nouvelle police */
-            text-decoration: underline; /* Souligner le texte */
+            font-size: 1.5em; 
+            font-family: 'Copperplate Gothic Bold' ; 
+            text-decoration: underline; 
         }
         
         #user-info {
