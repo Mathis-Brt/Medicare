@@ -70,7 +70,7 @@
     <main class="section">
         <h1>Bienvenue sur votre compte</h1>
         <div class="info-box">
-            <p>Votre adresse e-mail : <?php echo htmlspecialchars($email); ?></p>
+            <!--<p>Votre adresse e-mail : <?php echo htmlspecialchars($email); ?></p>-->
             <p>Role : Administrateur</p>
             <?php if ($role !== 'admin'): ?>
 
