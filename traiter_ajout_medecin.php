@@ -47,7 +47,7 @@ VALUES ('$new_id', '$nom', '$prenom', '$bureau', '$mail', '$experience', '$forma
 
 if ($conn->query($sql) === TRUE) {
     echo "Nouveau médecin ajouté avec succès";
-    header("Location: ajouter_medecin.php");
+    header("Location:Compte.html.php");
     exit();
 } else {
     echo "Erreur: " . $sql . "<br>" . $conn->error;

@@ -44,7 +44,7 @@ VALUES ('$new_id', '$nom', '$bureau', '$mail', '$calendrier', '$photo', '$specia
 
 if ($conn->query($sql) === TRUE) {
     echo "Nouveau laboratoire ajouté avec succès";
-    header("Location: ajouter_medecin.php");
+    header("Location:Compte.html");
     exit();
     echo "Nouveau laboratoire ajouté avec succès";
 } else {
