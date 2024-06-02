@@ -7,9 +7,8 @@ ini_set('display_errors', 1);
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['email'])) {
-    // Si l'utilisateur n'est pas connecté, afficher une alerte et rediriger vers la page de connexion appropriée
     echo '<script>alert("Vous devez être connecté pour confirmer un rendez-vous.");</script>';
-    header("Location: connexion.php"); // Redirection vers la page de connexion
+    header("Location: connexion.php");
     exit();
 }
 
@@ -19,10 +18,7 @@ $username = "root";
 $password = "root";
 $dbname = "medecing";
 
-// Créer une connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
-
-// Vérifier la connexion
 if ($conn->connect_error) {
     die("Erreur de connexion à la base de données : " . $conn->connect_error);
 }
@@ -33,17 +29,13 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     $jour = htmlspecialchars($_GET['jour']);
     $id_medecin = htmlspecialchars($_GET['id_medecin']);
 
-    // Déterminer si le médecin est un laboratoire en vérifiant si son ID est compris entre 27 et 38
+    // Déterminer si le médecin est un laboratoire
     if ($id_medecin >= 27 && $id_medecin <= 38) {
-        // Utiliser la table "labo" pour récupérer le nom du laboratoire
         $stmt = $conn->prepare("SELECT nom FROM labo WHERE id = ?");
     } else {
-        // Utiliser les tables existantes pour récupérer le nom du médecin
         if ($id_medecin >= 1 && $id_medecin <= 6) {
-            // Médecin généraliste
             $stmt = $conn->prepare("SELECT nom FROM medecing WHERE id = ?");
         } elseif ($id_medecin >= 7 && $id_medecin <= 14) {
-            // Médecin spécialisé
             $stmt = $conn->prepare("SELECT nom FROM medecinspe WHERE id = ?");
         } else {
             $nom_medecin = "Médecin non trouvé";
@@ -63,7 +55,6 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
             $nom_medecin = "Médecin non trouvé";
         }
 
-        // Fermer la requête préparée
         $stmt->close();
     }
 } else {
@@ -73,6 +64,7 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     $nom_medecin = "";
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -82,20 +74,6 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     <link rel="stylesheet" href="styles.css">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="icon" href="logo.medicare.png" type="image/png">
-    <style>
-        /* Ajoutez ici vos styles spécifiques si nécessaire */
-    </style>
-
-<script>
-    function confirmRendezVous() {
-        var isLoggedIn = "<?php echo isset($_SESSION['email']) ? 'true' : 'false'; ?>";
-        console.log(isLoggedIn);
-        if (!isLoggedIn) {
-            alert('Vous devez être connecté pour prendre un rendez-vous.');
-            return false;
-        }
-    }
-</script>
 </head>
 <body>
     <div class="wrapper">
@@ -121,18 +99,30 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
         </nav>
         <main class="section">
             <h1>Confirmer Rendez-vous</h1>
-            <p>Rendez-vous prévu pour le <?php echo $jour; ?> à <?php echo $heure; ?> avec le médecin <?php echo $nom_medecin; ?> </p>
-            
+            <p>Rendez-vous prévu pour le <?php echo $jour; ?> à <?php echo $heure; ?> avec le médecin <?php echo $nom_medecin; ?></p>
+
+            <p> Veuillez rentrer vos informations bancaires pour confirmer le rendez-vous</p>
 
             <form action="valider_rendezvous.php" method="post">
-    <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
-    <input type="hidden" name="nom_client" value="<?php echo $nom_client; ?>">
-    <input type="hidden" name="jour" value="<?php echo $jour; ?>">
-    <input type="hidden" name="heure" value="<?php echo $heure; ?>">
-    <button type="submit" class="confirm-button">Confirmer</button>
-</form>
+                <input type="hidden" name="id_medecin" value="<?php echo $id_medecin; ?>">
+                <input type="hidden" name="jour" value="<?php echo $jour; ?>">
+                <input type="hidden" name="heure" value="<?php echo $heure; ?>">
+            
 
-                
+                <label for="nomcarte">Nom sur la carte :</label>
+                <input type="text" id="nomcarte" name="nomcarte" required>
+                <br>
+
+                <label for="numerocarte">Numéro de carte :</label>
+                <input type="text" id="numerocarte" name="numerocarte" pattern="\d{16}" title="Le numéro de carte doit contenir 16 chiffres" required>
+                <br>
+
+                <label for="codesecret">Code de sécurité :</label>
+                <input type="password" id="codesecret" name="codesecret" pattern="\d{3}" title="Le code de sécurité doit contenir 3 chiffres" required>
+                <br>
+
+                <button type="submit" class="confirm-button">Confirmer</button>
+            </form>
         </main>
         <footer class="footer">
             <div class="contact-info">
@@ -149,7 +139,5 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
 </html>
 
 <?php
-// Fermer la connexion à la base de données
 $conn->close();
 ?>
-
