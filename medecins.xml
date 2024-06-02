@@ -189,4 +189,18 @@
         <age>39</age>
         <formation>Doctorat en Médecine, Université de Paris</formation>
     </medecin>
+    <medecin>
+        <nom>Bato</nom>
+        <prénom>Dany</prénom>
+        <bureau>109</bureau>
+        <mail>bato.dany@gmail.com</mail>
+        <experience>Ostheopathie, Cabinet Médical des Arènes, Paris, France, 2015 - Présent, Consultations médicales pour adultes et enfants. Gestion des maladies courantes.</experience>
+        <calendrier></calendrier>
+        <photo>medecin/medecinspe4.jpg</photo>
+        <id>31</id>
+        <spécialité>Osthéopathie</spécialité>
+        <telephone>0695438307</telephone>
+        <age>30</age>
+        <formation>Doctorat en Médecine, Université de Paris</formation>
+    </medecin>
 </medecins>
