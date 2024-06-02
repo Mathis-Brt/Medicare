@@ -135,13 +135,16 @@
             echo "<p>Dr. " . htmlspecialchars($row['nom']) . " " . htmlspecialchars($row['prénom']) . "</p>";
             //echo "<img src='" . $row['photo'] . "' height='80' width='100'>";
             echo "</div>";
+
+            // Stocker l'adresse e-mail dans une variable JavaScript
+            echo "<script>var medecinEmail = '" . htmlspecialchars($row['mail']) . "';</script>";
         } else {
             echo "<p>Aucun résultat trouvé.</p>";
         }
     } else {
         echo "<p>Erreur de connexion à la base de données.</p>";
     }
-    ?>
+?>
 </nav>
     <main class="section">
         <div class="doctor-container">
@@ -166,6 +169,7 @@
             <button class="btn btn-primary" onclick="window.location.href='prendre_rendezvous.php?id=2'">Prendre rendez-vous</button>
             <button class="btn btn-secondary" onclick="toggleChat()">Communiquer avec le médecin</button>
             <button class="btn btn-info" onclick="window.open('generate_cv.php?id=2', '_blank')">Voir son CV</button>
+            <button class="btn btn-success" onclick="contactMedecin()">Contacter le médecin par mail</button>
         </div>
     </main>
     <footer class="footer">
@@ -264,6 +268,14 @@
     window.onload = function() {
         loadMessages();
     };
+
+    function contactMedecin() {
+    if (medecinEmail) {
+        window.location.href = 'mailto:' + medecinEmail;
+    } else {
+        alert('Adresse e-mail du médecin non disponible.');
+    }
+}
     
     // Supprimer le stockage local lorsque la page est fermée
     window.addEventListener('beforeunload', function() {
