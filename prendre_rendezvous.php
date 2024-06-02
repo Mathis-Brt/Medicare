@@ -21,8 +21,12 @@ if (!isset($_GET['id'])) {
 // Récupérer l'ID du médecin depuis l'URL
 $id = intval($_GET['id']);
 
-// Déterminer la table à utiliser en fonction de l'ID du médecin
-$table_name = $id > 6 ? 'medecinspe' : 'medecing';
+// Vérifier si l'ID est compris entre 27 et 38
+if ($id >= 27 && $id <= 38) {
+    $table_name = 'labo'; // Utiliser la table "labo"
+} else {
+    $table_name = $id > 6 ? 'medecinspe' : 'medecing';
+}
 
 // Préparer et exécuter la requête pour obtenir les disponibilités
 $sql = "SELECT disponibilite FROM $table_name WHERE id = ?";
