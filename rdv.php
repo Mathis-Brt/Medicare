@@ -53,6 +53,19 @@ if ($is_logged_in) {
     $stmt_specialistes->close();
 }
 
+// Récupérer les rendez-vous des laboratoires
+$sql_laboratoires = "SELECT r.id, r.jour, r.heure, m.nom AS nom_medecin FROM rendez_vous r JOIN medecin m ON r.medecin_id = m.id WHERE r.email_client = ? AND r.medecin_id BETWEEN 27 AND 38";
+$stmt_laboratoires = $conn->prepare($sql_laboratoires);
+$stmt_laboratoires->bind_param("s", $email_client);
+$stmt_laboratoires->execute();
+$result_laboratoires = $stmt_laboratoires->get_result();
+if ($result_laboratoires->num_rows > 0) {
+    while ($row = $result_laboratoires->fetch_assoc()) {
+        $rendez_vous[] = $row;
+    }
+}
+$stmt_laboratoires->close();
+
 // Fonction pour annuler un rendez-vous
 if(isset($_POST['annuler_rdv'])) {
     $rdv_id = $_POST['rdv_id'];

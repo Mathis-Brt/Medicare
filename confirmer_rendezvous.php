@@ -7,9 +7,9 @@ ini_set('display_errors', 1);
 
 // Vérifier si l'utilisateur est connecté
 if (!isset($_SESSION['email'])) {
-    // Si l'utilisateur n'est pas connecté, afficher une alerte et rediriger vers la page de connexion
+    // Si l'utilisateur n'est pas connecté, afficher une alerte et rediriger vers la page de connexion appropriée
     echo '<script>alert("Vous devez être connecté pour confirmer un rendez-vous.");</script>';
-    header("Location: Compte.html");
+    header("Location: connexion.php"); // Redirection vers la page de connexion
     exit();
 }
 
@@ -33,16 +33,22 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     $jour = htmlspecialchars($_GET['jour']);
     $id_medecin = htmlspecialchars($_GET['id_medecin']);
 
-    // Déterminer de quelle table récupérer les informations du médecin
-    if ($id_medecin >= 1 && $id_medecin <= 6) {
-        // Médecin généraliste
-        $stmt = $conn->prepare("SELECT nom FROM medecing WHERE id = ?");
-    } elseif ($id_medecin >= 7 && $id_medecin <= 14) {
-        // Médecin spécialisé
-        $stmt = $conn->prepare("SELECT nom FROM medecinspe WHERE id = ?");
+    // Déterminer si le médecin est un laboratoire en vérifiant si son ID est compris entre 27 et 38
+    if ($id_medecin >= 27 && $id_medecin <= 38) {
+        // Utiliser la table "labo" pour récupérer le nom du laboratoire
+        $stmt = $conn->prepare("SELECT nom FROM labo WHERE id = ?");
     } else {
-        $nom_medecin = "Médecin non trouvé";
-        $stmt = null;
+        // Utiliser les tables existantes pour récupérer le nom du médecin
+        if ($id_medecin >= 1 && $id_medecin <= 6) {
+            // Médecin généraliste
+            $stmt = $conn->prepare("SELECT nom FROM medecing WHERE id = ?");
+        } elseif ($id_medecin >= 7 && $id_medecin <= 14) {
+            // Médecin spécialisé
+            $stmt = $conn->prepare("SELECT nom FROM medecinspe WHERE id = ?");
+        } else {
+            $nom_medecin = "Médecin non trouvé";
+            $stmt = null;
+        }
     }
 
     if ($stmt) {
@@ -67,7 +73,6 @@ if (isset($_GET['heure']) && isset($_GET['jour']) && isset($_GET['id_medecin']))
     $nom_medecin = "";
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>

@@ -1,64 +1,65 @@
 <?php
 session_start();
 
-// Afficher toutes les erreurs PHP
+// Set up error reporting
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 
-// Vérifier si l'utilisateur est connecté
+// Check if the user is logged in
 if (!isset($_SESSION['email'])) {
-    // Si l'utilisateur n'est pas connecté, afficher une alerte et rediriger vers la page de connexion
+    // Display an alert if the user is not logged in and redirect to the login page
     echo '<script>alert("Vous devez être connecté pour confirmer un rendez-vous.");</script>';
     header("Location: Compte.html");
     exit();
 }
 
-// Vérifier si les données du formulaire sont présentes
+// Check if form data is present
 if (isset($_POST['id_medecin'], $_POST['jour'], $_POST['heure'])) {
-    // Récupérer les données du formulaire
+    // Retrieve form data
     $id_medecin = $_POST['id_medecin'];
-    $email_client = $_SESSION['email']; // Récupérer l'email de l'utilisateur connecté
+    $email_client = $_SESSION['email']; // Retrieve the email of the logged-in user
     $jour = $_POST['jour'];
     $heure = $_POST['heure'];
 
-    // Connexion à la base de données
+    // Database connection parameters
     $servername = "localhost";
     $username = "root";
     $password = "root";
     $dbname = "medecing";
 
-    // Créer une connexion
+    // Create a database connection
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Vérifier la connexion
+    // Check the database connection
     if ($conn->connect_error) {
         die("Erreur de connexion à la base de données : " . $conn->connect_error);
     }
 
-    // Préparer la requête d'insertion
+    // Prepare the insertion query
     $sql = "INSERT INTO rendez_vous (medecin_id, email_client, jour, heure) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt === false) {
         die("Erreur de préparation de la requête : " . $conn->error);
     }
 
-    // Binder les paramètres
+    // Bind parameters
     $stmt->bind_param("isss", $id_medecin, $email_client, $jour, $heure);
 
-    // Exécuter la requête
+    // Execute the query
     if ($stmt->execute()) {
-        // Rediriger vers la page de rendez-vous avec un message de succès
+        // Redirect to the rendezvous page with a success message
         header("Location: rdv.php?message=Rendez-vous ajouté avec succès&success=true");
         exit();
     } else {
+        // Display an error message if the insertion fails
         die("Erreur lors de l'insertion du rendez-vous : " . $stmt->error);
     }
 
-    // Fermer la requête préparée et la connexion
+    // Close the prepared statement and the database connection
     $stmt->close();
     $conn->close();
 } else {
-    // Si les données du formulaire ne sont pas présentes, rediriger vers la page d'accueil
+    // If form data is not present, redirect to the home page
     header("Location: accueil.php");
     exit();
 }
