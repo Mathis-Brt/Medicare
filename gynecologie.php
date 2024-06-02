@@ -42,6 +42,10 @@
             font-size: 25px;
             color: black;
         }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -60,7 +64,7 @@
 
         // Vérification de la connexion
         if ($db_handle) {
-            // Requête SQL pour récupérer les informations des laboratoires spécialisés en "Dépistage covid-19"
+            // Requête SQL pour récupérer les informations des laboratoires spécialisés en "Gynécologie"
             $sql = "SELECT * FROM labo WHERE spécialité = 'Gynécologie'";
             $result = mysqli_query($db_handle, $sql);
             // Bouton de retour
@@ -96,6 +100,11 @@
                     echo "<p><strong>Téléphone:</strong> " . htmlspecialchars($row['telephone']) . "</p>";
                     echo "<p><strong>Consigne:</strong> " . htmlspecialchars($row['consigne']) . "</p>";
                     echo "</div>";
+                    echo "</div>";
+                    
+                    // Bouton de rendez-vous avec l'ID approprié
+                    echo "<div class='button-group'>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=" . htmlspecialchars($row['id']) . "'\">Prendre rendez-vous</button>";
                     echo "</div>";
                 }
             }

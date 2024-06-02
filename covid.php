@@ -42,6 +42,10 @@
             font-size: 25px;
             color: black;
         }
+        .button-group {
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -97,6 +101,10 @@
                     echo "<p><strong>Consigne:</strong> " . htmlspecialchars($row['consigne']) . "</p>";
                     echo "</div>";
                     echo "</div>";
+                    // Bouton de rendez-vous
+                    echo "<div class='button-group'>";
+                    echo "<button class='btn btn-primary' onclick=\"window.location.href='prendre_rendezvous.php?id=" . $row['id'] . "'\">Prendre rendez-vous</button>";
+                    echo "</div>";
                 }
             }
             ?>
@@ -117,6 +125,4 @@
 </div>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js
