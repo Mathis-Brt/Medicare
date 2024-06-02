@@ -48,7 +48,7 @@ VALUES ('$new_id', '$nom', '$prenom', '$bureau', '$mail', '$experience', '$calen
 
 if ($conn->query($sql) === TRUE) {
     echo "Nouveau médecin spécialiste ajouté avec succès";
-    header("Location:Compte.html.php");
+    header("Location:Compte.html");
     exit();
 } else {
     echo "Erreur: " . $sql . "<br>" . $conn->error;
